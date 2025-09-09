@@ -1,0 +1,35 @@
+# AI Engineering Lab - Core Dependencies
+
+# Flask Backend
+Flask==2.3.3
+Flask-CORS==4.0.0
+Flask-SQLAlchemy==3.0.5
+Werkzeug==2.3.7
+
+# Database
+SQLAlchemy==2.0.21
+
+# Core AI/ML Dependencies
+torch>=2.0.0
+torchvision>=0.15.0
+transformers>=4.30.0
+Pillow>=10.0.0
+numpy>=1.24.0
+matplotlib>=3.7.0
+
+# SAM (Segment Anything Model)
+git+https://github.com/facebookresearch/segment-anything.git
+
+# Testing & Development
+pytest>=7.0.0
+pytest-cov>=4.0.0
+coverage>=7.0.0
+python-dotenv>=1.0.0
+
+# Code Quality
+flake8>=6.0.0
+black>=23.0.0
+
+# Security
+safety>=2.0.0
+bandit>=1.7.0
