@@ -248,6 +248,31 @@ class _UploadPageState extends State<UploadPage> {
           ),
           child: Column(
             children: [
+            // Information banner about demo mode
+            Container(
+              padding: EdgeInsets.all(12),
+              margin: EdgeInsets.only(bottom: 16),
+              decoration: BoxDecoration(
+                color: Colors.blue[50],
+                border: Border.all(color: Colors.blue[200]!),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.info_outline, color: Colors.blue[700], size: 20),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      'Demo Mode: The system is running in simulation mode with realistic AI-like results. Upload images to see the counting functionality.',
+                      style: TextStyle(
+                        color: Colors.blue[700],
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             // Upload Section
             Card(
               child: Padding(
