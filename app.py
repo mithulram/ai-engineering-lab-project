@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory, Response
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
@@ -6,7 +6,10 @@ import os
 import uuid
 from datetime import datetime
 import logging
+import time
 from model_pipeline import ObjectCounter
+from monitoring import metrics_collector
+from few_shot_learning import few_shot_learner
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -79,6 +82,7 @@ def count_objects():
     Returns:
     - JSON response with count results
     """
+    start_time = time.time()
     try:
         # Check if image file is present
         if 'image' not in request.files:
@@ -115,10 +119,10 @@ def count_objects():
         logger.info(f"Image saved: {file_path}")
         
         # Process image with AI pipeline
-        start_time = datetime.now()
+        start_time = time.time()
         try:
             result = object_counter.count_objects(file_path, item_type)
-            processing_time = (datetime.now() - start_time).total_seconds()
+            processing_time = time.time() - start_time
             
             # Create database record
             result_id = str(uuid.uuid4())
@@ -133,6 +137,45 @@ def count_objects():
             
             db.session.add(db_result)
             db.session.commit()
+            
+            # Record metrics
+            try:
+                # Extract image metadata
+                from PIL import Image
+                with Image.open(file_path) as img:
+                    width, height = img.size
+                
+                image_metadata = {
+                    'width': width,
+                    'height': height,
+                    'segments_found': result.get('details', {}).get('total_segments', 0),
+                    'object_types_found': len(set(result.get('details', {}).get('refined_labels', []))),
+                    'avg_segment_resolution': (width * height) / max(1, result.get('details', {}).get('total_segments', 1))
+                }
+                
+                # Record prediction metrics (using mock actual count for now)
+                actual_count = result['count']  # In real scenario, this would come from user correction
+                confidence_scores = {
+                    'sam': result.get('confidence', 0.0),
+                    'resnet': result.get('confidence', 0.0),
+                    'distilbert': result.get('confidence', 0.0)
+                }
+                inference_times = {
+                    'sam': processing_time * 0.4,  # Estimated
+                    'resnet': processing_time * 0.3,
+                    'distilbert': processing_time * 0.3
+                }
+                
+                metrics_collector.record_prediction(
+                    object_type=item_type,
+                    predicted_count=result['count'],
+                    actual_count=actual_count,
+                    confidence_scores=confidence_scores,
+                    inference_times=inference_times,
+                    image_metadata=image_metadata
+                )
+            except Exception as e:
+                logger.warning(f"Failed to record metrics: {str(e)}")
             
             # Return response
             response = {
@@ -154,7 +197,14 @@ def count_objects():
             
     except Exception as e:
         logger.error(f"Unexpected error: {str(e)}")
+        # Record failed request
+        response_time = time.time() - start_time
+        metrics_collector.record_request('/api/count', 'POST', 500, response_time)
         return jsonify({'error': 'Internal server error'}), 500
+    finally:
+        # Record successful request
+        response_time = time.time() - start_time
+        metrics_collector.record_request('/api/count', 'POST', 200, response_time, item_type)
 
 @app.route('/api/correct', methods=['POST'])
 def correct_count():
@@ -271,6 +321,18 @@ def health_check():
         'service': 'AI Object Counting API'
     }), 200
 
+@app.route('/metrics', methods=['GET'])
+def metrics():
+    """
+    OpenMetrics endpoint for Prometheus scraping.
+    """
+    try:
+        metrics_data = metrics_collector.get_metrics()
+        return Response(metrics_data, mimetype=metrics_collector.get_content_type())
+    except Exception as e:
+        logger.error(f"Error generating metrics: {str(e)}")
+        return jsonify({'error': 'Failed to generate metrics'}), 500
+
 @app.route('/api/status', methods=['GET'])
 def status_check():
     """
@@ -317,6 +379,193 @@ def uploaded_file(filename):
     In production, use a proper file server or CDN.
     """
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+# Few-shot learning endpoints
+@app.route('/api/learn', methods=['POST'])
+def learn_new_object():
+    """
+    Learn a new object type from provided images.
+    
+    Expected input:
+    - object_name: string (name of the new object type)
+    - images: list of image files (multipart/form-data)
+    
+    Returns:
+    - JSON response with learning results
+    """
+    try:
+        # Get object name
+        object_name = request.form.get('object_name')
+        if not object_name:
+            return jsonify({'error': 'Object name is required'}), 400
+        
+        # Get uploaded images
+        if 'images' not in request.files:
+            return jsonify({'error': 'No images provided'}), 400
+        
+        files = request.files.getlist('images')
+        if len(files) < 2:
+            return jsonify({'error': 'At least 2 images are required for learning'}), 400
+        
+        # Save uploaded images
+        image_paths = []
+        for i, file in enumerate(files):
+            if file and file.filename:
+                filename = secure_filename(f"{object_name}_{i}_{file.filename}")
+                file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                file.save(file_path)
+                image_paths.append(file_path)
+        
+        # Learn the new object
+        learning_result = few_shot_learner.learn_new_object(object_name, image_paths)
+        
+        if learning_result['learning_successful']:
+            return jsonify(learning_result), 200
+        else:
+            return jsonify(learning_result), 400
+            
+    except Exception as e:
+        logger.error(f"Error learning new object: {str(e)}")
+        return jsonify({'error': f'Error learning new object: {str(e)}'}), 500
+
+@app.route('/api/learned-objects', methods=['GET'])
+def list_learned_objects():
+    """
+    List all learned object types.
+    
+    Returns:
+    - JSON response with list of learned objects
+    """
+    try:
+        objects = few_shot_learner.list_learned_objects()
+        return jsonify({
+            'learned_objects': objects,
+            'count': len(objects)
+        }), 200
+    except Exception as e:
+        logger.error(f"Error listing learned objects: {str(e)}")
+        return jsonify({'error': f'Error listing learned objects: {str(e)}'}), 500
+
+@app.route('/api/count-learned', methods=['POST'])
+def count_learned_objects():
+    """
+    Count instances of a learned object type in an image.
+    
+    Expected input:
+    - image: image file (multipart/form-data)
+    - object_name: string (name of the learned object type)
+    
+    Returns:
+    - JSON response with counting results
+    """
+    try:
+        # Check if image file is present
+        if 'image' not in request.files:
+            return jsonify({'error': 'No image file provided'}), 400
+        
+        file = request.files['image']
+        if file.filename == '':
+            return jsonify({'error': 'No image file selected'}), 400
+        
+        # Get object name
+        object_name = request.form.get('object_name')
+        if not object_name:
+            return jsonify({'error': 'Object name is required'}), 400
+        
+        # Save uploaded image
+        filename = secure_filename(file.filename)
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(file_path)
+        
+        # Count learned objects
+        counting_result = few_shot_learner.count_learned_objects(file_path, object_name)
+        
+        # Add metadata
+        counting_result['image_path'] = file_path
+        counting_result['timestamp'] = datetime.utcnow().isoformat()
+        
+        return jsonify(counting_result), 200
+        
+    except Exception as e:
+        logger.error(f"Error counting learned objects: {str(e)}")
+        return jsonify({'error': f'Error counting learned objects: {str(e)}'}), 500
+
+@app.route('/api/recognize', methods=['POST'])
+def recognize_objects():
+    """
+    Recognize learned objects in an image.
+    
+    Expected input:
+    - image: image file (multipart/form-data)
+    - threshold: float (optional, similarity threshold)
+    
+    Returns:
+    - JSON response with recognition results
+    """
+    try:
+        # Check if image file is present
+        if 'image' not in request.files:
+            return jsonify({'error': 'No image file provided'}), 400
+        
+        file = request.files['image']
+        if file.filename == '':
+            return jsonify({'error': 'No image file selected'}), 400
+        
+        # Get threshold
+        threshold = float(request.form.get('threshold', 0.5))
+        
+        # Save uploaded image
+        filename = secure_filename(file.filename)
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(file_path)
+        
+        # Recognize objects
+        recognition_result = few_shot_learner.recognize_object(file_path, threshold)
+        
+        # Add metadata
+        recognition_result['image_path'] = file_path
+        recognition_result['timestamp'] = datetime.utcnow().isoformat()
+        
+        return jsonify(recognition_result), 200
+        
+    except Exception as e:
+        logger.error(f"Error recognizing objects: {str(e)}")
+        return jsonify({'error': f'Error recognizing objects: {str(e)}'}), 500
+
+@app.route('/api/delete-learned-object', methods=['DELETE'])
+def delete_learned_object():
+    """
+    Delete a learned object type.
+    
+    Expected input:
+    - object_name: string (name of the object to delete)
+    
+    Returns:
+    - JSON response with deletion results
+    """
+    try:
+        data = request.get_json()
+        object_name = data.get('object_name')
+        
+        if not object_name:
+            return jsonify({'error': 'Object name is required'}), 400
+        
+        success = few_shot_learner.delete_object(object_name)
+        
+        if success:
+            return jsonify({
+                'message': f'Object "{object_name}" deleted successfully',
+                'success': True
+            }), 200
+        else:
+            return jsonify({
+                'error': f'Object "{object_name}" not found',
+                'success': False
+            }), 404
+            
+    except Exception as e:
+        logger.error(f"Error deleting learned object: {str(e)}")
+        return jsonify({'error': f'Error deleting learned object: {str(e)}'}), 500
 
 @app.errorhandler(413)
 def too_large(e):
