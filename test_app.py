@@ -326,6 +326,7 @@ class TestObjectCountingAPI(unittest.TestCase):
         """Test the database model."""
         with app.app_context():
             # Create a test result
+            from datetime import datetime
             result = CountingResult(
                 id='test-model-id',
                 image_path='/test/path',
@@ -334,7 +335,8 @@ class TestObjectCountingAPI(unittest.TestCase):
                 corrected_count=4,
                 confidence_score=0.8,
                 processing_time=1.5,
-                user_feedback='Test feedback'
+                user_feedback='Test feedback',
+                timestamp=datetime.utcnow()
             )
             
             # Test to_dict method

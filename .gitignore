@@ -1,0 +1,357 @@
+# AI Engineering Lab - Object Counting Application
+# Git ignore file to exclude large files and unnecessary files
+
+# ===========================================
+# Python & AI/ML Specific
+# ===========================================
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# AI/ML Model files (LARGE FILES)
+*.pth
+*.pt
+*.bin
+*.safetensors
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.joblib
+*.model
+*.weights
+sam_vit_b_01ec64.pth
+sam_vit_l_0b3195.pth
+sam_vit_h_4b8939.pth
+
+# HuggingFace cache (can be large)
+.huggingface_cache/
+.cache/
+huggingface/
+
+# PyTorch cache
+.torch/
+.cache/torch/
+
+# TensorFlow cache
+.tensorflow/
+
+# ===========================================
+# Database & Uploads
+# ===========================================
+
+# SQLite databases
+*.db
+*.sqlite
+*.sqlite3
+object_counting.db
+
+# Uploaded images (development only)
+uploads/
+static/uploads/
+media/
+
+# ===========================================
+# Node.js & Frontend
+# ===========================================
+
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Frontend build outputs
+frontend/dist/
+frontend/build/
+frontend/.vite/
+frontend/.next/
+frontend/out/
+
+# Package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# ===========================================
+# Flutter & Mobile
+# ===========================================
+
+# Flutter/Dart
+flutter_frontend/.dart_tool/
+flutter_frontend/.packages
+flutter_frontend/.pub-cache/
+flutter_frontend/.pub/
+flutter_frontend/build/
+flutter_frontend/.flutter-plugins
+flutter_frontend/.flutter-plugins-dependencies
+flutter_frontend/.metadata
+
+# Flutter build outputs
+flutter_frontend/web/build/
+flutter_frontend/android/app/build/
+flutter_frontend/ios/build/
+flutter_frontend/linux/build/
+flutter_frontend/macos/build/
+flutter_frontend/windows/build/
+
+# ===========================================
+# IDE & Editor Files
+# ===========================================
+
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# PyCharm
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# ===========================================
+# OS Generated Files
+# ===========================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ===========================================
+# Logs & Temporary Files
+# ===========================================
+
+# Log files
+*.log
+logs/
+log/
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*.bak
+*.backup
+*.orig
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# ===========================================
+# Environment & Configuration
+# ===========================================
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Configuration files with secrets
+config.ini
+secrets.json
+.secrets
+
+# ===========================================
+# Documentation Build
+# ===========================================
+
+# Sphinx documentation
+docs/_build/
+
+# MkDocs documentation
+site/
+
+# ===========================================
+# Testing
+# ===========================================
+
+# Test outputs
+test-results/
+test-reports/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ===========================================
+# Jupyter Notebook
+# ===========================================
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# ===========================================
+# Large Data Files
+# ===========================================
+
+# Large datasets
+data/
+datasets/
+*.csv
+*.json
+*.parquet
+*.feather
+
+# Images (except small test images)
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+*.webp
+!test_images/
+!sample_images/
+!docs/images/
+
+# Videos
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.webm
+
+# Archives
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# ===========================================
+# Git & Version Control
+# ===========================================
+
+# Git
+.git/
+.gitignore.bak
+
+# ===========================================
+# CI/CD
+# ===========================================
+
+# GitLab CI artifacts
+.gitlab-ci-local/
+
+# GitHub Actions
+.github/workflows/*.log
+
+# ===========================================
+# Project Specific
+# ===========================================
+
+# Duplicate files (remove these)
+* 2.*
+* 2
+*_2.*
+
+# Backup files
+*.backup
+*.bak
+*.old
+
+# Temporary project files
+temp/
+tmp/
+.temp/
+.tmp/

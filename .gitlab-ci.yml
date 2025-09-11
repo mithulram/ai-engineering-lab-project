@@ -1,0 +1,83 @@
+# GitLab CI/CD Pipeline for AI Object Counting Application
+# This pipeline runs tests, checks code quality, and reports coverage
+
+stages:
+  - test
+  - quality
+  - security
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+cache:
+  paths:
+    - .cache/pip/
+    - .huggingface_cache/
+
+# Test stage
+test:
+  stage: test
+  image: python:3.9-slim
+  before_script:
+    - apt-get update && apt-get install -y git build-essential libgl1-mesa-glx libglib2.0-0
+    - pip install --upgrade pip
+    - pip install -r requirements.txt
+  script:
+    - python -m pytest test_app.py -v --cov=app --cov=model_pipeline --cov-report=xml --cov-report=term-missing
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml
+    paths:
+      - coverage.xml
+    expire_in: 1 week
+  coverage: '/TOTAL.*\s+(\d+%)$/'
+
+# Code quality stage
+quality:
+  stage: quality
+  image: python:3.9-slim
+  before_script:
+    - pip install --upgrade pip
+    - pip install -r requirements.txt
+  script:
+    - python -m flake8 app.py model_pipeline.py test_app.py --max-line-length=100 --ignore=E501,W503
+    - python -m black --check app.py model_pipeline.py test_app.py
+  allow_failure: true
+
+# Security check stage
+security:
+  stage: security
+  image: python:3.9-slim
+  before_script:
+    - pip install --upgrade pip
+    - pip install safety bandit
+  script:
+    - safety check --json --output safety-report.json || true
+    - bandit -r app.py model_pipeline.py -f json -o bandit-report.json || true
+  artifacts:
+    reports:
+      security:
+        - safety-report.json
+        - bandit-report.json
+    expire_in: 1 week
+  allow_failure: true
+
+# Frontend tests (if needed)
+frontend_test:
+  stage: test
+  image: node:16
+  before_script:
+    - cd frontend
+    - npm install
+  script:
+    - npm run lint
+    - npm run build
+  artifacts:
+    paths:
+      - frontend/dist/
+    expire_in: 1 week
+  only:
+    - main
+    - develop
