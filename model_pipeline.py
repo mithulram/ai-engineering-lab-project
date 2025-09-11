@@ -102,15 +102,10 @@ class ObjectCounter:
             
         except Exception as e:
             logger.error(f"Error initializing classification models: {str(e)}")
-            # Create fallback mode for development
-            logger.warning("Falling back to basic mode without HuggingFace models")
-            self.image_processor = None
-            self.class_model = None
-            self.label_classifier = None
-            self.candidate_labels = [
-                "car", "cat", "tree", "dog", "building", 
-                "person", "sky", "ground", "hardware"
-            ]
+            # DISABLED: Fallback mode removed - force real AI usage
+            logger.error("CRITICAL: HuggingFace models failed to initialize!")
+            logger.error("Please run fix_huggingface_cache.py to resolve model loading issues")
+            raise RuntimeError(f"Failed to initialize AI models: {str(e)}. Please run fix_huggingface_cache.py to fix HuggingFace cache issues.")
     
     def count_objects(self, image_path, target_item_type):
         """
@@ -126,58 +121,10 @@ class ObjectCounter:
         try:
             logger.info(f"Processing image: {image_path} for item type: {target_item_type}")
             
-            # Check if we're in fallback mode (no HuggingFace models)
+            # DISABLED: Fallback mode removed - ensure real AI models are loaded
             if self.image_processor is None or self.class_model is None:
-                logger.warning("Running in fallback mode - returning simulated results")
-                
-                # Simulate more realistic processing
-                import time
-                import random
-                start_time = time.time()
-                
-                # Simulate processing time
-                time.sleep(0.1)
-                
-                # Generate more realistic mock results based on image
-                try:
-                    from PIL import Image
-                    with Image.open(image_path) as img:
-                        width, height = img.size
-                        # Simulate count based on image size (larger images might have more objects)
-                        base_count = max(1, min(10, (width * height) // 100000))
-                        count = base_count + random.randint(-1, 2)
-                        count = max(1, count)  # Ensure at least 1
-                        
-                        # Simulate confidence based on image characteristics
-                        confidence = 0.75 + random.uniform(0, 0.2)
-                        
-                        processing_time = time.time() - start_time
-                        
-                        return {
-                            "count": count,
-                            "confidence_score": confidence,
-                            "processing_time": processing_time,
-                            "details": {
-                                "segments_found": count + random.randint(0, 2),
-                                "model_confidence": confidence,
-                                "fallback_mode": True,
-                                "image_size": f"{width}x{height}",
-                                "target_item_type": target_item_type
-                            }
-                        }
-                except Exception as e:
-                    logger.warning(f"Error in fallback mode: {e}")
-                    return {
-                        "count": 3,
-                        "confidence_score": 0.85,
-                        "processing_time": 0.1,
-                        "details": {
-                            "segments_found": 3,
-                            "model_confidence": 0.85,
-                            "fallback_mode": True,
-                            "error": str(e)
-                        }
-                    }
+                logger.error("CRITICAL: AI models not initialized!")
+                raise RuntimeError("AI models not initialized. Please run fix_huggingface_cache.py to resolve model loading issues.")
             
             # Load and process image
             image = Image.open(image_path)
@@ -284,11 +231,9 @@ class ObjectCounter:
                     logger.warning(f"Error classifying segment {label}: {str(e)}")
                     predicted_classes.append("unknown")
             else:
-                # Fallback: use a random candidate label for testing
-                import random
-                fallback_class = random.choice(self.candidate_labels)
-                logger.warning(f"ResNet not available, using fallback class: {fallback_class}")
-                predicted_classes.append(fallback_class)
+                # DISABLED: Fallback removed - force real AI usage
+                logger.error("CRITICAL: ResNet model not available!")
+                raise RuntimeError("ResNet model not initialized. Please run fix_huggingface_cache.py to resolve model loading issues.")
         
         # Refine labels using DistilBERT (if available)
         labels = []
@@ -302,9 +247,9 @@ class ObjectCounter:
                     logger.warning(f"Error refining label for {predicted_class}: {str(e)}")
                     labels.append("unknown")
         else:
-            # Fallback: use predicted classes directly
-            logger.warning("DistilBERT not available, using ResNet predictions directly")
-            labels = predicted_classes.copy()
+            # DISABLED: Fallback removed - force real AI usage
+            logger.error("CRITICAL: DistilBERT model not available!")
+            raise RuntimeError("DistilBERT model not initialized. Please run fix_huggingface_cache.py to resolve model loading issues.")
         
         return segments, labels, predicted_classes
     
