@@ -1,3 +1,11 @@
+# DISABLED - Simple Flask app for testing without heavy AI dependencies.
+# This file is disabled in favor of the real AI pipeline in app.py.
+# 
+# DO NOT USE THIS FILE - Use app.py instead for the real AI implementation.
+
+'''
+# ENTIRE FILE COMMENTED OUT - SIMPLE API DISABLED
+
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
@@ -271,3 +279,5 @@ if __name__ == '__main__':
     
     # Run the application
     app.run(debug=True, host='0.0.0.0', port=5001)
+
+'''
