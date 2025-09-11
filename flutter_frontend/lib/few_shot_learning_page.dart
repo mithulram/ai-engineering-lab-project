@@ -90,10 +90,22 @@ class _FewShotLearningPageState extends State<FewShotLearningPage> {
                   children: [
                     ElevatedButton.icon(
                       onPressed: () async {
-                        final images = await _picker.pickMultiImage();
-                        setDialogState(() {
-                          selectedImages.addAll(images);
-                        });
+                        try {
+                          final images = await _picker.pickMultiImage();
+                          if (images.isNotEmpty) {
+                            setDialogState(() {
+                              selectedImages.addAll(images);
+                            });
+                          }
+                        } catch (e) {
+                          // Fallback to single image picker if multi-image fails
+                          final image = await _picker.pickImage(source: ImageSource.gallery);
+                          if (image != null) {
+                            setDialogState(() {
+                              selectedImages.add(image);
+                            });
+                          }
+                        }
                       },
                       icon: Icon(Icons.add_photo_alternate),
                       label: Text('Add Images'),
@@ -132,13 +144,32 @@ class _FewShotLearningPageState extends State<FewShotLearningPage> {
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
-                            child: Image.file(
-                              File(selectedImages[index].path),
+                            child: Image.network(
+                              selectedImages[index].path,
                               fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  color: Colors.grey[300],
+                                  child: Icon(Icons.image_not_supported),
+                                );
+                              },
                             ),
                           ),
                         );
                       },
+                    ),
+                  ),
+                ] else ...[
+                  SizedBox(height: 16),
+                  Container(
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey[300]!),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      'No images selected. Click "Add Images" to select training images.',
+                      style: TextStyle(color: Colors.grey[600]),
                     ),
                   ),
                 ],
