@@ -85,7 +85,44 @@ class EnhancedMonitoringHandler(http.server.SimpleHTTPRequestHandler):
                     metric_name = parts[0]
                     try:
                         value = float(parts[1])
-                        metrics[metric_name] = value
+                        
+                        # Special handling for image resolution - convert to readable format
+                        if 'image_resolution' in metric_name and value > 0:
+                            # Convert total pixels to width x height format
+                            # Assuming common aspect ratios, try to find reasonable dimensions
+                            import math
+                            sqrt_pixels = math.sqrt(value)
+                            
+                            # Try common aspect ratios
+                            aspect_ratios = [
+                                (16, 9), (4, 3), (3, 2), (1, 1), (21, 9)
+                            ]
+                            
+                            best_ratio = None
+                            best_diff = float('inf')
+                            
+                            for w_ratio, h_ratio in aspect_ratios:
+                                # Calculate width and height based on aspect ratio
+                                w = sqrt_pixels * math.sqrt(w_ratio / h_ratio)
+                                h = sqrt_pixels * math.sqrt(h_ratio / w_ratio)
+                                
+                                # Check if this gives us close to the original pixel count
+                                calculated_pixels = w * h
+                                diff = abs(calculated_pixels - value)
+                                
+                                if diff < best_diff:
+                                    best_diff = diff
+                                    best_ratio = (int(w), int(h))
+                            
+                            if best_ratio and best_diff < value * 0.1:  # Within 10% accuracy
+                                metrics[metric_name] = f"{best_ratio[0]}x{best_ratio[1]}"
+                            else:
+                                # Fallback to megapixels
+                                megapixels = value / 1000000
+                                metrics[metric_name] = f"{megapixels:.1f}MP"
+                        else:
+                            metrics[metric_name] = value
+                            
                     except ValueError:
                         continue
         
@@ -545,6 +582,10 @@ class EnhancedMonitoringHandler(http.server.SimpleHTTPRequestHandler):
                         <span class="info-label">Model Status</span>
                         <span class="info-value" id="model-status">Active</span>
                     </div>
+                    <div class="info-item">
+                        <span class="info-label">Image Resolution</span>
+                        <span class="info-value" id="image-resolution">-</span>
+                    </div>
                 </div>
             </div>
 
@@ -684,6 +725,14 @@ class EnhancedMonitoringHandler(http.server.SimpleHTTPRequestHandler):
                     Math.round((metrics['ai_object_counting_inference_time_seconds'] || 0) * 1000) + 'ms';
                 document.getElementById('segments-found').textContent = 
                     metrics['ai_object_counting_segments_found'] || 0;
+                
+                // Update image resolution display
+                const imageResolution = Object.keys(metrics).find(key => key.includes('image_resolution'));
+                if (imageResolution && metrics[imageResolution]) {
+                    document.getElementById('image-resolution').textContent = metrics[imageResolution];
+                } else {
+                    document.getElementById('image-resolution').textContent = 'No data';
+                }
                 
                 // Update chart
                 const now = new Date();
