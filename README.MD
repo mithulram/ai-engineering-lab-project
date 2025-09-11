@@ -4,6 +4,17 @@ A comprehensive AI-powered object counting application with Flutter frontend, Fl
 
 ## 🚀 Quick Start
 
+### For Week 2 Branch Users:
+1. **Clone and checkout** the week2 branch:
+   ```bash
+   git clone https://github.com/mithulram/ai-engineering-lab-project.git
+   cd ai-engineering-lab-project
+   git checkout week2
+   ```
+2. **Follow** the complete setup guide: [`SETUP_GUIDE.md`](SETUP_GUIDE.md)
+3. **Or use** the quick commands: [`QUICK_START.md`](QUICK_START.md)
+
+### For Other Branches:
 1. **Clone/Download** this project to your local machine
 2. **Navigate** to the project directory in your terminal
 3. **Follow** the detailed instructions in [`RUN_INSTRUCTIONS.md`](RUN_INSTRUCTIONS.md)
