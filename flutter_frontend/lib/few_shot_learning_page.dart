@@ -117,11 +117,13 @@ class _FewShotLearningPageState extends State<FewShotLearningPage> {
 
       request.fields['object_name'] = _nameController.text;
       
+      // Web-compatible file upload
       for (int i = 0; i < _selectedImages.length; i++) {
+        final bytes = await _selectedImages[i].readAsBytes();
         request.files.add(
-          await http.MultipartFile.fromPath(
+          http.MultipartFile.fromBytes(
             'images',
-            _selectedImages[i].path,
+            bytes,
             filename: '${_nameController.text}_$i.jpg',
           ),
         );
@@ -178,10 +180,14 @@ class _FewShotLearningPageState extends State<FewShotLearningPage> {
       );
 
       request.fields['object_name'] = objectName;
+      
+      // Web-compatible file upload
+      final bytes = await image.readAsBytes();
       request.files.add(
-        await http.MultipartFile.fromPath(
+        http.MultipartFile.fromBytes(
           'image',
-          image.path,
+          bytes,
+          filename: '${objectName}_count.jpg',
         ),
       );
 
