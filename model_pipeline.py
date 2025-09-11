@@ -178,7 +178,6 @@ class ObjectCounter:
                             "error": str(e)
                         }
                     }
-                }
             
             # Load and process image
             image = Image.open(image_path)
