@@ -10,6 +10,7 @@ import time
 from model_pipeline import ObjectCounter
 from monitoring import metrics_collector
 from few_shot_learning import few_shot_learner
+from image_generator import ImageGenerator
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -32,6 +33,9 @@ db = SQLAlchemy(app)
 
 # Initialize AI model pipeline
 object_counter = ObjectCounter()
+
+# Initialize image generator
+image_generator = ImageGenerator()
 
 # Database Models
 class CountingResult(db.Model):
@@ -570,6 +574,185 @@ def delete_learned_object():
 @app.errorhandler(413)
 def too_large(e):
     return jsonify({'error': 'File too large. Maximum size is 16MB'}), 413
+
+# Image Generation Endpoints
+@app.route('/api/generate-image', methods=['POST'])
+def generate_single_image():
+    """Generate a single synthetic test image"""
+    try:
+        data = request.get_json()
+        
+        # Extract parameters
+        object_type = data.get('object_type', 'car')
+        count = data.get('count', 3)
+        width = int(data.get('size', '512x512').split('x')[0])
+        height = int(data.get('size', '512x512').split('x')[1])
+        background_type = data.get('background', 'white')
+        clarity_level = data.get('clarity', 0.8)
+        noise_level = data.get('noise', 10)
+        rotation_angle = data.get('rotation', 0)
+        
+        # Generate image
+        image, metadata = image_generator.generate_synthetic_image(
+            object_type=object_type,
+            count=count,
+            width=width,
+            height=height,
+            background_type=background_type,
+            clarity_level=clarity_level,
+            noise_level=noise_level,
+            rotation_range=(rotation_angle, rotation_angle)
+        )
+        
+        # Save image
+        image_id = str(uuid.uuid4())
+        image_filename = f"generated_{image_id}.png"
+        image_path = os.path.join(app.config['UPLOAD_FOLDER'], image_filename)
+        image.save(image_path)
+        
+        # Test the generated image with AI
+        start_time = time.time()
+        counting_result = object_counter.count_objects(image_path, object_type)
+        processing_time = time.time() - start_time
+        
+        # Update metrics
+        metrics_collector.record_request('/api/generate-image', 'POST', 200, processing_time, object_type)
+        
+        return jsonify({
+            'success': True,
+            'image_id': image_id,
+            'image_path': image_path,
+            'generation_metadata': metadata,
+            'ai_test_result': {
+                'predicted_count': counting_result.get('count', 0),
+                'confidence': counting_result.get('confidence', 0.0),
+                'processing_time': processing_time,
+                'true_count': count,
+                'accuracy': 1.0 if counting_result.get('count', 0) == count else 0.0
+            }
+        })
+        
+    except Exception as e:
+        logger.error(f"Error generating image: {str(e)}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/run-batch-test', methods=['POST'])
+def run_batch_test():
+    """Run batch testing with multiple generated images"""
+    try:
+        data = request.get_json()
+        
+        # Extract parameters
+        num_tests = data.get('num_tests', 10)
+        object_type = data.get('object_type', 'car')
+        width = int(data.get('size', '512x512').split('x')[0])
+        height = int(data.get('size', '512x512').split('x')[1])
+        background_type = data.get('background', 'white')
+        clarity_level = data.get('clarity', 0.8)
+        noise_level = data.get('noise', 10)
+        rotation_angle = data.get('rotation', 0)
+        
+        test_results = []
+        successful_tests = 0
+        total_processing_time = 0
+        
+        for i in range(num_tests):
+            try:
+                # Generate random count for each test
+                count = (i % 5) + 1  # 1-5 objects
+                
+                # Generate image
+                image, metadata = image_generator.generate_synthetic_image(
+                    object_type=object_type,
+                    count=count,
+                    width=width,
+                    height=height,
+                    background_type=background_type,
+                    clarity_level=clarity_level,
+                    noise_level=noise_level,
+                    rotation_range=(rotation_angle, rotation_angle)
+                )
+                
+                # Save image
+                image_id = str(uuid.uuid4())
+                image_filename = f"batch_test_{image_id}.png"
+                image_path = os.path.join(app.config['UPLOAD_FOLDER'], image_filename)
+                image.save(image_path)
+                
+                # Test with AI
+                start_time = time.time()
+                counting_result = object_counter.count_objects(image_path, object_type)
+                processing_time = time.time() - start_time
+                total_processing_time += processing_time
+                
+                # Calculate accuracy
+                predicted_count = counting_result.get('count', 0)
+                accuracy = 1.0 if predicted_count == count else 0.0
+                if accuracy == 1.0:
+                    successful_tests += 1
+                
+                # Record metrics
+                metrics_collector.record_request('/api/run-batch-test', 'POST', 200, processing_time, object_type)
+                
+                test_result = {
+                    'test_id': i + 1,
+                    'object_type': object_type,
+                    'true_count': count,
+                    'predicted_count': predicted_count,
+                    'accuracy': accuracy,
+                    'confidence': counting_result.get('confidence', 0.0),
+                    'response_time': processing_time,
+                    'image_size': f"{width}x{height}",
+                    'image_id': image_id
+                }
+                
+                test_results.append(test_result)
+                
+                # Clean up image file
+                if os.path.exists(image_path):
+                    os.remove(image_path)
+                    
+            except Exception as e:
+                logger.error(f"Error in batch test {i+1}: {str(e)}")
+                test_result = {
+                    'test_id': i + 1,
+                    'object_type': object_type,
+                    'true_count': count,
+                    'predicted_count': 0,
+                    'accuracy': 0.0,
+                    'confidence': 0.0,
+                    'response_time': 0.0,
+                    'image_size': f"{width}x{height}",
+                    'error': str(e)
+                }
+                test_results.append(test_result)
+        
+        # Calculate summary statistics
+        accuracy_rate = (successful_tests / num_tests) * 100 if num_tests > 0 else 0.0
+        avg_response_time = total_processing_time / num_tests if num_tests > 0 else 0.0
+        
+        return jsonify({
+            'success': True,
+            'summary': {
+                'total_tests': num_tests,
+                'successful_tests': successful_tests,
+                'accuracy_rate': accuracy_rate,
+                'avg_response_time': avg_response_time
+            },
+            'test_results': test_results
+        })
+        
+    except Exception as e:
+        logger.error(f"Error running batch test: {str(e)}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/generated-image/<image_id>')
+def get_generated_image(image_id):
+    """Serve generated image files"""
+    try:
+        return send_from_directory(app.config['UPLOAD_FOLDER'], f"generated_{image_id}.png")
+    except FileNotFoundError:
+        return jsonify({'error': 'Image not found'}), 404
 
 @app.errorhandler(404)
 def not_found(e):

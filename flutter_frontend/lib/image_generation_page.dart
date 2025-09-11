@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'dart:html' as html;
 
 class ImageGenerationPage extends StatefulWidget {
   const ImageGenerationPage({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class _ImageGenerationPageState extends State<ImageGenerationPage> {
   String _errorMessage = '';
   Map<String, dynamic> _generationResults = {};
   List<Map<String, dynamic>> _testResults = [];
+  String? _generatedImageUrl;
 
   // Generation parameters
   String _selectedObjectType = 'car';
@@ -50,6 +52,10 @@ class _ImageGenerationPageState extends State<ImageGenerationPage> {
             _buildGenerationSettings(),
             SizedBox(height: 24),
             _buildGenerationControls(),
+            if (_isGenerating) ...[
+              SizedBox(height: 24),
+              _buildLoadingIndicator(),
+            ],
             if (_generationResults.isNotEmpty) ...[
               SizedBox(height: 24),
               _buildGenerationResults(),
@@ -251,6 +257,38 @@ class _ImageGenerationPageState extends State<ImageGenerationPage> {
     );
   }
 
+  Widget _buildLoadingIndicator() {
+    return Card(
+      child: Padding(
+        padding: EdgeInsets.all(32),
+        child: Column(
+          children: [
+            CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.blue[600]!),
+              strokeWidth: 3,
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Generating image and testing with AI...',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey[600],
+              ),
+            ),
+            SizedBox(height: 8),
+            Text(
+              'This may take a few seconds',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey[500],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildGenerationControls() {
     return Card(
       child: Padding(
@@ -319,11 +357,10 @@ class _ImageGenerationPageState extends State<ImageGenerationPage> {
     });
 
     try {
-      // Simulate image generation (in real implementation, this would call the backend)
-      await Future.delayed(Duration(seconds: 2));
-      
-      setState(() {
-        _generationResults = {
+      final response = await http.post(
+        Uri.parse('http://localhost:5001/api/generate-image'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
           'object_type': _selectedObjectType,
           'count': _objectCount,
           'size': _selectedSize,
@@ -331,17 +368,47 @@ class _ImageGenerationPageState extends State<ImageGenerationPage> {
           'noise': _noiseLevel,
           'rotation': _rotationAngle,
           'background': _selectedBackground,
-          'generated_at': DateTime.now().toIso8601String(),
-        };
-        _isGenerating = false;
-      });
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Image generated successfully!'),
-          backgroundColor: Colors.green,
-        ),
+        }),
       );
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data['success'] == true) {
+          setState(() {
+            _generationResults = {
+              'object_type': _selectedObjectType,
+              'count': _objectCount,
+              'size': _selectedSize,
+              'clarity': _clarityLevel,
+              'noise': _noiseLevel,
+              'rotation': _rotationAngle,
+              'background': _selectedBackground,
+              'generated_at': DateTime.now().toIso8601String(),
+              'image_id': data['image_id'],
+              'ai_test_result': data['ai_test_result'],
+            };
+            _generatedImageUrl = 'http://localhost:5001/api/generated-image/${data['image_id']}';
+            _isGenerating = false;
+          });
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Image generated and tested successfully! AI accuracy: ${(data['ai_test_result']['accuracy'] * 100).toStringAsFixed(1)}%'),
+              backgroundColor: Colors.green,
+            ),
+          );
+        } else {
+          setState(() {
+            _errorMessage = 'Failed to generate image: ${data['error'] ?? 'Unknown error'}';
+            _isGenerating = false;
+          });
+        }
+      } else {
+        setState(() {
+          _errorMessage = 'Error generating image: ${response.statusCode}';
+          _isGenerating = false;
+        });
+      }
     } catch (e) {
       setState(() {
         _errorMessage = 'Error generating image: $e';
@@ -358,36 +425,47 @@ class _ImageGenerationPageState extends State<ImageGenerationPage> {
     });
 
     try {
-      // Simulate batch testing
-      for (int i = 0; i < _numTests; i++) {
-        await Future.delayed(Duration(milliseconds: 500));
-        
-        // Simulate test results
-        final result = {
-          'test_id': i + 1,
-          'object_type': _objectTypes[i % _objectTypes.length],
-          'true_count': (i % 5) + 1,
-          'predicted_count': (i % 5) + 1 + (i % 3) - 1,
-          'accuracy': (i % 2) == 0 ? 1.0 : 0.0,
-          'response_time': 0.1 + (i % 10) * 0.01,
-          'image_size': _imageSizes[i % _imageSizes.length],
-        };
-        
+      final response = await http.post(
+        Uri.parse('http://localhost:5001/api/run-batch-test'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'num_tests': _numTests,
+          'object_type': _selectedObjectType,
+          'size': _selectedSize,
+          'clarity': _clarityLevel,
+          'noise': _noiseLevel,
+          'rotation': _rotationAngle,
+          'background': _selectedBackground,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data['success'] == true) {
+          setState(() {
+            _testResults = List<Map<String, dynamic>>.from(data['test_results']);
+            _isGenerating = false;
+          });
+
+          final summary = data['summary'];
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Batch test completed! ${summary['total_tests']} images tested. Accuracy: ${summary['accuracy_rate'].toStringAsFixed(1)}%'),
+              backgroundColor: Colors.green,
+            ),
+          );
+        } else {
+          setState(() {
+            _errorMessage = 'Failed to run batch test: ${data['error'] ?? 'Unknown error'}';
+            _isGenerating = false;
+          });
+        }
+      } else {
         setState(() {
-          _testResults.add(result);
+          _errorMessage = 'Error running batch test: ${response.statusCode}';
+          _isGenerating = false;
         });
       }
-
-      setState(() {
-        _isGenerating = false;
-      });
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Batch test completed! ${_testResults.length} images tested.'),
-          backgroundColor: Colors.green,
-        ),
-      );
     } catch (e) {
       setState(() {
         _errorMessage = 'Error running batch test: $e';
@@ -397,6 +475,9 @@ class _ImageGenerationPageState extends State<ImageGenerationPage> {
   }
 
   Widget _buildGenerationResults() {
+    final aiResult = _generationResults['ai_test_result'];
+    final accuracy = aiResult != null ? (aiResult['accuracy'] * 100) : 0.0;
+    
     return Card(
       child: Padding(
         padding: EdgeInsets.all(20),
@@ -404,12 +485,202 @@ class _ImageGenerationPageState extends State<ImageGenerationPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Generation Results',
+              'Generation & AI Test Results',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 16),
+            
+            // Generated Image Display
+            if (_generatedImageUrl != null) ...[
+              Container(
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.grey[50],
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.grey[300]!),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.image, color: Colors.blue[600], size: 24),
+                        SizedBox(width: 8),
+                        Text(
+                          'Generated Image',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue[800],
+                          ),
+                        ),
+                        Spacer(),
+                        ElevatedButton.icon(
+                          onPressed: _downloadImage,
+                          icon: Icon(Icons.download, size: 16),
+                          label: Text('Download'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue[600],
+                            foregroundColor: Colors.white,
+                            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          ),
+                        ),
+                        SizedBox(width: 8),
+                        OutlinedButton.icon(
+                          onPressed: _clearResults,
+                          icon: Icon(Icons.clear, size: 16),
+                          label: Text('Clear'),
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: Colors.grey[600],
+                            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 12),
+                    Center(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.grey[300]!),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.2),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.network(
+                            _generatedImageUrl!,
+                            width: 300,
+                            height: 300,
+                            fit: BoxFit.contain,
+                            loadingBuilder: (context, child, loadingProgress) {
+                              if (loadingProgress == null) return child;
+                              return Container(
+                                width: 300,
+                                height: 300,
+                                child: Center(
+                                  child: CircularProgressIndicator(
+                                    value: loadingProgress.expectedTotalBytes != null
+                                        ? loadingProgress.cumulativeBytesLoaded /
+                                            loadingProgress.expectedTotalBytes!
+                                        : null,
+                                  ),
+                                ),
+                              );
+                            },
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                width: 300,
+                                height: 300,
+                                color: Colors.grey[200],
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.error, color: Colors.red, size: 48),
+                                    SizedBox(height: 8),
+                                    Text('Failed to load image', style: TextStyle(color: Colors.red)),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 16),
+            ],
+
+            // AI Test Results Section
+            if (aiResult != null) ...[
+              Container(
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: accuracy == 100.0 ? Colors.green[50] : Colors.orange[50],
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: accuracy == 100.0 ? Colors.green[300]! : Colors.orange[300]!,
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          accuracy == 100.0 ? Icons.check_circle : Icons.warning,
+                          color: accuracy == 100.0 ? Colors.green[600] : Colors.orange[600],
+                          size: 24,
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          'AI Test Results',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: accuracy == 100.0 ? Colors.green[800] : Colors.orange[800],
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 12),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _buildAIMetricCard(
+                            'True Count',
+                            aiResult['true_count'].toString(),
+                            Icons.numbers,
+                            Colors.blue,
+                          ),
+                        ),
+                        SizedBox(width: 12),
+                        Expanded(
+                          child: _buildAIMetricCard(
+                            'Predicted',
+                            aiResult['predicted_count'].toString(),
+                            Icons.psychology,
+                            Colors.purple,
+                          ),
+                        ),
+                        SizedBox(width: 12),
+                        Expanded(
+                          child: _buildAIMetricCard(
+                            'Accuracy',
+                            '${accuracy.toStringAsFixed(1)}%',
+                            Icons.check_circle,
+                            accuracy == 100.0 ? Colors.green : Colors.orange,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 8),
+                    _buildResultRow('Confidence', '${(aiResult['confidence'] * 100).toStringAsFixed(1)}%'),
+                    _buildResultRow('Processing Time', '${aiResult['processing_time'].toStringAsFixed(2)}s'),
+                  ],
+                ),
+              ),
+              SizedBox(height: 16),
+            ],
+            
+            // Generation Parameters
+            Text(
+              'Generation Parameters',
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
             _buildResultRow('Object Type', _generationResults['object_type']),
             _buildResultRow('Count', _generationResults['count'].toString()),
             _buildResultRow('Size', _generationResults['size']),
@@ -420,6 +691,39 @@ class _ImageGenerationPageState extends State<ImageGenerationPage> {
             _buildResultRow('Generated At', _generationResults['generated_at']?.toString().substring(11, 19) ?? ''),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildAIMetricCard(String title, String value, IconData icon, Color color) {
+    return Container(
+      padding: EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: color.withOpacity(0.3)),
+      ),
+      child: Column(
+        children: [
+          Icon(icon, color: color, size: 20),
+          SizedBox(height: 4),
+          Text(
+            value,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: color,
+            ),
+          ),
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.grey[600],
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
     );
   }
@@ -555,6 +859,47 @@ class _ImageGenerationPageState extends State<ImageGenerationPage> {
             textAlign: TextAlign.center,
           ),
         ],
+      ),
+    );
+  }
+
+  void _downloadImage() async {
+    if (_generatedImageUrl == null) return;
+    
+    try {
+      // Create a temporary anchor element to trigger download
+      final anchor = html.AnchorElement(href: _generatedImageUrl!)
+        ..setAttribute('download', 'generated_image_${_generationResults['object_type']}_${_generationResults['count']}_objects.png')
+        ..click();
+      
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Image download started!'),
+          backgroundColor: Colors.green,
+        ),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to download image: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
+  void _clearResults() {
+    setState(() {
+      _generationResults.clear();
+      _generatedImageUrl = null;
+      _testResults.clear();
+      _errorMessage = '';
+    });
+    
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Results cleared'),
+        backgroundColor: Colors.blue,
       ),
     );
   }
