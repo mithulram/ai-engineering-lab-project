@@ -30,6 +30,8 @@ class TestAIObjectCountingWeek2(unittest.TestCase):
         
         with self.app.app_context():
             db.create_all()
+            # Ensure the database is properly initialized
+            db.session.commit()
     
     def tearDown(self):
         """Clean up after tests"""
