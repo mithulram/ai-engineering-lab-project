@@ -87,7 +87,11 @@ class TestSafetyModule(unittest.TestCase):
             with self.subTest(text=text):
                 violations = self.safety_module.check_text_safety(text)
                 self.assertGreater(len(violations), 0, f"Should block suspicious pattern: {text}")
-                self.assertEqual(violations[0].violation_type, "suspicious_pattern")
+                # Military detection takes precedence over suspicious patterns
+                if "military" in text.lower() or "tactical" in text.lower() or "strategic" in text.lower():
+                    self.assertEqual(violations[0].violation_type, "military_vehicle_detection")
+                else:
+                    self.assertEqual(violations[0].violation_type, "suspicious_pattern")
     
     def test_ambiguous_cases(self):
         """Test ambiguous cases that might be military-related"""
