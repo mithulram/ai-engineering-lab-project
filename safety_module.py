@@ -24,6 +24,7 @@ def contains_military_keyword(text: str) -> bool:
 
 DEFAULT_MILITARY_PROB_BLOCK = float(os.getenv('MILITARY_BLOCK_THRESH', 0.75))
 DEFAULT_TURRET_SCORE_THRESH = float(os.getenv('TURRET_SCORE_THRESH', 0.45))
+COLLECT_ALL_VIOLATIONS = os.getenv('COLLECT_ALL_VIOLATIONS', 'true').lower() in ('1','true','yes')
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -105,10 +106,11 @@ class SafetyModule:
                 }
             )
             violations.append(violation)
-            # Military detection takes precedence - return early
-            return violations
+            # Military detection takes precedence - return early unless collecting all violations
+            if not COLLECT_ALL_VIOLATIONS:
+                return violations
         
-        # Check for suspicious patterns only if military detection didn't trigger
+        # Check for suspicious patterns (always check if COLLECT_ALL_VIOLATIONS is enabled)
         for pattern_type, patterns in self.suspicious_patterns.items():
             for pattern in patterns:
                 if pattern in text_lower:
@@ -126,6 +128,9 @@ class SafetyModule:
                             }
                         )
                         violations.append(violation)
+                        # Return early if not collecting all violations
+                        if not COLLECT_ALL_VIOLATIONS:
+                            return violations
         
         # Use ML classifier if available
         if self.text_classifier:
