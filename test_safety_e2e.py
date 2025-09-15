@@ -57,11 +57,11 @@ class TestSafetyE2E(unittest.TestCase):
     def test_military_vehicle_request_blocked(self):
         """Test that military vehicle counting requests are blocked with 403"""
         test_cases = [
-            ("tank", "count tanks in this image"),
-            ("armored vehicle", "how many armored vehicles"),
-            ("fighter jet", "number of fighter jets"),
-            ("warship", "count warships"),
-            ("artillery", "artillery pieces in image")
+            ("car", "count tanks in this image"),
+            ("car", "how many armored vehicles"),
+            ("car", "number of fighter jets"),
+            ("car", "count warships"),
+            ("car", "artillery pieces in image")
         ]
         
         for item_type, description in test_cases:

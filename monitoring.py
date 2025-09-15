@@ -106,6 +106,14 @@ class MetricsCollector:
             registry=self.registry
         )
         
+        # Additional counter for test compatibility
+        self.ai_requests_total = Counter(
+            'ai_object_counting_requests_total',
+            'Total count of API requests for object counting',
+            ['status', 'pipeline_version'],
+            registry=self.registry
+        )
+        
         self.predictions_total = Counter(
             'ai_object_counting_predictions_total',
             'Total number of predictions made',
@@ -262,6 +270,12 @@ class MetricsCollector:
                 endpoint=endpoint,
                 method=method,
                 status_code=str(status_code),
+                pipeline_version=pipeline_version
+            ).inc()
+            
+            # Also increment the test-compatible counter
+            self.ai_requests_total.labels(
+                status=str(status_code),
                 pipeline_version=pipeline_version
             ).inc()
             

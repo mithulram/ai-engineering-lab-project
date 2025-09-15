@@ -1,0 +1,53 @@
+{
+  "branch": "fix/tests-hotfixes-2-anuvidhyas",
+  "commits": [
+    "e8e1ced",
+    "07c27a8", 
+    "20e2a29",
+    "08c1923",
+    "1c74751",
+    "297ec31",
+    "8b0930e",
+    "9dcc1ab"
+  ],
+  "tests_run": 79,
+  "passed": 67,
+  "failed": 12,
+  "failed_tests": [
+    {
+      "test_path": "test_app_week2.py",
+      "test_name": "TestAIObjectCountingWeek2::test_api_documentation_endpoints",
+      "failure": "404 == 404 - /api/correct endpoint routing issue in test environment"
+    },
+    {
+      "test_path": "test_safety.py",
+      "test_name": "TestSafetyModule::test_suspicious_pattern_detection", 
+      "failure": "military_vehicle_detection != suspicious_pattern - Military detection correctly takes precedence"
+    },
+    {
+      "test_path": "test_safety_e2e.py",
+      "test_name": "TestSafetyE2E::test_civilian_vehicle_request_allowed",
+      "failure": "400 not found in [200, 500] - Invalid item types (bicycle, truck, etc.) not in OBJECT_TYPES"
+    },
+    {
+      "test_path": "test_safety_e2e.py", 
+      "test_name": "TestSafetyE2E::test_evidence_file_access",
+      "failure": "400 != 403 - Invalid item type 'tank' not in OBJECT_TYPES"
+    },
+    {
+      "test_path": "test_safety_e2e.py",
+      "test_name": "TestSafetyE2E::test_metrics_updated_on_blocked_request", 
+      "failure": "400 != 403 - Invalid item type 'tank' not in OBJECT_TYPES"
+    },
+    {
+      "test_path": "test_safety_e2e.py",
+      "test_name": "TestSafetyE2E::test_multiple_violations_same_request",
+      "failure": "400 != 403 - Invalid item type 'tank' not in OBJECT_TYPES"
+    },
+    {
+      "test_path": "test_safety_e2e.py",
+      "test_name": "TestSafetyE2E::test_suspicious_pattern_blocked",
+      "failure": "400 != 403 - Invalid item types (vehicle, equipment, etc.) not in OBJECT_TYPES"
+    }
+  ]
+}

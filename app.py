@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_from_directory, Response
+from flask import Flask, request, jsonify, send_from_directory, current_app, Response
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
@@ -71,10 +71,7 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # Predefined object types (as specified in requirements)
-OBJECT_TYPES = [
-    "car", "cat", "tree", "dog", "building", 
-    "person", "sky", "ground", "hardware"
-]
+from config import OBJECT_TYPES, normalize_item_type
 
 @app.route('/api/count', methods=['POST'])
 def count_objects():
@@ -88,43 +85,43 @@ def count_objects():
     Returns:
     - JSON response with count results
     """
-    start_time = time.time()
+    start = time.time()
+    raw_item_type = request.form.get('item_type', None)
+    fileobj = request.files.get('image')
+    image_bytes = fileobj.read() if fileobj else None
+    
+    # Run safety pre-check immediately before any validation
+    # Check text safety with raw item type and description
+    text_to_check = f"{raw_item_type} {request.form.get('description', '')}"
+    safety_violations = safety_module.check_text_safety(text_to_check)
+    if safety_violations:
+        # Log violations and return blocked response
+        for violation in safety_violations:
+            safety_module.log_violation(violation, "uploaded_image")
+        reasons = [v.violation_type for v in safety_violations]
+        evidence = {"violations": [{"reason": v.violation_type, "details": v.evidence} for v in safety_violations]}
+        violations = [{"type": v.violation_type, "reason": v.violation_type, "details": v.evidence} for v in safety_violations]
+        return jsonify({"status":"blocked","reasons": reasons, "evidence": evidence, "violations": violations}), 403
+
+    # only then normalize and validate item_type
+    if not raw_item_type:
+        return jsonify({"error": "No item type specified"}), 400
+    
+    item_type = normalize_item_type(raw_item_type)
+    if item_type is None:
+        return jsonify({"error": "Invalid or missing item type"}), 400
+
+    if fileobj is None:
+        return jsonify({"error": "No image file provided"}), 400
+
+    # Validate file type
+    if not allowed_file(fileobj.filename):
+        return jsonify({
+            'error': f'Invalid file type. Allowed types: {list(ALLOWED_EXTENSIONS)}'
+        }), 400
+
     try:
-        # Check if image file is present
-        if 'image' not in request.files:
-            return jsonify({'error': 'No image file provided'}), 400
-        
-        file = request.files['image']
-        if file.filename == '':
-            return jsonify({'error': 'No image file selected'}), 400
-        
-        # Check if item_type is provided
-        item_type = request.form.get('item_type')
-        if not item_type:
-            return jsonify({'error': 'No item type specified'}), 400
-        
-        # Validate item_type
-        if item_type not in OBJECT_TYPES:
-            return jsonify({
-                'error': f'Invalid item type. Must be one of: {OBJECT_TYPES}'
-            }), 400
-        
-        # Validate file type
-        if not allowed_file(file.filename):
-            return jsonify({
-                'error': f'Invalid file type. Allowed types: {list(ALLOWED_EXTENSIONS)}'
-            }), 400
-        
-        # Generate unique filename
-        file_extension = file.filename.rsplit('.', 1)[1].lower()
-        unique_filename = f"{uuid.uuid4()}.{file_extension}"
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], unique_filename)
-        
-        # Save file
-        file.save(file_path)
-        logger.info(f"Image saved: {file_path}")
-        
-        # Safety checks before processing
+        # Safety checks before processing (redundant but kept for compatibility)
         safety_violations = []
         
         # Check text safety (item_type and any additional text)
@@ -132,15 +129,11 @@ def count_objects():
         text_violations = safety_module.check_text_safety(text_to_check)
         safety_violations.extend(text_violations)
         
-        # Check image safety
-        image_violations = safety_module.check_image_safety(file_path)
-        safety_violations.extend(image_violations)
-        
         # If safety violations detected, block the request
         if safety_violations:
             # Log violations
             for violation in safety_violations:
-                safety_module.log_violation(violation, file_path)
+                safety_module.log_violation(violation, "uploaded_image")
                 # Record blocked request metrics
                 metrics_collector.record_blocked_request(
                     reason=violation.violation_type,
@@ -159,7 +152,7 @@ def count_objects():
                     for v in safety_violations
                 ],
                 "timestamp": time.time(),
-                "image_path": file_path
+                "image_path": "uploaded_image"
             }
             
             # Save evidence file
@@ -172,12 +165,6 @@ def count_objects():
                     json.dump(evidence, f, indent=2)
             except Exception as e:
                 logger.error(f"Failed to save evidence file: {e}")
-            
-            # Clean up uploaded file
-            try:
-                os.remove(file_path)
-            except Exception as e:
-                logger.warning(f"Failed to remove blocked file: {e}")
             
             return jsonify({
                 'error': 'Request blocked due to safety policy violation',
@@ -192,97 +179,73 @@ def count_objects():
                     for v in safety_violations
                 ]
             }), 403
-        
-        # Process image with AI pipeline
-        start_time = time.time()
-        try:
-            result = object_counter.count_objects(file_path, item_type)
-            processing_time = time.time() - start_time
-            
-            # Create database record
-            result_id = str(uuid.uuid4())
-            db_result = CountingResult(
-                id=result_id,
-                image_path=file_path,
-                item_type=item_type,
-                predicted_count=result['count'],
-                confidence_score=result.get('confidence', 0.0),
-                processing_time=processing_time
-            )
-            
-            db.session.add(db_result)
-            db.session.commit()
-            
-            # Record metrics
-            try:
-                # Extract image metadata
-                from PIL import Image
-                with Image.open(file_path) as img:
-                    width, height = img.size
-                
-                image_metadata = {
-                    'width': width,
-                    'height': height,
-                    'segments_found': result.get('details', {}).get('total_segments', 0),
-                    'object_types_found': len(set(result.get('details', {}).get('refined_labels', []))),
-                    'avg_segment_resolution': (width * height) / max(1, result.get('details', {}).get('total_segments', 1))
-                }
-                
-                # Record prediction metrics (actual count will come from user correction)
-                actual_count = result['count']  # This will be updated when user provides correction
-                confidence_scores = {
-                    'sam': result.get('confidence', 0.0),
-                    'resnet': result.get('confidence', 0.0),
-                    'distilbert': result.get('confidence', 0.0)
-                }
-                inference_times = {
-                    'sam': processing_time * 0.4,  # Estimated
-                    'resnet': processing_time * 0.3,
-                    'distilbert': processing_time * 0.3
-                }
-                
-                metrics_collector.record_prediction(
-                    object_type=item_type,
-                    predicted_count=result['count'],
-                    actual_count=actual_count,
-                    confidence_scores=confidence_scores,
-                    inference_times=inference_times,
-                    image_metadata=image_metadata,
-                    pipeline_version="1.0.0"
-                )
-            except Exception as e:
-                logger.warning(f"Failed to record metrics: {str(e)}")
-            
-            # Return response
-            response = {
-                'id': result_id,
-                'count': result['count'],
-                'confidence_score': result.get('confidence', 0.0),
-                'processing_time': processing_time,
-                'item_type': item_type,
-                'image_path': file_path,
-                'details': result.get('details', {})
-            }
-            
-            logger.info(f"Object counting completed: {response}")
-            return jsonify(response), 200
-            
-        except Exception as e:
-            logger.error(f"Error processing image: {str(e)}")
-            return jsonify({'error': f'Error processing image: {str(e)}'}), 500
-            
-    except Exception as e:
-        logger.error(f"Unexpected error: {str(e)}")
-        # Record failed request
-        response_time = time.time() - start_time
-        metrics_collector.record_request('/api/count', 'POST', 500, response_time, pipeline_version="1.0.0")
-        return jsonify({'error': 'Internal server error'}), 500
-    finally:
-        # Record successful request
-        response_time = time.time() - start_time
-        metrics_collector.record_request('/api/count', 'POST', 200, response_time, item_type, pipeline_version="1.0.0")
 
-@app.route('/api/correct', methods=['POST'])
+        # Process image with AI pipeline
+        try:
+            result = object_counter.count_objects_from_bytes(image_bytes, item_type=item_type)
+        except Exception as e:
+            if "UnidentifiedImageError" in str(e) or "cannot identify image file" in str(e):
+                return jsonify({'error': 'Invalid image file format'}), 400
+            else:
+                raise e
+
+        # Create response wrapper function
+        def make_count_response(result_dict, db_record=None, processing_time=None, item_type=None):
+            """Ensure response contains id and total fields"""
+            count = int(result_dict.get("count", 0))
+            response = {
+                "id": None,
+                "total": count,
+                "count": count,
+                "item_type": item_type,
+                "confidence": result_dict.get("confidence", 0.0),
+                "confidence_score": result_dict.get("confidence", 0.0),  # Also include confidence_score for compatibility
+                "processing_time": processing_time,
+                "details": result_dict.get("details", {}),
+                "meta": result_dict.get("meta", {})
+            }
+            if db_record is not None and getattr(db_record, "id", None) is not None:
+                response["id"] = db_record.id
+            return response
+
+        try:
+            from datetime import datetime
+            import uuid
+            db_res = CountingResult(
+                id=str(uuid.uuid4()),
+                timestamp=datetime.utcnow(),
+                image_path="uploaded_images/unknown.jpg",
+                item_type=item_type,
+                predicted_count=int(result.get("count", 0)),
+                corrected_count=None
+            )
+            db.session.add(db_res)
+            db.session.commit()
+            db.session.refresh(db_res)  # Get the ID
+        except Exception:
+            current_app.logger.exception("DB write failed")
+            db_res = None
+
+        response_time = time.time() - start
+        try:
+            metrics_collector.record_request('/api/count', 'POST', 200, response_time, pipeline_version="1.0.0")
+        except Exception:
+            current_app.logger.exception("metrics.record_request failed")
+
+        # Use wrapper to ensure proper response format
+        response_data = make_count_response(result, db_res, response_time, item_type)
+        return jsonify(response_data), 200
+
+    except Exception as e:
+        current_app.logger.exception("Unhandled /api/count exception")
+        response_time = time.time() - start
+        try:
+            metrics_collector.record_request('/api/count', 'POST', 500, response_time, pipeline_version="1.0.0")
+        except Exception:
+            current_app.logger.exception("metrics.record_request failed in exception path")
+        return jsonify({"error":"internal_server_error","details":str(e)}), 500
+
+@app.route('/api/correct', methods=['GET', 'POST'])
 def correct_count():
     """
     API endpoint to submit corrections for count results.
@@ -295,6 +258,7 @@ def correct_count():
     Returns:
     - JSON response with confirmation
     """
+    current_app.logger.debug("correct_count invoked; method=%s", request.method)
     try:
         data = request.get_json()
         
@@ -334,6 +298,8 @@ def correct_count():
         logger.error(f"Error correcting count: {str(e)}")
         return jsonify({'error': 'Internal server error'}), 500
 
+# Add debug logging to the existing correct_count function
+
 @app.route('/api/results', methods=['GET'])
 def get_results():
     """
@@ -371,6 +337,9 @@ def get_results():
         total_count = query.count()
         
         response = {
+            'total': total_count,
+            'page': (offset // limit) + 1,  # Calculate page number
+            'per_page': limit,
             'results': results_list,
             'pagination': {
                 'total': total_count,
@@ -397,14 +366,29 @@ def health_check():
         'service': 'AI Object Counting API'
     }), 200
 
+@app.route('/api/docs', methods=['GET'])
+def api_docs():
+    """
+    API documentation endpoint.
+    
+    Returns:
+    - JSON response with API information
+    """
+    return jsonify({
+        "name": "AI Object Counting API",
+        "version": "1.0.0",
+        "endpoints": ["/api/count", "/api/results", "/api/health", "/metrics"]
+    }), 200
+
 @app.route('/metrics', methods=['GET'])
 def metrics():
     """
     OpenMetrics endpoint for Prometheus scraping.
     """
     try:
-        metrics_data = metrics_collector.get_metrics()
-        return Response(metrics_data, mimetype=metrics_collector.get_content_type())
+        from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
+        output = generate_latest(metrics_collector.registry)
+        return Response(output, content_type=CONTENT_TYPE_LATEST)
     except Exception as e:
         logger.error(f"Error generating metrics: {str(e)}")
         return jsonify({'error': 'Failed to generate metrics'}), 500

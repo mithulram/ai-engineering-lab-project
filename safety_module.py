@@ -8,11 +8,23 @@ import json
 import logging
 import os
 import time
+import re
 from typing import Dict, List, Tuple, Optional
 from PIL import Image
 import numpy as np
 from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassification
 import torch
+
+# Military keyword detection with word boundaries
+MILITARY_KEYWORDS = {"tank","tanks","armored","armour","howitzer","turret","IFV","APC","artillery","armor","fighter","jet","warship","warships","submarine","submarines","helicopter","helicopters","drone","drones","missile","missiles","rocket","rockets","bomb","bombs","cannon","cannons","mortar","mortars","combat","military","weapon","weapons","gun","guns","defense","defence","tactical","strategic"}
+MILITARY_RE = re.compile(r'\b(' + r'|'.join(re.escape(k) for k in MILITARY_KEYWORDS) + r')\b', flags=re.I)
+
+def contains_military_keyword(text: str) -> bool:
+    return bool(MILITARY_RE.search(text or ""))
+
+DEFAULT_MILITARY_PROB_BLOCK = float(os.getenv('MILITARY_BLOCK_THRESH', 0.75))
+DEFAULT_TURRET_SCORE_THRESH = float(os.getenv('TURRET_SCORE_THRESH', 0.45))
+COLLECT_ALL_VIOLATIONS = os.getenv('COLLECT_ALL_VIOLATIONS', 'true').lower() in ('1','true','yes')
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -49,8 +61,8 @@ class SafetyModule:
         self.suspicious_patterns = {
             'camouflage': ['camouflage', 'camouflaged', 'military camo', 'desert camo', 'urban camo'],
             'military_components': ['turret', 'gun barrel', 'missile', 'rocket', 'bomb', 'warhead'],
-            'counting_indicators': ['count tanks', 'how many vehicles', 'number of aircraft', 'vehicle count'],
-            'military_terms': ['combat', 'warfare', 'military', 'defense', 'strategic', 'tactical']
+            'counting_indicators': ['count tanks', 'how many vehicles', 'number of aircraft', 'military vehicle count'],
+            'military_terms': ['combat', 'warfare', 'military base', 'defense', 'strategic', 'tactical']
         }
         
         # Initialize text classifier for military content detection
@@ -81,34 +93,32 @@ class SafetyModule:
         violations = []
         text_lower = text.lower()
         
-        # Check for direct military vehicle mentions
-        for category, keywords in self.military_vehicles.items():
-            for keyword in keywords:
-                if keyword in text_lower:
-                    confidence = self._calculate_confidence(text_lower, keyword)
-                    if confidence > 0.5:
-                        violation = SafetyViolation(
-                            violation_type="military_vehicle_detection",
-                            reason=f"Text contains military vehicle reference: {keyword}",
-                            confidence=confidence,
-                            evidence={
-                                "text": text,
-                                "keyword": keyword,
-                                "category": category,
-                                "detection_method": "keyword_matching"
-                            }
-                        )
-                        violations.append(violation)
+        # Use regex-based military keyword detection - takes precedence
+        if contains_military_keyword(text):
+            confidence = DEFAULT_MILITARY_PROB_BLOCK
+            violation = SafetyViolation(
+                violation_type="military_vehicle_detection",
+                reason="military_vehicle_detection",  # Canonical reason string
+                confidence=confidence,
+                evidence={
+                    "text": text,
+                    "detection_method": "regex_keyword_matching"
+                }
+            )
+            violations.append(violation)
+            # Military detection takes precedence - return early unless collecting all violations
+            if not COLLECT_ALL_VIOLATIONS:
+                return violations
         
-        # Check for suspicious patterns
+        # Check for suspicious patterns (always check if COLLECT_ALL_VIOLATIONS is enabled)
         for pattern_type, patterns in self.suspicious_patterns.items():
             for pattern in patterns:
                 if pattern in text_lower:
                     confidence = self._calculate_confidence(text_lower, pattern)
-                    if confidence > 0.4:
+                    if confidence > DEFAULT_TURRET_SCORE_THRESH:
                         violation = SafetyViolation(
                             violation_type="suspicious_pattern",
-                            reason=f"Text contains suspicious pattern: {pattern}",
+                            reason="suspicious_pattern",  # Canonical reason string
                             confidence=confidence,
                             evidence={
                                 "text": text,
@@ -118,6 +128,9 @@ class SafetyModule:
                             }
                         )
                         violations.append(violation)
+                        # Return early if not collecting all violations
+                        if not COLLECT_ALL_VIOLATIONS:
+                            return violations
         
         # Use ML classifier if available
         if self.text_classifier:
@@ -242,7 +255,7 @@ class SafetyModule:
         text_length = len(text.split())
         
         # Higher confidence for multiple occurrences or shorter text
-        base_confidence = min(0.95, 0.6 + (keyword_count * 0.2))
+        base_confidence = min(0.95, 0.7 + (keyword_count * 0.15))
         length_factor = max(0.3, 1.0 - (text_length / 200.0))
         
         return min(0.95, base_confidence * length_factor)
@@ -251,10 +264,17 @@ class SafetyModule:
         """Log a safety violation with evidence"""
         self.violations_log.append(violation)
         
+        # Canonicalize reason strings
+        canonical = {
+            "military_vehicle_detection": "military_vehicle_detection",
+            "suspicious_pattern": "suspicious_pattern",
+        }
+        reason_str = canonical.get(violation.violation_type, violation.reason)
+        
         # Create evidence file
         evidence_data = {
             "violation_type": violation.violation_type,
-            "reason": violation.reason,
+            "reason": reason_str,
             "confidence": violation.confidence,
             "timestamp": violation.timestamp,
             "evidence": violation.evidence
