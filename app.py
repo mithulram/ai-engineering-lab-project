@@ -100,7 +100,7 @@ def count_objects():
             safety_module.log_violation(violation, "uploaded_image")
         reasons = [v.violation_type for v in safety_violations]
         evidence = {"violations": [{"reason": v.violation_type, "details": v.evidence} for v in safety_violations]}
-        violations = [{"reason": v.violation_type, "details": v.evidence} for v in safety_violations]
+        violations = [{"type": v.violation_type, "reason": v.violation_type, "details": v.evidence} for v in safety_violations]
         return jsonify({"status":"blocked","reasons": reasons, "evidence": evidence, "violations": violations}), 403
 
     # only then normalize and validate item_type
