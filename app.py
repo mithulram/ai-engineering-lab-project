@@ -71,10 +71,7 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # Predefined object types (as specified in requirements)
-OBJECT_TYPES = [
-    "car", "cat", "tree", "dog", "building", 
-    "person", "sky", "ground", "hardware"
-]
+from config import OBJECT_TYPES, normalize_item_type
 
 @app.route('/api/count', methods=['POST'])
 def count_objects():
@@ -89,19 +86,19 @@ def count_objects():
     - JSON response with count results
     """
     start = time.time()
-    item_type = request.form.get('item_type')
-    if not item_type:
+    raw_item_type = request.form.get('item_type')
+    if not raw_item_type:
         return jsonify({"error": "No item type specified"}), 400
+    
+    item_type = normalize_item_type(raw_item_type)
+    if item_type is None:
+        return jsonify({"error": "Invalid or missing item type"}), 400
 
     fileobj = request.files.get('image')
     if fileobj is None:
         return jsonify({"error": "No image file provided"}), 400
 
-    # Validate item_type
-    if item_type not in OBJECT_TYPES:
-        return jsonify({
-            'error': f'Invalid item type. Must be one of: {OBJECT_TYPES}'
-        }), 400
+    # item_type is already validated by normalize_item_type()
 
     # Validate file type
     if not allowed_file(fileobj.filename):
