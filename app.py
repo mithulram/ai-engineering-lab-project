@@ -91,11 +91,23 @@ def count_objects():
     start = time.time()
     item_type = request.form.get('item_type')
     if not item_type:
-        return jsonify({"error": "missing item_type"}), 400
+        return jsonify({"error": "No item type specified"}), 400
 
     fileobj = request.files.get('image')
     if fileobj is None:
-        return jsonify({"error": "missing image file"}), 400
+        return jsonify({"error": "No image file provided"}), 400
+
+    # Validate item_type
+    if item_type not in OBJECT_TYPES:
+        return jsonify({
+            'error': f'Invalid item type. Must be one of: {OBJECT_TYPES}'
+        }), 400
+
+    # Validate file type
+    if not allowed_file(fileobj.filename):
+        return jsonify({
+            'error': f'Invalid file type. Allowed types: {list(ALLOWED_EXTENSIONS)}'
+        }), 400
 
     image_bytes = fileobj.read()
 
@@ -160,11 +172,18 @@ def count_objects():
             }), 403
 
         # Process image with AI pipeline
-        result = object_counter.count_objects_from_bytes(image_bytes, item_type=item_type)
+        try:
+            result = object_counter.count_objects_from_bytes(image_bytes, item_type=item_type)
+        except Exception as e:
+            if "UnidentifiedImageError" in str(e) or "cannot identify image file" in str(e):
+                return jsonify({'error': 'Invalid image file format'}), 400
+            else:
+                raise e
 
         try:
+            from datetime import datetime
             db_res = CountingResult(
-                timestamp=int(time.time()),
+                timestamp=datetime.utcnow(),
                 image_path="uploaded_images/unknown.jpg",
                 item_type=item_type,
                 predicted_count=int(result.get("count", 0)),
