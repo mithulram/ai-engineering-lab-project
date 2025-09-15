@@ -180,6 +180,22 @@ def count_objects():
             else:
                 raise e
 
+        # Create response wrapper function
+        def make_count_response(result_dict, db_record=None):
+            """Ensure response contains id and total fields"""
+            count = int(result_dict.get("count", 0))
+            response = {
+                "id": None,
+                "total": count,
+                "count": count,
+                "confidence": result_dict.get("confidence", 0.0),
+                "details": result_dict.get("details", {}),
+                "meta": result_dict.get("meta", {})
+            }
+            if db_record is not None and getattr(db_record, "id", None) is not None:
+                response["id"] = db_record.id
+            return response
+
         try:
             from datetime import datetime
             db_res = CountingResult(
@@ -191,8 +207,10 @@ def count_objects():
             )
             db.session.add(db_res)
             db.session.commit()
+            db.session.refresh(db_res)  # Get the ID
         except Exception:
             current_app.logger.exception("DB write failed")
+            db_res = None
 
         response_time = time.time() - start
         try:
@@ -200,7 +218,9 @@ def count_objects():
         except Exception:
             current_app.logger.exception("metrics.record_request failed")
 
-        return jsonify(result), 200
+        # Use wrapper to ensure proper response format
+        response_data = make_count_response(result, db_res)
+        return jsonify(response_data), 200
 
     except Exception as e:
         current_app.logger.exception("Unhandled /api/count exception")
@@ -300,6 +320,7 @@ def get_results():
         total_count = query.count()
         
         response = {
+            'total': total_count,
             'results': results_list,
             'pagination': {
                 'total': total_count,
