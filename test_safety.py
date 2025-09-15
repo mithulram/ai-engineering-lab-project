@@ -88,7 +88,7 @@ class TestSafetyModule(unittest.TestCase):
                 violations = self.safety_module.check_text_safety(text)
                 self.assertGreater(len(violations), 0, f"Should block suspicious pattern: {text}")
                 # Military detection takes precedence over suspicious patterns
-                if "military" in text.lower() or "tactical" in text.lower() or "strategic" in text.lower():
+                if "military" in text.lower() or "tactical" in text.lower() or "strategic" in text.lower() or "defense" in text.lower():
                     self.assertEqual(violations[0].violation_type, "military_vehicle_detection")
                 else:
                     self.assertEqual(violations[0].violation_type, "suspicious_pattern")
