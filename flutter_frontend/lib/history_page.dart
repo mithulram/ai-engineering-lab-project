@@ -61,7 +61,7 @@ class _HistoryPageWidgetState extends State<HistoryPageWidget> {
         final data = json.decode(response.body);
         setState(() {
           _serverResults = List<Map<String, dynamic>>.from(data['results']);
-          _hasMore = data['has_more'] ?? false;
+          _hasMore = data['pagination']?['has_more'] ?? false;
           _currentPage = 1;
         });
       }
@@ -91,7 +91,7 @@ class _HistoryPageWidgetState extends State<HistoryPageWidget> {
         final data = json.decode(response.body);
         setState(() {
           _serverResults.addAll(List<Map<String, dynamic>>.from(data['results']));
-          _hasMore = data['has_more'] ?? false;
+          _hasMore = data['pagination']?['has_more'] ?? false;
           _currentPage = nextPage;
         });
       }
@@ -133,7 +133,12 @@ class _HistoryPageWidgetState extends State<HistoryPageWidget> {
     }
     
     // Add server results
-    combined.addAll(_serverResults.map((r) => {...r, 'is_local': false}));
+    combined.addAll(_serverResults.map((r) => {
+      ...r, 
+      'is_local': false,
+      'count': r['predicted_count'] ?? 0, // Map predicted_count to count
+      'image_name': r['image_path']?.split('/').last ?? 'Unknown', // Map image_path to image_name
+    }));
     
     return combined;
   }
