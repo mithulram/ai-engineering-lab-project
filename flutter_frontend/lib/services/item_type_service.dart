@@ -66,7 +66,6 @@ class ItemTypeService {
     'lorries': 'truck',
     'motorcycle': 'motorcycle',
     'motorbike': 'motorcycle',
-    'bike': 'motorcycle',
     'scooter': 'motorcycle',
     'airplane': 'airplane',
     'plane': 'airplane',
