@@ -86,7 +86,7 @@ class SafetyModule:
             for keyword in keywords:
                 if keyword in text_lower:
                     confidence = self._calculate_confidence(text_lower, keyword)
-                    if confidence > 0.7:
+                    if confidence > 0.5:
                         violation = SafetyViolation(
                             violation_type="military_vehicle_detection",
                             reason=f"Text contains military vehicle reference: {keyword}",
@@ -105,7 +105,7 @@ class SafetyModule:
             for pattern in patterns:
                 if pattern in text_lower:
                     confidence = self._calculate_confidence(text_lower, pattern)
-                    if confidence > 0.6:
+                    if confidence > 0.4:
                         violation = SafetyViolation(
                             violation_type="suspicious_pattern",
                             reason=f"Text contains suspicious pattern: {pattern}",
@@ -242,10 +242,10 @@ class SafetyModule:
         text_length = len(text.split())
         
         # Higher confidence for multiple occurrences or shorter text
-        base_confidence = min(0.9, keyword_count * 0.3)
-        length_factor = max(0.1, 1.0 - (text_length / 100.0))
+        base_confidence = min(0.95, 0.6 + (keyword_count * 0.2))
+        length_factor = max(0.3, 1.0 - (text_length / 200.0))
         
-        return base_confidence * length_factor
+        return min(0.95, base_confidence * length_factor)
     
     def log_violation(self, violation: SafetyViolation, image_path: Optional[str] = None):
         """Log a safety violation with evidence"""
