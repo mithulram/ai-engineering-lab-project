@@ -354,6 +354,20 @@ def health_check():
         'service': 'AI Object Counting API'
     }), 200
 
+@app.route('/api/docs', methods=['GET'])
+def api_docs():
+    """
+    API documentation endpoint.
+    
+    Returns:
+    - JSON response with API information
+    """
+    return jsonify({
+        "name": "AI Object Counting API",
+        "version": "1.0.0",
+        "endpoints": ["/api/count", "/api/results", "/api/health", "/metrics"]
+    }), 200
+
 @app.route('/metrics', methods=['GET'])
 def metrics():
     """
