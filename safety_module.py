@@ -8,11 +8,22 @@ import json
 import logging
 import os
 import time
+import re
 from typing import Dict, List, Tuple, Optional
 from PIL import Image
 import numpy as np
 from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassification
 import torch
+
+# Military keyword detection with word boundaries
+MILITARY_KEYWORDS = {"tank","armored","armour","howitzer","turret","IFV","APC","artillery","armor"}
+MILITARY_RE = re.compile(r'\b(' + r'|'.join(re.escape(k) for k in MILITARY_KEYWORDS) + r')\b', flags=re.I)
+
+def contains_military_keyword(text: str) -> bool:
+    return bool(MILITARY_RE.search(text or ""))
+
+DEFAULT_MILITARY_PROB_BLOCK = float(os.getenv('MILITARY_BLOCK_THRESH', 0.65))
+DEFAULT_TURRET_SCORE_THRESH = float(os.getenv('TURRET_SCORE_THRESH', 0.45))
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -81,31 +92,26 @@ class SafetyModule:
         violations = []
         text_lower = text.lower()
         
-        # Check for direct military vehicle mentions
-        for category, keywords in self.military_vehicles.items():
-            for keyword in keywords:
-                if keyword in text_lower:
-                    confidence = self._calculate_confidence(text_lower, keyword)
-                    if confidence > 0.5:
-                        violation = SafetyViolation(
-                            violation_type="military_vehicle_detection",
-                            reason=f"Text contains military vehicle reference: {keyword}",
-                            confidence=confidence,
-                            evidence={
-                                "text": text,
-                                "keyword": keyword,
-                                "category": category,
-                                "detection_method": "keyword_matching"
-                            }
-                        )
-                        violations.append(violation)
+        # Use regex-based military keyword detection
+        if contains_military_keyword(text):
+            confidence = DEFAULT_MILITARY_PROB_BLOCK
+            violation = SafetyViolation(
+                violation_type="military_vehicle_detection",
+                reason=f"Text contains military vehicle reference",
+                confidence=confidence,
+                evidence={
+                    "text": text,
+                    "detection_method": "regex_keyword_matching"
+                }
+            )
+            violations.append(violation)
         
         # Check for suspicious patterns
         for pattern_type, patterns in self.suspicious_patterns.items():
             for pattern in patterns:
                 if pattern in text_lower:
                     confidence = self._calculate_confidence(text_lower, pattern)
-                    if confidence > 0.4:
+                    if confidence > DEFAULT_TURRET_SCORE_THRESH:
                         violation = SafetyViolation(
                             violation_type="suspicious_pattern",
                             reason=f"Text contains suspicious pattern: {pattern}",
