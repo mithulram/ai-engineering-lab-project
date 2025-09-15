@@ -36,7 +36,12 @@ def normalize_item_type(raw: str) -> str:
     s = raw.strip().lower()
     s = re.sub(r'[^a-z0-9_ ]', '', s)
     s = s.replace('-', '_')
-    s = s.rstrip('s')  # simple singularization (keeps 'bus' ok)
+    
+    # Handle special cases that shouldn't be singularized
+    special_cases = {'bus', 'apc', 'ifv'}
+    if s not in special_cases:
+        s = s.rstrip('s')  # simple singularization
+    
     # map synonyms
     mapped = OBJECT_TYPE_SYNONYMS.get(s, s)
     if mapped in OBJECT_TYPES:
