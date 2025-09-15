@@ -25,21 +25,21 @@ class MetricsCollector:
         self.accuracy_gauge = Gauge(
             'ai_object_counting_accuracy',
             'Accuracy of object counting predictions',
-            ['object_type', 'image_resolution', 'segments_found'],
+            ['object_type', 'image_resolution', 'segments_found', 'pipeline_version'],
             registry=self.registry
         )
         
         self.precision_gauge = Gauge(
             'ai_object_counting_precision',
             'Precision of object counting predictions',
-            ['object_type', 'image_resolution', 'segments_found'],
+            ['object_type', 'image_resolution', 'segments_found', 'pipeline_version'],
             registry=self.registry
         )
         
         self.recall_gauge = Gauge(
             'ai_object_counting_recall',
             'Recall of object counting predictions',
-            ['object_type', 'image_resolution', 'segments_found'],
+            ['object_type', 'image_resolution', 'segments_found', 'pipeline_version'],
             registry=self.registry
         )
         
@@ -47,7 +47,7 @@ class MetricsCollector:
         self.model_confidence_gauge = Gauge(
             'ai_object_counting_model_confidence',
             'Confidence score per predicted label',
-            ['model_name', 'object_type', 'predicted_label'],
+            ['model_name', 'object_type', 'predicted_label', 'pipeline_version'],
             registry=self.registry
         )
         
@@ -55,7 +55,7 @@ class MetricsCollector:
         self.inference_time_histogram = Histogram(
             'ai_object_counting_inference_time_seconds',
             'Time taken for model inference',
-            ['model_name', 'object_type'],
+            ['model_name', 'object_type', 'pipeline_version'],
             buckets=[0.1, 0.5, 1.0, 2.0, 5.0, 10.0, 30.0, 60.0, float('inf')],
             registry=self.registry
         )
@@ -64,7 +64,7 @@ class MetricsCollector:
         self.response_time_histogram = Histogram(
             'ai_object_counting_response_time_seconds',
             'Total response time for API requests',
-            ['endpoint', 'object_type'],
+            ['endpoint', 'object_type', 'pipeline_version'],
             buckets=[0.1, 0.5, 1.0, 2.0, 5.0, 10.0, 30.0, 60.0, float('inf')],
             registry=self.registry
         )
@@ -73,43 +73,51 @@ class MetricsCollector:
         self.image_resolution_gauge = Gauge(
             'ai_object_counting_image_resolution',
             'Resolution of processed images',
-            ['object_type'],
+            ['object_type', 'pipeline_version'],
             registry=self.registry
         )
         
         self.segments_found_gauge = Gauge(
             'ai_object_counting_segments_found',
             'Number of segments found in images',
-            ['object_type', 'image_resolution'],
+            ['object_type', 'image_resolution', 'pipeline_version'],
             registry=self.registry
         )
         
         self.object_types_found_gauge = Gauge(
             'ai_object_counting_object_types_found',
             'Number of different object types found in images',
-            ['object_type', 'image_resolution'],
+            ['object_type', 'image_resolution', 'pipeline_version'],
             registry=self.registry
         )
         
         self.avg_segment_resolution_gauge = Gauge(
             'ai_object_counting_avg_segment_resolution',
             'Average resolution of segments',
-            ['object_type', 'image_resolution'],
+            ['object_type', 'image_resolution', 'pipeline_version'],
             registry=self.registry
         )
         
         # Request Counters
         self.requests_total = Counter(
-            'ai_object_counting_requests_total',
+            'ai_object_counting_request_count_total',
             'Total number of API requests',
-            ['endpoint', 'method', 'status_code'],
+            ['endpoint', 'method', 'status_code', 'pipeline_version'],
             registry=self.registry
         )
         
         self.predictions_total = Counter(
             'ai_object_counting_predictions_total',
             'Total number of predictions made',
-            ['object_type', 'model_name'],
+            ['object_type', 'model_name', 'pipeline_version'],
+            registry=self.registry
+        )
+        
+        # Blocked Requests Counter
+        self.blocked_requests_total = Counter(
+            'ai_object_counting_blocked_requests_total',
+            'Total number of blocked requests',
+            ['reason', 'pipeline_version'],
             registry=self.registry
         )
         
@@ -131,7 +139,7 @@ class MetricsCollector:
         logger.info("Metrics collector initialized successfully")
     
     def record_prediction(self, object_type, predicted_count, actual_count, 
-                         confidence_scores, inference_times, image_metadata):
+                         confidence_scores, inference_times, image_metadata, pipeline_version="latest"):
         """
         Record metrics for a single prediction
         
@@ -159,19 +167,22 @@ class MetricsCollector:
             self.accuracy_gauge.labels(
                 object_type=object_type,
                 image_resolution=image_resolution,
-                segments_found=str(segments_found)
+                segments_found=str(segments_found),
+                pipeline_version=pipeline_version
             ).set(accuracy)
             
             self.precision_gauge.labels(
                 object_type=object_type,
                 image_resolution=image_resolution,
-                segments_found=str(segments_found)
+                segments_found=str(segments_found),
+                pipeline_version=pipeline_version
             ).set(precision)
             
             self.recall_gauge.labels(
                 object_type=object_type,
                 image_resolution=image_resolution,
-                segments_found=str(segments_found)
+                segments_found=str(segments_found),
+                pipeline_version=pipeline_version
             ).set(recall)
             
             # Record model confidence
@@ -179,40 +190,47 @@ class MetricsCollector:
                 self.model_confidence_gauge.labels(
                     model_name=model_name,
                     object_type=object_type,
-                    predicted_label=object_type
+                    predicted_label=object_type,
+                    pipeline_version=pipeline_version
                 ).set(confidence)
             
             # Record inference times
             for model_name, inference_time in inference_times.items():
                 self.inference_time_histogram.labels(
                     model_name=model_name,
-                    object_type=object_type
+                    object_type=object_type,
+                    pipeline_version=pipeline_version
                 ).observe(inference_time)
             
             # Record image processing metrics
-            self.image_resolution_gauge.labels(object_type=object_type).set(
-                image_metadata.get('width', 0) * image_metadata.get('height', 0)
-            )
+            self.image_resolution_gauge.labels(
+                object_type=object_type,
+                pipeline_version=pipeline_version
+            ).set(image_metadata.get('width', 0) * image_metadata.get('height', 0))
             
             self.segments_found_gauge.labels(
                 object_type=object_type,
-                image_resolution=image_resolution
+                image_resolution=image_resolution,
+                pipeline_version=pipeline_version
             ).set(segments_found)
             
             self.object_types_found_gauge.labels(
                 object_type=object_type,
-                image_resolution=image_resolution
+                image_resolution=image_resolution,
+                pipeline_version=pipeline_version
             ).set(object_types_found)
             
             self.avg_segment_resolution_gauge.labels(
                 object_type=object_type,
-                image_resolution=image_resolution
+                image_resolution=image_resolution,
+                pipeline_version=pipeline_version
             ).set(avg_segment_resolution)
             
             # Increment counters
             self.predictions_total.labels(
                 object_type=object_type,
-                model_name='pipeline'
+                model_name='pipeline',
+                pipeline_version=pipeline_version
             ).inc()
             
             logger.info(f"Recorded metrics for {object_type}: accuracy={accuracy}, precision={precision}, recall={recall}")
@@ -220,7 +238,7 @@ class MetricsCollector:
         except Exception as e:
             logger.error(f"Error recording prediction metrics: {str(e)}")
     
-    def record_request(self, endpoint, method, status_code, response_time, object_type=None):
+    def record_request(self, endpoint, method, status_code, response_time, object_type=None, pipeline_version="latest"):
         """
         Record metrics for an API request
         
@@ -235,18 +253,37 @@ class MetricsCollector:
             # Record response time
             self.response_time_histogram.labels(
                 endpoint=endpoint,
-                object_type=object_type or 'unknown'
+                object_type=object_type or 'unknown',
+                pipeline_version=pipeline_version
             ).observe(response_time)
             
             # Increment request counter
             self.requests_total.labels(
                 endpoint=endpoint,
                 method=method,
-                status_code=str(status_code)
+                status_code=str(status_code),
+                pipeline_version=pipeline_version
             ).inc()
             
         except Exception as e:
             logger.error(f"Error recording request metrics: {str(e)}")
+    
+    def record_blocked_request(self, reason, pipeline_version="latest"):
+        """
+        Record a blocked request
+        
+        Args:
+            reason (str): Reason for blocking the request
+            pipeline_version (str): Pipeline version
+        """
+        try:
+            self.blocked_requests_total.labels(
+                reason=reason,
+                pipeline_version=pipeline_version
+            ).inc()
+            logger.info(f"Recorded blocked request: {reason}")
+        except Exception as e:
+            logger.error(f"Error recording blocked request metrics: {str(e)}")
     
     def _calculate_precision(self, predicted_count, actual_count):
         """Calculate precision for counting task"""

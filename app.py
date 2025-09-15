@@ -176,7 +176,8 @@ def count_objects():
                     actual_count=actual_count,
                     confidence_scores=confidence_scores,
                     inference_times=inference_times,
-                    image_metadata=image_metadata
+                    image_metadata=image_metadata,
+                    pipeline_version="1.0.0"
                 )
             except Exception as e:
                 logger.warning(f"Failed to record metrics: {str(e)}")
@@ -203,12 +204,12 @@ def count_objects():
         logger.error(f"Unexpected error: {str(e)}")
         # Record failed request
         response_time = time.time() - start_time
-        metrics_collector.record_request('/api/count', 'POST', 500, response_time)
+        metrics_collector.record_request('/api/count', 'POST', 500, response_time, pipeline_version="1.0.0")
         return jsonify({'error': 'Internal server error'}), 500
     finally:
         # Record successful request
         response_time = time.time() - start_time
-        metrics_collector.record_request('/api/count', 'POST', 200, response_time, item_type)
+        metrics_collector.record_request('/api/count', 'POST', 200, response_time, item_type, pipeline_version="1.0.0")
 
 @app.route('/api/correct', methods=['POST'])
 def correct_count():
@@ -616,7 +617,7 @@ def generate_single_image():
         processing_time = time.time() - start_time
         
         # Update metrics
-        metrics_collector.record_request('/api/generate-image', 'POST', 200, processing_time, object_type)
+        metrics_collector.record_request('/api/generate-image', 'POST', 200, processing_time, object_type, pipeline_version="1.0.0")
         
         return jsonify({
             'success': True,
@@ -692,7 +693,7 @@ def run_batch_test():
                     successful_tests += 1
                 
                 # Record metrics
-                metrics_collector.record_request('/api/run-batch-test', 'POST', 200, processing_time, object_type)
+                metrics_collector.record_request('/api/run-batch-test', 'POST', 200, processing_time, object_type, pipeline_version="1.0.0")
                 
                 test_result = {
                     'test_id': i + 1,
