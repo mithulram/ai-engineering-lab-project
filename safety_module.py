@@ -257,10 +257,17 @@ class SafetyModule:
         """Log a safety violation with evidence"""
         self.violations_log.append(violation)
         
+        # Canonicalize reason strings
+        canonical = {
+            "military_vehicle_detection": "military_vehicle_detection",
+            "suspicious_pattern": "suspicious_pattern",
+        }
+        reason_str = canonical.get(violation.violation_type, violation.violation_type)
+        
         # Create evidence file
         evidence_data = {
             "violation_type": violation.violation_type,
-            "reason": violation.reason,
+            "reason": reason_str,
             "confidence": violation.confidence,
             "timestamp": violation.timestamp,
             "evidence": violation.evidence
