@@ -285,6 +285,14 @@ class _ResultsPageWidgetState extends State<ResultsPageWidget> {
         const SizedBox(height: 12),
         
         _buildResultCard(
+          Icons.fingerprint,
+          'Request ID',
+          result.id,
+          Theme.of(context).colorScheme.outline,
+        ),
+        const SizedBox(height: 12),
+        
+        _buildResultCard(
           Icons.verified,
           'Confidence',
           '${(result.confidence * 100).toStringAsFixed(1)}%',
