@@ -16,6 +16,7 @@ import io
 
 # Import the Flask app
 from app import app, db, CountingResult
+import pytest
 
 class TestAIObjectCountingWeek2(unittest.TestCase):
     """Test cases for Week 2 functionality"""
@@ -367,10 +368,22 @@ class TestAIObjectCountingWeek2(unittest.TestCase):
                 # These are POST/DELETE endpoints, test with appropriate method
                 if endpoint == '/api/delete-learned-object':
                     response = self.client.delete(endpoint, json={'object_name': 'test'})
+                elif endpoint == '/api/correct':
+                    # Debug: check if route exists
+                    print(f"Testing endpoint: {endpoint}")
+                    print(f"App routes: {[rule.rule for rule in self.app.url_map.iter_rules()]}")
+                    response = self.client.post(endpoint, json={'result_id': 'test', 'corrected_count': 5})
+                    print(f"Response status: {response.status_code}")
+                elif endpoint == '/api/learn':
+                    response = self.client.post(endpoint, json={'object_name': 'test', 'images': []})
+                elif endpoint == '/api/count-learned':
+                    response = self.client.post(endpoint, json={'object_name': 'test'})
+                elif endpoint == '/api/recognize':
+                    response = self.client.post(endpoint, json={'object_name': 'test'})
                 else:
                     response = self.client.post(endpoint)
-                # Should not be 404 (endpoint exists)
-                self.assertNotEqual(response.status_code, 404)
+                # Should not be 404 (endpoint exists) - allow 400/500 for validation errors
+                self.assertNotIn(response.status_code, [404], f"Endpoint {endpoint} returned 404")
             else:
                 # GET endpoints
                 response = self.client.get(endpoint)
