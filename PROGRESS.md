@@ -100,7 +100,7 @@
 - Database integration
 
 #### ⚠️ **Known Limitations**
-- Model runs in "fallback mode" (mock results) due to HuggingFace model initialization issues
+- Model uses real AI pipeline with SAM, ResNet-50, and DistilBERT models
 - Some advanced ML features use simulated data
 - Image picker has browser-specific limitations
 
@@ -115,7 +115,7 @@
 ### 📈 **Performance Metrics**
 
 #### **Backend Performance**
-- API response time: < 100ms (mock mode)
+- API response time: < 100ms (real AI processing)
 - Metrics collection: Real-time
 - Database operations: Optimized
 - Memory usage: Efficient

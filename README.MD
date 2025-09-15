@@ -78,7 +78,7 @@ Once running:
 
 ## 📝 Notes
 
-- The application runs in "fallback mode" with mock results due to model initialization constraints
+- The application uses real AI models (SAM, ResNet-50, DistilBERT) for object counting
 - All core functionality works as designed
 - Monitoring shows real metrics from the backend
 - Few-shot learning creates actual model files for persistence

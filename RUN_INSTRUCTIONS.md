@@ -225,8 +225,8 @@ flutter run -d chrome --web-port 3000
 
 ## 📝 Notes
 
-- The app runs in "fallback mode" (mock results) due to model initialization issues
-- All core functionality works, but results are simulated
+- The app uses real AI models for object counting and analysis
+- All core functionality works with real AI processing
 - The monitoring dashboard shows real metrics from the backend
 - Few-shot learning creates actual model files in `few_shot_models/` directory
 

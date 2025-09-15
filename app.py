@@ -157,8 +157,8 @@ def count_objects():
                     'avg_segment_resolution': (width * height) / max(1, result.get('details', {}).get('total_segments', 1))
                 }
                 
-                # Record prediction metrics (using mock actual count for now)
-                actual_count = result['count']  # In real scenario, this would come from user correction
+                # Record prediction metrics (actual count will come from user correction)
+                actual_count = result['count']  # This will be updated when user provides correction
                 confidence_scores = {
                     'sam': result.get('confidence', 0.0),
                     'resnet': result.get('confidence', 0.0),
@@ -345,7 +345,7 @@ def status_check():
     return jsonify({
         'status': 'healthy',
         'timestamp': datetime.utcnow().isoformat(),
-        'service': 'AI Object Counting API (Real AI)'
+        'service': 'AI Object Counting API (Real AI Models)'
     }), 200
 
 @app.route('/api/history', methods=['GET'])

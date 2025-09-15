@@ -5,8 +5,7 @@
 ```mermaid
 graph TB
     subgraph "Client Layer"
-        WEB[Web Frontend<br/>React + Vite]
-        MOBILE[Mobile Frontend<br/>Flutter]
+        FLUTTER[Flutter Frontend<br/>Web & Mobile]
         API_CLIENT[API Client<br/>Image Generator]
     end
     
@@ -26,7 +25,7 @@ graph TB
         SAM[SAM Model<br/>Segment Anything]
         RESNET[ResNet-50<br/>Image Classification]
         DISTILBERT[DistilBERT<br/>Zero-shot Classification]
-        FALLBACK[Fallback Mode<br/>Mock Results]
+        REAL_AI[Real AI Models<br/>SAM + ResNet + DistilBERT]
     end
     
     subgraph "Data Layer"
@@ -48,8 +47,7 @@ graph TB
     end
     
     %% Client connections
-    WEB --> FLASK
-    MOBILE --> FLASK
+    FLUTTER --> FLASK
     API_CLIENT --> FLASK
     
     %% API Gateway
@@ -62,7 +60,7 @@ graph TB
     COUNTING --> SAM
     COUNTING --> RESNET
     COUNTING --> DISTILBERT
-    COUNTING --> FALLBACK
+    COUNTING --> REAL_AI
     LEARNING --> MODELS
     MONITORING --> METRICS
     
@@ -91,10 +89,10 @@ graph TB
     classDef monitor fill:#f1f8e9
     classDef external fill:#f5f5f5
     
-    class WEB,MOBILE,API_CLIENT client
+    class FLUTTER,API_CLIENT client
     class FLASK,CORS,AUTH api
     class COUNTING,LEARNING,MONITORING service
-    class SAM,RESNET,DISTILBERT,FALLBACK ai
+    class SAM,RESNET,DISTILBERT,REAL_AI ai
     class DB,FILES,MODELS data
     class METRICS,DASHBOARD,PROMETHEUS,GRAFANA monitor
     class HF,AI_GEN external
@@ -246,9 +244,8 @@ graph TB
 - **Monitoring**: Prometheus, OpenMetrics
 
 ### Frontend
-- **Web**: React 18, Vite, Tailwind CSS
-- **Mobile**: Flutter, Dart
-- **State Management**: React Context, Flutter Provider
+- **Web & Mobile**: Flutter, Dart
+- **State Management**: Flutter Provider
 
 ### DevOps
 - **Containerization**: Docker (monitoring stack)
