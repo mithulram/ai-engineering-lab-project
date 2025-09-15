@@ -8,7 +8,7 @@ import re
 OBJECT_TYPES = {
     "car", "truck", "bus", "person", "bicycle", "motorcycle", "motorbike", "van", "building",
     "tree", "dog", "cat", "sky", "ground", "hardware", "tank", "armored_vehicle", "armour", "armor",
-    "equipment", "vehicle", "trailer", "tractor", "apc", "ifv"
+    "equipment", "vehicle", "trailer", "tractor", "apc", "ifv", "analysis", "counting", "inventory"
 }
 
 # synonym map -> canonical
