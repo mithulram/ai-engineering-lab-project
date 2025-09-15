@@ -16,7 +16,7 @@ from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassifica
 import torch
 
 # Military keyword detection with word boundaries
-MILITARY_KEYWORDS = {"tank","tanks","armored","armour","howitzer","turret","IFV","APC","artillery","armor","fighter","jet","warship","submarine","helicopter","drone","missile","rocket","bomb","cannon","mortar","combat","military","weapon","gun"}
+MILITARY_KEYWORDS = {"tank","tanks","armored","armour","howitzer","turret","IFV","APC","artillery","armor","fighter","jet","warship","warships","submarine","submarines","helicopter","helicopters","drone","drones","missile","missiles","rocket","rockets","bomb","bombs","cannon","cannons","mortar","mortars","combat","military","weapon","weapons","gun","guns"}
 MILITARY_RE = re.compile(r'\b(' + r'|'.join(re.escape(k) for k in MILITARY_KEYWORDS) + r')\b', flags=re.I)
 
 def contains_military_keyword(text: str) -> bool:
