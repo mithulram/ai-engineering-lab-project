@@ -91,10 +91,16 @@ def count_objects():
     image_bytes = fileobj.read() if fileobj else None
     
     # Run safety pre-check immediately before any validation
-    blocked, reason, evidence = safety_module.check_image_safety(image_bytes, {"raw_item_type": raw_item_type})
-    if blocked:
-        # persist evidence if safety module returns a path or object
-        return jsonify({"status":"blocked","reasons": reason if isinstance(reason, list) else [reason], "evidence": evidence}), 403
+    # Check text safety with raw item type and description
+    text_to_check = f"{raw_item_type} {request.form.get('description', '')}"
+    safety_violations = safety_module.check_text_safety(text_to_check)
+    if safety_violations:
+        # Log violations and return blocked response
+        for violation in safety_violations:
+            safety_module.log_violation(violation, "uploaded_image")
+        reasons = [v.violation_type for v in safety_violations]
+        evidence = {"violations": [{"reason": v.violation_type, "details": v.evidence} for v in safety_violations]}
+        return jsonify({"status":"blocked","reasons": reasons, "evidence": evidence}), 403
 
     # only then normalize and validate item_type
     if not raw_item_type:
