@@ -287,9 +287,62 @@ graph TB
 - **Caching**: Ready for Redis integration
 - **CDN**: Static file serving ready
 
+## 🐳 Docker & Containerization
+
+### Docker Compose Stack
+- **AI Application**: Custom Dockerfile with Python 3.9
+- **Prometheus**: Metrics collection and storage
+- **Grafana**: Dashboard visualization with auto-provisioning
+- **Node Exporter**: System metrics collection
+- **Networking**: Isolated monitoring network
+
+### Environment Configuration
+- **Port Management**: Configurable via environment variables
+- **Volume Mounts**: Persistent data for models and dashboards
+- **Health Checks**: Built-in application health monitoring
+- **Resource Limits**: Configurable memory and CPU limits
+
+### Deployment Options
+- **Development**: `docker-compose up -d`
+- **Production**: Custom environment variables and secrets
+- **Scaling**: Horizontal scaling with load balancer support
+
+## 📊 Week 2 Compliance Summary
+
+### ✅ Completed Requirements
+
+1. **Prometheus/OpenMetrics Endpoint**
+   - All required metrics with `pipeline_version` labels
+   - Histogram and Gauge metrics properly configured
+   - Metadata metrics for image processing
+
+2. **Grafana Dashboards**
+   - 4 comprehensive dashboards with auto-provisioning
+   - Pipeline version filtering and comparison
+   - Safety and misuse monitoring
+   - Resource and latency analysis
+
+3. **Image Generation & Few-Shot Learning**
+   - Synthetic dataset creation endpoint
+   - Few-shot learning pipeline with model adaptation
+   - Generated examples storage and retrieval
+
+4. **Documentation & Architecture**
+   - Updated architecture diagram with monitoring stack
+   - Comprehensive run instructions with Docker setup
+   - Automated verification tests for all requirements
+
+### 🔧 Technical Implementation
+
+- **Metrics**: 15+ metrics with proper labeling
+- **Dashboards**: 4 JSON dashboards with 12+ panels
+- **Docker**: Complete containerized stack
+- **Testing**: Automated verification suite
+- **Ports**: Configurable via environment variables
+
 ---
 
-**Architecture Version**: 2.0  
-**Last Updated**: September 11, 2025  
-**Compliance**: Week 2 Requirements  
-**Status**: Production Ready
+**Architecture Version**: 2.1  
+**Last Updated**: September 15, 2025  
+**Compliance**: Week 2 Requirements Complete  
+**Status**: Production Ready with Full Monitoring

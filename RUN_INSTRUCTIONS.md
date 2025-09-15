@@ -232,4 +232,131 @@ flutter run -d chrome --web-port 3000
 
 ---
 
+## 📊 Week 2: Advanced Monitoring & Grafana Dashboards
+
+### 🎯 Grafana Dashboard Import
+
+The application now includes comprehensive Grafana dashboards for monitoring and analysis:
+
+#### **Available Dashboards:**
+
+1. **Pipeline Overview** (`pipeline-overview`)
+   - Request rate by status
+   - Model inference time by model  
+   - Model confidence distribution
+   - Average response time
+
+2. **Version Comparison** (`version-comparison`)
+   - Accuracy, precision, recall by pipeline version
+   - Blocked requests by pipeline version
+   - Dropdown filter for pipeline versions
+
+3. **Safety & Misuse** (`safety-misuse`)
+   - Blocked requests by reason
+   - Top rule triggers (pie chart)
+   - Blocked examples over time
+
+4. **Resource & Latency** (`resource-latency`)
+   - CPU usage
+   - Memory usage
+   - Per-model latency histogram (P50, P95, P99)
+
+#### **Import Steps:**
+
+1. **Start Grafana** (if using Docker):
+   ```bash
+   docker-compose up -d grafana
+   ```
+
+2. **Access Grafana**: http://localhost:3000 (admin/admin123)
+
+3. **Dashboards are auto-provisioned** from:
+   - `monitoring/grafana/dashboards/`
+   - `monitoring/grafana/provisioning/dashboards/dashboards.yml`
+
+4. **Manual Import** (if needed):
+   - Go to Grafana → Dashboards → Import
+   - Upload JSON files from `monitoring/grafana/dashboards/`
+
+### 🔧 Environment Variables for Port Configuration
+
+To avoid port conflicts, use these environment variables:
+
+```bash
+# API Configuration
+export API_PORT=5001
+export MONITORING_PORT=8080
+
+# Prometheus & Grafana
+export PROMETHEUS_PORT=9090
+export GRAFANA_PORT=3000
+export NODE_EXPORTER_PORT=9100
+
+# Start with custom ports
+API_PORT=5002 MONITORING_PORT=8081 python3 app.py
+```
+
+### 📈 Metrics Verification
+
+Verify all required metrics are exposed:
+
+```bash
+# Check metrics endpoint
+curl http://localhost:5001/metrics | grep -E "(pipeline_version|ai_object_counting)"
+
+# Run automated verification tests
+python3 test_week2_metrics.py
+```
+
+### 🐳 Docker Setup (Complete Stack)
+
+For a complete monitoring stack with Docker:
+
+```bash
+# Start complete stack
+docker-compose up -d
+
+# Access services:
+# - AI App: http://localhost:5001
+# - Grafana: http://localhost:3000 (admin/admin123)
+# - Prometheus: http://localhost:9090
+# - Node Exporter: http://localhost:9100
+
+# View logs
+docker-compose logs -f ai-app
+
+# Stop stack
+docker-compose down
+```
+
+### 🔍 Required Metrics with pipeline_version Labels
+
+The `/metrics` endpoint now exposes:
+
+- `ai_object_counting_inference_time_seconds` (Histogram) with `model`, `object_type`, `pipeline_version`
+- `ai_object_counting_model_confidence` (Gauge) with `model`, `object_type`, `pipeline_version`
+- `ai_object_counting_request_count_total` (Counter) with `endpoint`, `method`, `status_code`, `pipeline_version`
+- `ai_object_counting_blocked_requests_total` (Counter) with `reason`, `pipeline_version`
+- `ai_object_counting_accuracy`, `ai_object_counting_precision`, `ai_object_counting_recall` (Gauges) with `pipeline_version`
+- Image metadata metrics with `pipeline_version` labels
+
+### 🧪 Verification Commands
+
+```bash
+# Test all Week 2 requirements
+python3 test_week2_metrics.py
+
+# Check specific metrics
+curl -s http://localhost:5001/metrics | grep "pipeline_version"
+
+# Verify Grafana dashboards
+ls -la monitoring/grafana/dashboards/*.json
+
+# Test port configuration
+MONITORING_PORT=8081 python3 monitoring_server_enhanced.py &
+curl http://localhost:8081/api/metrics
+```
+
+---
+
 **Happy Testing! 🎉**
