@@ -16,7 +16,7 @@ from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassifica
 import torch
 
 # Military keyword detection with word boundaries
-MILITARY_KEYWORDS = {"tank","armored","armour","howitzer","turret","IFV","APC","artillery","armor"}
+MILITARY_KEYWORDS = {"tank","tanks","armored","armour","howitzer","turret","IFV","APC","artillery","armor","fighter","jet","warship","submarine","helicopter","drone","missile","rocket","bomb","cannon","mortar","combat","military","weapon","gun"}
 MILITARY_RE = re.compile(r'\b(' + r'|'.join(re.escape(k) for k in MILITARY_KEYWORDS) + r')\b', flags=re.I)
 
 def contains_military_keyword(text: str) -> bool:
@@ -60,8 +60,8 @@ class SafetyModule:
         self.suspicious_patterns = {
             'camouflage': ['camouflage', 'camouflaged', 'military camo', 'desert camo', 'urban camo'],
             'military_components': ['turret', 'gun barrel', 'missile', 'rocket', 'bomb', 'warhead'],
-            'counting_indicators': ['count tanks', 'how many vehicles', 'number of aircraft', 'vehicle count'],
-            'military_terms': ['combat', 'warfare', 'military', 'defense', 'strategic', 'tactical']
+            'counting_indicators': ['count tanks', 'how many vehicles', 'number of aircraft', 'military vehicle count'],
+            'military_terms': ['combat', 'warfare', 'military base', 'defense', 'strategic', 'tactical']
         }
         
         # Initialize text classifier for military content detection
@@ -248,8 +248,8 @@ class SafetyModule:
         text_length = len(text.split())
         
         # Higher confidence for multiple occurrences or shorter text
-        base_confidence = min(0.95, 0.6 + (keyword_count * 0.2))
-        length_factor = max(0.3, 1.0 - (text_length / 200.0))
+        base_confidence = min(0.95, 0.7 + (keyword_count * 0.15))
+        length_factor = max(0.5, 1.0 - (text_length / 300.0))
         
         return min(0.95, base_confidence * length_factor)
     
@@ -262,7 +262,7 @@ class SafetyModule:
             "military_vehicle_detection": "military_vehicle_detection",
             "suspicious_pattern": "suspicious_pattern",
         }
-        reason_str = canonical.get(violation.violation_type, violation.violation_type)
+        reason_str = canonical.get(violation.violation_type, violation.reason)
         
         # Create evidence file
         evidence_data = {
