@@ -233,7 +233,7 @@ def count_objects():
             current_app.logger.exception("metrics.record_request failed in exception path")
         return jsonify({"error":"internal_server_error","details":str(e)}), 500
 
-@app.route('/api/correct', methods=['POST'])
+@app.route('/api/correct', methods=['GET', 'POST'])
 def correct_count():
     """
     API endpoint to submit corrections for count results.
@@ -246,6 +246,7 @@ def correct_count():
     Returns:
     - JSON response with confirmation
     """
+    current_app.logger.debug("correct_count invoked; method=%s", request.method)
     try:
         data = request.get_json()
         
@@ -285,19 +286,7 @@ def correct_count():
         logger.error(f"Error correcting count: {str(e)}")
         return jsonify({'error': 'Internal server error'}), 500
 
-# Add resilient alias for /api/correct to ensure test client can reach it
-def _call_correction_handler():
-    try:
-        # If there is an existing function, call it; otherwise replicate expected behavior
-        return correct_count()
-    except NameError:
-        # minimal safe response for tests
-        return jsonify({"status":"ok","message":"correction endpoint alive"}), 200
-
-@app.route('/api/correct', methods=['GET','POST'])
-def api_correct_alias():
-    current_app.logger.debug("api_correct_alias invoked; method=%s", request.method)
-    return _call_correction_handler()
+# Add debug logging to the existing correct_count function
 
 @app.route('/api/results', methods=['GET'])
 def get_results():
