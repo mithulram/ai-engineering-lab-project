@@ -182,14 +182,14 @@ def train_model(training_data: Dict, fast_mode: bool = False) -> Tuple[SafetyCla
     
     return model, training_metadata
 
-def save_model(model: SafetyClassifier, metadata: Dict, output_dir: str):
+def save_model(model: SafetyClassifier, metadata: Dict, output_dir: str, training_data: Dict = None):
     """Save the trained model and metadata"""
     os.makedirs(output_dir, exist_ok=True)
     
     # Save model (using pickle for simplicity)
     import pickle
     model_path = os.path.join(output_dir, 'safety_classifier.pkl')
-    with open(model_path, 'w') as f:
+    with open(model_path, 'wb') as f:
         pickle.dump(model, f)
     
     # Save metadata
@@ -199,6 +199,18 @@ def save_model(model: SafetyClassifier, metadata: Dict, output_dir: str):
     
     # Save training report
     report_path = os.path.join(output_dir, 'training_report.json')
+    
+    # Calculate training data stats if available
+    military_samples = 0
+    civilian_samples = 0
+    if training_data:
+        for category, examples in training_data.items():
+            for example in examples:
+                if example['label'] == 'blocked':
+                    military_samples += 1
+                else:
+                    civilian_samples += 1
+    
     report = {
         'training_info': {
             'date': metadata['training_date'],
@@ -215,8 +227,8 @@ def save_model(model: SafetyClassifier, metadata: Dict, output_dir: str):
         },
         'training_data': {
             'total_samples': metadata['training_samples'],
-            'military_samples': sum(1 for label in [1 if ex['label'] == 'blocked' else 0 for cat in training_data.values() for ex in cat]),
-            'civilian_samples': sum(1 for label in [0 if ex['label'] == 'allowed' else 1 for cat in training_data.values() for ex in cat])
+            'military_samples': military_samples,
+            'civilian_samples': civilian_samples
         },
         'model_artifacts': [
             'safety_classifier.pkl',
@@ -260,7 +272,7 @@ def main():
     metadata['training_time_seconds'] = training_time
     
     # Save model
-    save_model(model, metadata, args.output_dir)
+    save_model(model, metadata, args.output_dir, training_data)
     
     # Print summary
     print("\n" + "="*60)
