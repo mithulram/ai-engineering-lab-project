@@ -10,3 +10,8 @@ providers:
     allowUiUpdates: true
     options:
       path: /var/lib/grafana/dashboards
+    dashboard_files:
+      - pipeline_overview.json
+      - version_comparison.json
+      - safety_misuse.json
+      - resource_latency.json
