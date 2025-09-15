@@ -12,6 +12,7 @@ import threading
 import requests
 from urllib.parse import urlparse, parse_qs
 import logging
+import os
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -903,8 +904,11 @@ class EnhancedMonitoringHandler(http.server.SimpleHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(html_content.encode())
 
-def start_enhanced_monitoring_server(port=8080):
+def start_enhanced_monitoring_server(port=None):
     """Start the enhanced monitoring server"""
+    if port is None:
+        port = int(os.environ.get('MONITORING_PORT', 8080))
+    
     handler = EnhancedMonitoringHandler
     
     with socketserver.TCPServer(("", port), handler) as httpd:
