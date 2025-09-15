@@ -86,7 +86,17 @@ def count_objects():
     - JSON response with count results
     """
     start = time.time()
-    raw_item_type = request.form.get('item_type')
+    raw_item_type = request.form.get('item_type', None)
+    fileobj = request.files.get('image')
+    image_bytes = fileobj.read() if fileobj else None
+    
+    # Run safety pre-check immediately before any validation
+    blocked, reason, evidence = safety_module.check_image_safety(image_bytes, {"raw_item_type": raw_item_type})
+    if blocked:
+        # persist evidence if safety module returns a path or object
+        return jsonify({"status":"blocked","reasons": reason if isinstance(reason, list) else [reason], "evidence": evidence}), 403
+
+    # only then normalize and validate item_type
     if not raw_item_type:
         return jsonify({"error": "No item type specified"}), 400
     
@@ -94,11 +104,8 @@ def count_objects():
     if item_type is None:
         return jsonify({"error": "Invalid or missing item type"}), 400
 
-    fileobj = request.files.get('image')
     if fileobj is None:
         return jsonify({"error": "No image file provided"}), 400
-
-    # item_type is already validated by normalize_item_type()
 
     # Validate file type
     if not allowed_file(fileobj.filename):
@@ -106,10 +113,8 @@ def count_objects():
             'error': f'Invalid file type. Allowed types: {list(ALLOWED_EXTENSIONS)}'
         }), 400
 
-    image_bytes = fileobj.read()
-
     try:
-        # Safety checks before processing
+        # Safety checks before processing (redundant but kept for compatibility)
         safety_violations = []
         
         # Check text safety (item_type and any additional text)
