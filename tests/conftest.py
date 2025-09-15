@@ -26,18 +26,23 @@ import time
 import requests
 import signal
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="session", autouse=True)
 def live_server():
+    import subprocess, time, requests, os, signal
     env = os.environ.copy()
-    env['API_PORT'] = env.get('API_PORT','5001')
+    api_port = env.get('API_PORT','5001')
     proc = subprocess.Popen(['python3','app.py'], env=env)
-    for _ in range(20):
+    deadline = time.time() + 30
+    while time.time() < deadline:
         try:
-            r = requests.get(f"http://127.0.0.1:{env['API_PORT']}/api/health", timeout=1)
+            r = requests.get(f"http://127.0.0.1:{api_port}/api/health", timeout=1)
             if r.status_code == 200:
                 break
         except Exception:
             time.sleep(1)
+    else:
+        proc.terminate()
+        raise RuntimeError("Live server failed to start within 30s")
     yield
     proc.send_signal(signal.SIGINT)
     proc.wait(timeout=5)
