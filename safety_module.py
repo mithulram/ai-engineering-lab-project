@@ -22,7 +22,7 @@ MILITARY_RE = re.compile(r'\b(' + r'|'.join(re.escape(k) for k in MILITARY_KEYWO
 def contains_military_keyword(text: str) -> bool:
     return bool(MILITARY_RE.search(text or ""))
 
-DEFAULT_MILITARY_PROB_BLOCK = float(os.getenv('MILITARY_BLOCK_THRESH', 0.65))
+DEFAULT_MILITARY_PROB_BLOCK = float(os.getenv('MILITARY_BLOCK_THRESH', 0.75))
 DEFAULT_TURRET_SCORE_THRESH = float(os.getenv('TURRET_SCORE_THRESH', 0.45))
 
 # Configure logging
@@ -249,7 +249,7 @@ class SafetyModule:
         
         # Higher confidence for multiple occurrences or shorter text
         base_confidence = min(0.95, 0.7 + (keyword_count * 0.15))
-        length_factor = max(0.5, 1.0 - (text_length / 300.0))
+        length_factor = max(0.3, 1.0 - (text_length / 200.0))
         
         return min(0.95, base_confidence * length_factor)
     
