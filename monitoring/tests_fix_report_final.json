@@ -1,0 +1,46 @@
+{
+  "branch": "week2",
+  "merged_commits": [
+    "b756c85",
+    "2413270",
+    "118c507",
+    "b313fec",
+    "38172e2",
+    "6d57e9d",
+    "36bf1ff",
+    "ea167c6",
+    "0d285fa",
+    "1da20b7",
+    "817ac1f",
+    "89903bc"
+  ],
+  "tests_run": 79,
+  "passed": 73,
+  "failed": 6,
+  "failed_tests": [
+    {
+      "test_path": "test_app_week2.py::TestAIObjectCountingWeek2::test_api_documentation_endpoints",
+      "failure": "Endpoint /api/correct returned 404 - complex Flask routing issue"
+    },
+    {
+      "test_path": "test_safety.py::TestSafetyAPI::test_evidence_file_creation",
+      "failure": "Evidence file creation test expects different violation type"
+    },
+    {
+      "test_path": "test_safety_e2e.py::TestSafetyE2E::test_evidence_file_access",
+      "failure": "Test expects evidence_file field in response"
+    },
+    {
+      "test_path": "test_safety_e2e.py::TestSafetyE2E::test_military_vehicle_request_blocked",
+      "failure": "Test expects error field in response"
+    },
+    {
+      "test_path": "test_safety_e2e.py::TestSafetyE2E::test_civilian_vehicle_request_allowed",
+      "failure": "Test expects different response format"
+    },
+    {
+      "test_path": "test_safety_e2e.py::TestSafetyE2E::test_safety_stats_endpoint",
+      "failure": "Test expects different response format"
+    }
+  ]
+}
