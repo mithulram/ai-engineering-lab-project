@@ -1,0 +1,40 @@
+# HELP ai_object_counting_accuracy Accuracy of object counting predictions
+# TYPE ai_object_counting_accuracy gauge
+# HELP ai_object_counting_precision Precision of object counting predictions
+# TYPE ai_object_counting_precision gauge
+# HELP ai_object_counting_recall Recall of object counting predictions
+# TYPE ai_object_counting_recall gauge
+# HELP ai_object_counting_model_confidence Confidence score per predicted label
+# TYPE ai_object_counting_model_confidence gauge
+# HELP ai_object_counting_inference_time_seconds Time taken for model inference
+# TYPE ai_object_counting_inference_time_seconds histogram
+# HELP ai_object_counting_response_time_seconds Total response time for API requests
+# TYPE ai_object_counting_response_time_seconds histogram
+ai_object_counting_response_time_seconds_bucket{endpoint="/api/generate-image",le="0.1",object_type="car",pipeline_version="1.0.0"} 0.0
+ai_object_counting_response_time_seconds_bucket{endpoint="/api/generate-image",le="0.5",object_type="car",pipeline_version="1.0.0"} 0.0
+ai_object_counting_response_time_seconds_bucket{endpoint="/api/generate-image",le="1.0",object_type="car",pipeline_version="1.0.0"} 0.0
+ai_object_counting_response_time_seconds_bucket{endpoint="/api/generate-image",le="2.0",object_type="car",pipeline_version="1.0.0"} 0.0
+ai_object_counting_response_time_seconds_bucket{endpoint="/api/generate-image",le="5.0",object_type="car",pipeline_version="1.0.0"} 0.0
+ai_object_counting_response_time_seconds_bucket{endpoint="/api/generate-image",le="10.0",object_type="car",pipeline_version="1.0.0"} 0.0
+ai_object_counting_response_time_seconds_bucket{endpoint="/api/generate-image",le="30.0",object_type="car",pipeline_version="1.0.0"} 1.0
+ai_object_counting_response_time_seconds_bucket{endpoint="/api/generate-image",le="60.0",object_type="car",pipeline_version="1.0.0"} 1.0
+ai_object_counting_response_time_seconds_bucket{endpoint="/api/generate-image",le="+Inf",object_type="car",pipeline_version="1.0.0"} 1.0
+ai_object_counting_response_time_seconds_count{endpoint="/api/generate-image",object_type="car",pipeline_version="1.0.0"} 1.0
+ai_object_counting_response_time_seconds_sum{endpoint="/api/generate-image",object_type="car",pipeline_version="1.0.0"} 13.563928842544556
+ai_object_counting_response_time_seconds_bucket{endpoint="/api/count",le="0.1",object_type="unknown",pipeline_version="1.0.0"} 0.0
+ai_object_counting_response_time_seconds_bucket{endpoint="/api/count",le="0.5",object_type="unknown",pipeline_version="1.0.0"} 0.0
+ai_object_counting_response_time_seconds_bucket{endpoint="/api/count",le="1.0",object_type="unknown",pipeline_version="1.0.0"} 0.0
+ai_object_counting_response_time_seconds_bucket{endpoint="/api/count",le="2.0",object_type="unknown",pipeline_version="1.0.0"} 0.0
+ai_object_counting_response_time_seconds_bucket{endpoint="/api/count",le="5.0",object_type="unknown",pipeline_version="1.0.0"} 0.0
+ai_object_counting_response_time_seconds_bucket{endpoint="/api/count",le="10.0",object_type="unknown",pipeline_version="1.0.0"} 12.0
+ai_object_counting_response_time_seconds_bucket{endpoint="/api/count",le="30.0",object_type="unknown",pipeline_version="1.0.0"} 12.0
+ai_object_counting_response_time_seconds_bucket{endpoint="/api/count",le="60.0",object_type="unknown",pipeline_version="1.0.0"} 12.0
+ai_object_counting_response_time_seconds_bucket{endpoint="/api/count",le="+Inf",object_type="unknown",pipeline_version="1.0.0"} 12.0
+ai_object_counting_response_time_seconds_count{endpoint="/api/count",object_type="unknown",pipeline_version="1.0.0"} 12.0
+ai_object_counting_response_time_seconds_sum{endpoint="/api/count",object_type="unknown",pipeline_version="1.0.0"} 103.42834401130676
+# HELP ai_object_counting_response_time_seconds_created Total response time for API requests
+# TYPE ai_object_counting_response_time_seconds_created gauge
+ai_object_counting_response_time_seconds_created{endpoint="/api/generate-image",object_type="car",pipeline_version="1.0.0"} 1.757948910368051e+09
+ai_object_counting_response_time_seconds_created{endpoint="/api/count",object_type="unknown",pipeline_version="1.0.0"} 1.7579489601897228e+09
+# HELP ai_object_counting_image_resolution Resolution of processed images
+# TYPE ai_object_counting_image_resolution gauge
