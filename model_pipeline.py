@@ -106,6 +106,158 @@ class ObjectCounter:
             logger.error("Please run 'python3 fix_huggingface_cache.py' to fix model loading issues")
             raise RuntimeError(f"Failed to initialize AI models: {str(e)}")
     
+    def count_objects_from_bytes(self, image_bytes, item_type):
+        """
+        Count objects of a specific type from image bytes.
+        
+        Args:
+            image_bytes (bytes): Image data as bytes
+            item_type (str): Type of object to count
+            
+        Returns:
+            dict: Results containing count, confidence, and details
+        """
+        import io
+        from PIL import Image
+        
+        # Convert bytes to PIL Image
+        image = Image.open(io.BytesIO(image_bytes))
+        return self.count_objects_from_image(image, item_type)
+    
+    def count_objects_from_image(self, image, target_item_type):
+        """
+        Count objects of a specific type in a PIL Image.
+        
+        Args:
+            image (PIL.Image): Input image
+            target_item_type (str): Type of object to count
+            
+        Returns:
+            dict: Results containing count, confidence, and details
+        """
+        try:
+            logger.info(f"Processing image for item type: {target_item_type}")
+            
+            # Ensure real AI models are loaded - no fallback mode allowed
+            if self.image_processor is None or self.class_model is None:
+                logger.error("CRITICAL: AI models not initialized!")
+                raise RuntimeError("AI models not initialized. Please run fix_huggingface_cache.py to resolve model loading issues.")
+            
+            # Process image
+            height, width = image.size[1], image.size[0]
+            logger.info(f"Image size: {width}x{height}")
+            
+            # Step 1: Generate segmentation masks using SAM
+            logger.info("Generating segmentation masks...")
+            masks = self.mask_generator.generate(np.array(image))
+            masks_sorted = sorted(masks, key=lambda x: x['area'], reverse=True)
+            
+            # Create panoptic map
+            panoptic_map = np.zeros((height, width), dtype=np.uint32)
+            for i, mask_data in enumerate(masks_sorted):
+                panoptic_map[mask_data['segmentation']] = i + 1
+            
+            logger.info(f"Generated {len(masks_sorted)} segments")
+            
+            # Step 2: Classify each segment using ResNet-50
+            logger.info("Classifying segments...")
+            segment_labels = []
+            segment_confidences = []
+            
+            for i, mask_data in enumerate(masks_sorted):
+                # Extract segment
+                segment_mask = mask_data['segmentation']
+                segment_bbox = mask_data['bbox']  # [x, y, w, h]
+                
+                # Crop segment from original image
+                x, y, w, h = segment_bbox
+                x, y, w, h = int(x), int(y), int(w), int(h)
+                segment_crop = image.crop((x, y, x + w, y + h))
+                
+                # Classify segment
+                try:
+                    inputs = self.image_processor(segment_crop, return_tensors="pt")
+                    with torch.no_grad():
+                        outputs = self.class_model(**inputs)
+                        probabilities = torch.nn.functional.softmax(outputs.logits[0], dim=-1)
+                        predicted_class_id = probabilities.argmax().item()
+                        confidence = probabilities[predicted_class_id].item()
+                        predicted_label = self.class_model.config.id2label[predicted_class_id]
+                    
+                    segment_labels.append(predicted_label)
+                    segment_confidences.append(confidence)
+                except Exception as e:
+                    logger.warning(f"Failed to classify segment {i}: {str(e)}")
+                    segment_labels.append("unknown")
+                    segment_confidences.append(0.0)
+            
+            # Step 3: Use DistilBERT for zero-shot classification to refine results
+            logger.info("Refining classification with zero-shot learning...")
+            refined_labels = []
+            refined_confidences = []
+            
+            for i, (label, confidence) in enumerate(zip(segment_labels, segment_confidences)):
+                if confidence > 0.3:  # Only refine high-confidence predictions
+                    try:
+                        # Create a description of the segment
+                        segment_description = f"An image of a {label}"
+                        
+                        # Use zero-shot classification
+                        result = self.zero_shot_classifier(
+                            segment_description,
+                            candidate_labels=[target_item_type, "other", "background"]
+                        )
+                        
+                        # Update label if zero-shot gives higher confidence for target
+                        if result['labels'][0] == target_item_type and result['scores'][0] > confidence:
+                            refined_labels.append(target_item_type)
+                            refined_confidences.append(result['scores'][0])
+                        else:
+                            refined_labels.append(label)
+                            refined_confidences.append(confidence)
+                    except Exception as e:
+                        logger.warning(f"Zero-shot classification failed for segment {i}: {str(e)}")
+                        refined_labels.append(label)
+                        refined_confidences.append(confidence)
+                else:
+                    refined_labels.append(label)
+                    refined_confidences.append(confidence)
+            
+            # Step 4: Count objects of the target type
+            target_count = 0
+            target_confidences = []
+            
+            for label, confidence in zip(refined_labels, refined_confidences):
+                if label.lower() == target_item_type.lower() or target_item_type.lower() in label.lower():
+                    target_count += 1
+                    target_confidences.append(confidence)
+            
+            # Calculate overall confidence
+            overall_confidence = np.mean(target_confidences) if target_confidences else 0.5
+            
+            # Prepare results
+            result = {
+                'count': target_count,
+                'confidence': overall_confidence,
+                'details': {
+                    'total_segments': len(masks_sorted),
+                    'refined_labels': refined_labels,
+                    'refined_confidences': refined_confidences,
+                    'target_confidences': target_confidences
+                }
+            }
+            
+            logger.info(f"Object counting completed. Count: {target_count}, Confidence: {overall_confidence}")
+            return result
+            
+        except Exception as e:
+            logger.error(f"Error in object counting: {str(e)}")
+            return {
+                'count': 0,
+                'confidence': 0.0,
+                'details': {'error': str(e)}
+            }
+
     def count_objects(self, image_path, target_item_type):
         """
         Count objects of a specific type in an image.
