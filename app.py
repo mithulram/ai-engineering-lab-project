@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 import os
 import uuid
+import json
 from datetime import datetime
 import logging
 import time
@@ -11,6 +12,7 @@ from model_pipeline import ObjectCounter
 from monitoring import metrics_collector
 from few_shot_learning import few_shot_learner
 from image_generator import ImageGenerator
+from safety_module import safety_module
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -121,6 +123,75 @@ def count_objects():
         # Save file
         file.save(file_path)
         logger.info(f"Image saved: {file_path}")
+        
+        # Safety checks before processing
+        safety_violations = []
+        
+        # Check text safety (item_type and any additional text)
+        text_to_check = f"{item_type} {request.form.get('description', '')}"
+        text_violations = safety_module.check_text_safety(text_to_check)
+        safety_violations.extend(text_violations)
+        
+        # Check image safety
+        image_violations = safety_module.check_image_safety(file_path)
+        safety_violations.extend(image_violations)
+        
+        # If safety violations detected, block the request
+        if safety_violations:
+            # Log violations
+            for violation in safety_violations:
+                safety_module.log_violation(violation, file_path)
+                # Record blocked request metrics
+                metrics_collector.record_blocked_request(
+                    reason=violation.violation_type,
+                    pipeline_version="1.0.0"
+                )
+            
+            # Prepare evidence for response
+            evidence = {
+                "violations": [
+                    {
+                        "type": v.violation_type,
+                        "reason": v.reason,
+                        "confidence": v.confidence,
+                        "evidence": v.evidence
+                    }
+                    for v in safety_violations
+                ],
+                "timestamp": time.time(),
+                "image_path": file_path
+            }
+            
+            # Save evidence file
+            evidence_file = os.path.join(
+                safety_module.evidence_dir,
+                f"blocked_request_{int(time.time())}.json"
+            )
+            try:
+                with open(evidence_file, 'w') as f:
+                    json.dump(evidence, f, indent=2)
+            except Exception as e:
+                logger.error(f"Failed to save evidence file: {e}")
+            
+            # Clean up uploaded file
+            try:
+                os.remove(file_path)
+            except Exception as e:
+                logger.warning(f"Failed to remove blocked file: {e}")
+            
+            return jsonify({
+                'error': 'Request blocked due to safety policy violation',
+                'reason': 'Military vehicle counting detected',
+                'evidence_file': evidence_file,
+                'violations': [
+                    {
+                        'type': v.violation_type,
+                        'reason': v.reason,
+                        'confidence': v.confidence
+                    }
+                    for v in safety_violations
+                ]
+            }), 403
         
         # Process image with AI pipeline
         start_time = time.time()
@@ -754,6 +825,27 @@ def get_generated_image(image_id):
         return send_from_directory(app.config['UPLOAD_FOLDER'], f"generated_{image_id}.png")
     except FileNotFoundError:
         return jsonify({'error': 'Image not found'}), 404
+
+@app.route('/api/safety/stats', methods=['GET'])
+def get_safety_stats():
+    """Get safety violation statistics"""
+    try:
+        stats = safety_module.get_violation_stats()
+        return jsonify({
+            'success': True,
+            'safety_stats': stats
+        })
+    except Exception as e:
+        logger.error(f"Error getting safety stats: {str(e)}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/safety/evidence/<filename>')
+def get_safety_evidence(filename):
+    """Serve safety evidence files"""
+    try:
+        return send_from_directory(safety_module.evidence_dir, filename)
+    except FileNotFoundError:
+        return jsonify({'error': 'Evidence file not found'}), 404
 
 @app.errorhandler(404)
 def not_found(e):
