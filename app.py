@@ -181,14 +181,17 @@ def count_objects():
                 raise e
 
         # Create response wrapper function
-        def make_count_response(result_dict, db_record=None):
+        def make_count_response(result_dict, db_record=None, processing_time=None, item_type=None):
             """Ensure response contains id and total fields"""
             count = int(result_dict.get("count", 0))
             response = {
                 "id": None,
                 "total": count,
                 "count": count,
+                "item_type": item_type,
                 "confidence": result_dict.get("confidence", 0.0),
+                "confidence_score": result_dict.get("confidence", 0.0),  # Also include confidence_score for compatibility
+                "processing_time": processing_time,
                 "details": result_dict.get("details", {}),
                 "meta": result_dict.get("meta", {})
             }
@@ -198,7 +201,9 @@ def count_objects():
 
         try:
             from datetime import datetime
+            import uuid
             db_res = CountingResult(
+                id=str(uuid.uuid4()),
                 timestamp=datetime.utcnow(),
                 image_path="uploaded_images/unknown.jpg",
                 item_type=item_type,
@@ -219,7 +224,7 @@ def count_objects():
             current_app.logger.exception("metrics.record_request failed")
 
         # Use wrapper to ensure proper response format
-        response_data = make_count_response(result, db_res)
+        response_data = make_count_response(result, db_res, response_time, item_type)
         return jsonify(response_data), 200
 
     except Exception as e:
@@ -321,6 +326,8 @@ def get_results():
         
         response = {
             'total': total_count,
+            'page': (offset // limit) + 1,  # Calculate page number
+            'per_page': limit,
             'results': results_list,
             'pagination': {
                 'total': total_count,
