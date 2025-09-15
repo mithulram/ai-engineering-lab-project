@@ -102,13 +102,13 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ai_object_counting_blocked_requests_total{reason!=\"\"}",
+          "expr": "rate(ai_object_counting_blocked_requests_total[5m])",
           "interval": "",
           "legendFormat": "{{reason}}",
           "refId": "A"
         }
       ],
-      "title": "Blocked Requests by Reason",
+      "title": "Safety Violations Rate by Reason",
       "type": "timeseries"
     },
     {
@@ -163,13 +163,13 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "topk(5, ai_object_counting_blocked_requests_total{reason!=\"\"})",
+          "expr": "ai_object_counting_blocked_requests_total",
           "interval": "",
           "legendFormat": "{{reason}}",
           "refId": "A"
         }
       ],
-      "title": "Top Rule Triggers",
+      "title": "Safety Violations Distribution",
       "type": "piechart"
     },
     {
@@ -252,13 +252,13 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "rate(ai_object_counting_blocked_requests_total[5m])",
+          "expr": "ai_object_counting_blocked_requests_total{pipeline_version=\"$pipeline_version\"}",
           "interval": "",
-          "legendFormat": "{{reason}}",
+          "legendFormat": "{{reason}} - {{pipeline_version}}",
           "refId": "A"
         }
       ],
-      "title": "Blocked Examples Over Time",
+      "title": "Safety Violations by Pipeline Version",
       "type": "timeseries"
     },
     {
@@ -313,7 +313,7 @@
               }
             ]
           },
-          "unit": "short"
+          "unit": "percent"
         },
         "overrides": []
       },
@@ -341,13 +341,13 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ai_object_counting_blocked_requests_total{pipeline_version=\"$pipeline_version\"}",
+          "expr": "rate(ai_object_counting_blocked_requests_total[5m]) / rate(ai_object_counting_request_count_total[5m]) * 100",
           "interval": "",
-          "legendFormat": "{{reason}} - {{pipeline_version}}",
+          "legendFormat": "Block Rate %",
           "refId": "A"
         }
       ],
-      "title": "Safety Violations by Pipeline Version",
+      "title": "Safety Block Rate Percentage",
       "type": "timeseries"
     }
   ],
@@ -357,7 +357,7 @@
   "tags": [
     "ai-object-counting",
     "safety",
-    "misuse"
+    "week3"
   ],
   "templating": {
     "list": [
@@ -367,19 +367,26 @@
           "text": "latest",
           "value": "latest"
         },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "definition": "label_values(ai_object_counting_blocked_requests_total, pipeline_version)",
         "hide": 0,
+        "includeAll": false,
         "label": "Pipeline Version",
+        "multi": false,
         "name": "pipeline_version",
-        "options": [
-          {
-            "selected": true,
-            "text": "latest",
-            "value": "latest"
-          }
-        ],
-        "query": "latest",
+        "options": [],
+        "query": {
+          "query": "label_values(ai_object_counting_blocked_requests_total, pipeline_version)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
         "skipUrlSync": false,
-        "type": "custom"
+        "sort": 0,
+        "type": "query"
       }
     ]
   },
@@ -389,8 +396,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "AI Object Counting - Safety & Misuse",
-  "uid": "safety-misuse",
+  "title": "AI Object Counting - Week 3 Safety Monitoring",
+  "uid": "week3-safety-monitoring",
   "version": 1,
   "weekStart": ""
 }

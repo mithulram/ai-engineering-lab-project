@@ -15,3 +15,4 @@ providers:
       - version_comparison.json
       - safety_misuse.json
       - resource_latency.json
+      - week3_safety_monitoring.json
