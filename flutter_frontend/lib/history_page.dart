@@ -138,6 +138,8 @@ class _HistoryPageWidgetState extends State<HistoryPageWidget> {
       'is_local': false,
       'count': r['predicted_count'] ?? 0, // Map predicted_count to count
       'image_name': r['image_path']?.split('/').last ?? 'Unknown', // Map image_path to image_name
+      'confidence_score': r['confidence_score'] ?? 0.0, // Ensure confidence_score is not null
+      'processing_time': r['processing_time'] ?? 0.0, // Ensure processing_time is not null
     }));
     
     return combined;
@@ -534,7 +536,7 @@ class _HistoryPageWidgetState extends State<HistoryPageWidget> {
               result['count'].toString(),
             ),
             const SizedBox(width: 8),
-            _buildConfidenceChip(result['confidence_score'].toDouble()),
+            _buildConfidenceChip((result['confidence_score'] ?? 0.0).toDouble()),
           ],
         ),
         const SizedBox(height: 12),
@@ -570,7 +572,7 @@ class _HistoryPageWidgetState extends State<HistoryPageWidget> {
             ),
             const SizedBox(width: 4),
             Text(
-              '${result['processing_time']?.toStringAsFixed(2) ?? '0.00'}s',
+              '${(result['processing_time'] ?? 0.0).toStringAsFixed(2)}s',
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
