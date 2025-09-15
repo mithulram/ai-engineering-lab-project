@@ -313,8 +313,9 @@ def metrics():
     OpenMetrics endpoint for Prometheus scraping.
     """
     try:
-        metrics_data = metrics_collector.get_metrics()
-        return Response(metrics_data, mimetype=metrics_collector.get_content_type())
+        from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
+        output = generate_latest(metrics_collector.registry)
+        return Response(output, content_type=CONTENT_TYPE_LATEST)
     except Exception as e:
         logger.error(f"Error generating metrics: {str(e)}")
         return jsonify({'error': 'Failed to generate metrics'}), 500
