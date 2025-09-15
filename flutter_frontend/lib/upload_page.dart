@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'dart:html' as html;
 import 'models/counting_result.dart';
+import 'services/item_type_service.dart';
 
 class UploadPage extends StatefulWidget {
   final Function(CountingResult) onResultReceived;
@@ -20,10 +21,10 @@ class _UploadPageState extends State<UploadPage> {
   String? _selectedImageName;
   bool _isProcessing = false;
   
-  final List<String> _objectTypes = [
-    'car', 'cat', 'tree', 'dog', 'building', 
-    'person', 'sky', 'ground', 'hardware'
-  ];
+  final List<String> _objectTypes = ItemTypeService.getAllCanonicalTypes();
+  final TextEditingController _itemTypeController = TextEditingController();
+  List<String> _suggestions = [];
+  bool _showSuggestions = false;
 
   void _pickImage() {
     try {
@@ -138,6 +139,10 @@ class _UploadPageState extends State<UploadPage> {
           _selectedImageName!,
         );
         widget.onResultReceived(countingResult);
+      } else if (response.statusCode == 403) {
+        // Handle blocked response
+        final blockedData = json.decode(responseData);
+        _showBlockedDialog(blockedData);
       } else {
         final error = json.decode(responseData);
         _showSnackBar('Error: ${error['error']}');
@@ -235,6 +240,142 @@ class _UploadPageState extends State<UploadPage> {
     );
   }
 
+  void _showBlockedDialog(Map<String, dynamic> blockedData) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          icon: Icon(
+            Icons.block,
+            color: Theme.of(context).colorScheme.error,
+            size: 32,
+          ),
+          title: const Text('Request Blocked'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Your request was blocked by the safety system.',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              const SizedBox(height: 16),
+              if (blockedData['reasons'] != null) ...[
+                Text(
+                  'Reasons:',
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                ...((blockedData['reasons'] as List?) ?? []).map((reason) => 
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8, bottom: 4),
+                    child: Text('• $reason'),
+                  ),
+                ),
+                const SizedBox(height: 16),
+              ],
+              if (blockedData['evidence'] != null && blockedData['evidence']['violations'] != null) ...[
+                Text(
+                  'Evidence:',
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                ...((blockedData['evidence']['violations'] as List?) ?? []).map((violation) => 
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8, bottom: 4),
+                    child: Text('• ${violation['reason'] ?? 'Unknown violation'}'),
+                  ),
+                ),
+                const SizedBox(height: 16),
+              ],
+              if (blockedData['evidence'] != null && blockedData['evidence']['violations'] != null) ...[
+                ElevatedButton.icon(
+                  onPressed: () => _showEvidenceDetails(blockedData['evidence']),
+                  icon: const Icon(Icons.visibility),
+                  label: const Text('View Evidence Details'),
+                ),
+              ],
+            ],
+          ),
+          actions: [
+            FilledButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Close'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showEvidenceDetails(Map<String, dynamic> evidence) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Evidence Details'),
+          content: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Violation Details:',
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                ...((evidence['violations'] as List?) ?? []).map((violation) => 
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 8),
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.errorContainer.withOpacity(0.3),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.error.withOpacity(0.3),
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Type: ${violation['type'] ?? 'Unknown'}',
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        if (violation['reason'] != null) ...[
+                          const SizedBox(height: 4),
+                          Text('Reason: ${violation['reason']}'),
+                        ],
+                        if (violation['details'] != null) ...[
+                          const SizedBox(height: 4),
+                          Text('Details: ${violation['details']}'),
+                        ],
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            FilledButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Close'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final isLargeScreen = MediaQuery.of(context).size.width > 1200;
@@ -269,23 +410,103 @@ class _UploadPageState extends State<UploadPage> {
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(height: 8),
-                  DropdownButtonFormField<String>(
-                    value: _selectedObjectType,
-                    hint: const Text('Select object type...'),
-                    items: _objectTypes.map((type) {
-                      return DropdownMenuItem(
-                        value: type,
-                        child: Text(type.toUpperCase()),
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        _selectedObjectType = value;
-                      });
-                    },
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                    ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextField(
+                        controller: _itemTypeController,
+                        decoration: InputDecoration(
+                          hintText: 'Type object type (e.g., car, person, tree...)',
+                          border: const OutlineInputBorder(),
+                          suffixIcon: _itemTypeController.text.isNotEmpty
+                              ? IconButton(
+                                  icon: const Icon(Icons.clear),
+                                  onPressed: () {
+                                    _itemTypeController.clear();
+                                    setState(() {
+                                      _selectedObjectType = null;
+                                      _showSuggestions = false;
+                                    });
+                                  },
+                                )
+                              : null,
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedObjectType = ItemTypeService.normalizeItemType(value);
+                            _suggestions = ItemTypeService.getSuggestions(value);
+                            _showSuggestions = value.isNotEmpty && _suggestions.isNotEmpty;
+                          });
+                        },
+                        onTap: () {
+                          if (_itemTypeController.text.isEmpty) {
+                            setState(() {
+                              _suggestions = ItemTypeService.getAllCanonicalTypes();
+                              _showSuggestions = true;
+                            });
+                          }
+                        },
+                      ),
+                      if (_showSuggestions && _suggestions.isNotEmpty) ...[
+                        const SizedBox(height: 8),
+                        Container(
+                          constraints: const BoxConstraints(maxHeight: 200),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Theme.of(context).colorScheme.outline),
+                            borderRadius: BorderRadius.circular(8),
+                            color: Theme.of(context).colorScheme.surface,
+                          ),
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: _suggestions.length,
+                            itemBuilder: (context, index) {
+                              final suggestion = _suggestions[index];
+                              return ListTile(
+                                dense: true,
+                                title: Text(suggestion),
+                                onTap: () {
+                                  _itemTypeController.text = suggestion;
+                                  setState(() {
+                                    _selectedObjectType = suggestion;
+                                    _showSuggestions = false;
+                                  });
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                      if (_selectedObjectType != null) ...[
+                        const SizedBox(height: 8),
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.check_circle,
+                                color: Theme.of(context).colorScheme.primary,
+                                size: 16,
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                'Selected: ${_selectedObjectType!.toUpperCase()}',
+                                style: TextStyle(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ],
                   ),
                   const SizedBox(height: 24),
                   

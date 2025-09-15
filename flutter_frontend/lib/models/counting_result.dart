@@ -27,11 +27,11 @@ class CountingResult {
 
   factory CountingResult.fromJson(Map<String, dynamic> json, Uint8List imageBytes, String imageName) {
     return CountingResult(
-      id: DateTime.now().millisecondsSinceEpoch.toString(),
-      objectType: json['item_type'],
-      count: json['count'],
-      confidence: json['confidence_score'].toDouble(),
-      processingTime: json['processing_time'].toDouble(),
+      id: json['id'] ?? DateTime.now().millisecondsSinceEpoch.toString(),
+      objectType: json['item_type'] ?? 'unknown',
+      count: json['total'] ?? json['count'] ?? 0,
+      confidence: (json['confidence_score'] ?? 0.0).toDouble(),
+      processingTime: (json['processing_time'] ?? 0.0).toDouble(),
       timestamp: DateTime.now(),
       imageBytes: imageBytes,
       imageName: imageName,
