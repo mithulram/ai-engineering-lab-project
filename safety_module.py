@@ -92,12 +92,12 @@ class SafetyModule:
         violations = []
         text_lower = text.lower()
         
-        # Use regex-based military keyword detection
+        # Use regex-based military keyword detection - takes precedence
         if contains_military_keyword(text):
             confidence = DEFAULT_MILITARY_PROB_BLOCK
             violation = SafetyViolation(
                 violation_type="military_vehicle_detection",
-                reason=f"Text contains military vehicle reference",
+                reason="military_vehicle_detection",  # Canonical reason string
                 confidence=confidence,
                 evidence={
                     "text": text,
@@ -105,8 +105,10 @@ class SafetyModule:
                 }
             )
             violations.append(violation)
+            # Military detection takes precedence - return early
+            return violations
         
-        # Check for suspicious patterns
+        # Check for suspicious patterns only if military detection didn't trigger
         for pattern_type, patterns in self.suspicious_patterns.items():
             for pattern in patterns:
                 if pattern in text_lower:
@@ -114,7 +116,7 @@ class SafetyModule:
                     if confidence > DEFAULT_TURRET_SCORE_THRESH:
                         violation = SafetyViolation(
                             violation_type="suspicious_pattern",
-                            reason=f"Text contains suspicious pattern: {pattern}",
+                            reason="suspicious_pattern",  # Canonical reason string
                             confidence=confidence,
                             evidence={
                                 "text": text,
