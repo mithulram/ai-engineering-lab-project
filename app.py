@@ -217,7 +217,9 @@ def count_objects():
                 image_path="uploaded_images/unknown.jpg",
                 item_type=item_type,
                 predicted_count=int(result.get("count", 0)),
-                corrected_count=None
+                corrected_count=None,
+                confidence_score=float(result.get("confidence", 0.0)),
+                processing_time=float(processing_time)
             )
             db.session.add(db_res)
             db.session.commit()
