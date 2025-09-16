@@ -180,10 +180,10 @@ if command -v flutter >/dev/null 2>&1; then
         fi
         
         # Try to start Flutter
-        if flutter run -d web-server --web-port "$FLUTTER_PORT" > "../$DEMO_DIR/flutter.log" 2>&1 &
+        if flutter run -d web-server --web-port "$FLUTTER_PORT" > "../demo/flutter.log" 2>&1 &
         then
             flutter_pid=$!
-            echo "$flutter_pid" > "../$DEMO_DIR/flutter.pid"
+            echo "$flutter_pid" > "../demo/flutter.pid"
             log "Flutter started (pid $flutter_pid), logging -> $DEMO_DIR/flutter.log"
             
             # Wait for Flutter to be ready
@@ -193,7 +193,7 @@ if command -v flutter >/dev/null 2>&1; then
             else
                 log "Flutter web server not ready, will retry..."
                 kill "$flutter_pid" 2>/dev/null || true
-                rm -f "../$DEMO_DIR/flutter.pid"
+                rm -f "../demo/flutter.pid"
             fi
         else
             log "Failed to start Flutter, will retry..."
