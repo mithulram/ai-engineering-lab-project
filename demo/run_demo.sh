@@ -166,9 +166,9 @@ if command -v flutter >/dev/null 2>&1; then
     log "Starting Flutter web server on port $FLUTTER_PORT..."
     cd flutter_frontend
     
-    local flutter_attempts=0
-    local flutter_max_attempts=3
-    local flutter_started=false
+    flutter_attempts=0
+    flutter_max_attempts=3
+    flutter_started=false
     
     while [ $flutter_attempts -lt $flutter_max_attempts ] && [ "$flutter_started" = "false" ]; do
         flutter_attempts=$((flutter_attempts + 1))
