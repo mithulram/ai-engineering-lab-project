@@ -174,9 +174,16 @@ if command -v flutter >/dev/null 2>&1; then
         flutter_attempts=$((flutter_attempts + 1))
         log "Flutter attempt $flutter_attempts/$flutter_max_attempts"
         
-        # Clean up port before retry
+        # Clean up only Flutter port before retry
         if [ $flutter_attempts -gt 1 ]; then
-            cleanup_ports
+            if command -v lsof >/dev/null 2>&1; then
+                pids=$(lsof -ti:"$FLUTTER_PORT" 2>/dev/null || true)
+                if [ -n "$pids" ]; then
+                    log "Killing processes on Flutter port $FLUTTER_PORT: $pids"
+                    echo "$pids" | xargs -r kill -9 2>/dev/null || true
+                fi
+            fi
+            sleep 2
         fi
         
         # Try to start Flutter
@@ -208,7 +215,7 @@ if command -v flutter >/dev/null 2>&1; then
     cd "$ROOT"
     
     if [ "$flutter_started" = "false" ]; then
-        log "Flutter web server failed to start after $flutter_max_attempts attempts"
+        log "Flutter web server failed to start after $flutter_max_attempts attempts - continuing without Flutter"
         rm -f "$DEMO_DIR/flutter.pid"
     fi
 else
