@@ -315,13 +315,13 @@ class MetricsCollector:
             predicted_count = int(result_dict.get("count", result_dict.get("total", 0)))
             corrected_count = result_dict.get("corrected_count")
             
-            # Update model confidence (as percentage 0-100)
+            # Update model confidence (store as 0-1, Grafana will format as percent)
             self.model_confidence_gauge.labels(
                 model_name="pipeline",
                 object_type=item_type,
                 predicted_label=item_type,
                 pipeline_version=pipeline_version
-            ).set(confidence * 100.0)
+            ).set(confidence)
             
             # Calculate proxy accuracy/precision/recall
             if corrected_count is not None:
@@ -330,13 +330,13 @@ class MetricsCollector:
                 corr = float(corrected_count)
                 # Accuracy proxy: how close prediction is to correction (1.0 perfect -> scale 0-1)
                 accuracy_proxy = max(0.0, 1.0 - (abs(pred - corr) / max(1.0, corr)))
-                precision_proxy = 100.0 * min(pred, corr) / (pred if pred > 0 else 1.0)
-                recall_proxy = 100.0 * min(pred, corr) / (corr if corr > 0 else 1.0)
+                precision_proxy = min(pred, corr) / (pred if pred > 0 else 1.0)
+                recall_proxy = min(pred, corr) / (corr if corr > 0 else 1.0)
             else:
-                # No correction: use confidence as proxy
-                accuracy_proxy = confidence * 100.0
-                precision_proxy = confidence * 100.0
-                recall_proxy = confidence * 100.0
+                # No correction: use confidence as proxy (already 0-1)
+                accuracy_proxy = confidence
+                precision_proxy = confidence
+                recall_proxy = confidence
             
             # Update accuracy/precision/recall gauges
             self.accuracy_gauge.labels(
