@@ -231,6 +231,8 @@ def count_objects():
         response_time = time.time() - start
         try:
             metrics_collector.record_request('/api/count', 'POST', 200, response_time, pipeline_version="1.0.0")
+            # Record counting result metrics
+            metrics_collector.record_counting_result(result, pipeline_version="1.0.0")
         except Exception:
             current_app.logger.exception("metrics.record_request failed")
 
@@ -287,6 +289,19 @@ def correct_count():
         db_result.corrected_count = corrected_count
         db_result.user_feedback = user_feedback
         db.session.commit()
+        
+        # Update metrics with corrected values
+        try:
+            result_dict = {
+                'item_type': db_result.item_type,
+                'count': db_result.predicted_count,
+                'confidence': db_result.confidence_score,
+                'processing_time': db_result.processing_time,
+                'corrected_count': corrected_count
+            }
+            metrics_collector.record_counting_result(result_dict, pipeline_version="1.0.0")
+        except Exception as e:
+            logger.error(f"Error updating metrics after correction: {str(e)}")
         
         logger.info(f"Count corrected: {result_id} -> {corrected_count}")
         
