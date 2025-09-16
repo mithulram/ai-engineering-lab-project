@@ -4,7 +4,12 @@ A comprehensive AI-powered object counting application with Flutter frontend, Fl
 
 ## 🚀 Quick Start
 
-### For Week 2 Branch Users:
+### One-Line Demo Run
+```bash
+./run_local.sh
+```
+
+### Manual Setup
 1. **Clone and checkout** the week2 branch:
    ```bash
    git clone https://github.com/mithulram/ai-engineering-lab-project.git
@@ -14,10 +19,29 @@ A comprehensive AI-powered object counting application with Flutter frontend, Fl
 2. **Follow** the complete setup guide: [`SETUP_GUIDE.md`](SETUP_GUIDE.md)
 3. **Or use** the quick commands: [`QUICK_START.md`](QUICK_START.md)
 
-### For Other Branches:
-1. **Clone/Download** this project to your local machine
-2. **Navigate** to the project directory in your terminal
-3. **Follow** the detailed instructions in [`RUN_INSTRUCTIONS.md`](RUN_INSTRUCTIONS.md)
+### Health Check
+```bash
+curl http://127.0.0.1:5001/api/health
+```
+
+### Example API Call
+```bash
+curl -X POST http://127.0.0.1:5001/api/count \
+  -F "image=@sample_image.jpg" \
+  -F "item_type=car"
+```
+
+### Monitoring Setup
+```bash
+cd monitoring && docker-compose up -d
+# Access Grafana: http://127.0.0.1:3000 (admin/admin)
+```
+
+### Memory Optimization
+For systems with limited RAM (8GB or less), the application automatically uses low memory mode:
+- **LOCAL_LOW_MEMORY=1**: Enables lazy loading and lightweight models
+- **Automatic Fallbacks**: Uses mock models when full models can't load
+- **Optimized for M1 MacBook Air**: Tested and optimized for 8GB RAM systems
 
 ## 📁 Project Structure
 

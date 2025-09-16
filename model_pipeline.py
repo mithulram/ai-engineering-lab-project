@@ -24,7 +24,7 @@ class ObjectCounter:
     
     def __init__(self, top_n=10):
         """
-        Initialize the ObjectCounter with all required models.
+        Initialize the ObjectCounter with lazy model loading.
         
         Args:
             top_n (int): Number of top segments to process
@@ -33,9 +33,35 @@ class ObjectCounter:
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         logger.info(f"Using device: {self.device}")
         
-        # Initialize models
-        self._initialize_sam()
-        self._initialize_classification_models()
+        # Check for low memory mode
+        import os
+        self.local_low_memory = os.getenv("LOCAL_LOW_MEMORY", "1") == "1"
+        
+        # Initialize model placeholders (lazy loading)
+        self.sam = None
+        self.mask_generator = None
+        self.classifier = None
+        self.feature_extractor = None
+        self.zero_shot_classifier = None
+        
+        # Only initialize models if not in low memory mode
+        if not self.local_low_memory:
+            self._initialize_sam()
+            self._initialize_classification_models()
+        else:
+            logger.info("Low memory mode enabled - models will be loaded on first use")
+    
+    def _ensure_sam_loaded(self):
+        """Ensure SAM model is loaded (lazy loading)."""
+        if self.sam is None or self.mask_generator is None:
+            logger.info("Loading SAM model on first use...")
+            self._initialize_sam()
+    
+    def _ensure_classification_models_loaded(self):
+        """Ensure classification models are loaded (lazy loading)."""
+        if self.classifier is None or self.feature_extractor is None or self.zero_shot_classifier is None:
+            logger.info("Loading classification models on first use...")
+            self._initialize_classification_models()
         
     def _initialize_sam(self):
         """Initialize the SAM (Segment Anything Model)."""
@@ -137,6 +163,10 @@ class ObjectCounter:
         """
         try:
             logger.info(f"Processing image for item type: {target_item_type}")
+            
+            # Ensure models are loaded (lazy loading)
+            self._ensure_sam_loaded()
+            self._ensure_classification_models_loaded()
             
             # Ensure real AI models are loaded - no fallback mode allowed
             if self.image_processor is None or self.class_model is None:
