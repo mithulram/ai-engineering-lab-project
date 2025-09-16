@@ -7,7 +7,7 @@ Flask-SQLAlchemy==3.0.5
 Werkzeug==2.3.7
 
 # Database
-SQLAlchemy==2.0.21
+SQLAlchemy<2.0,>=1.4.46
 
 # Core AI/ML Dependencies
 torch>=2.0.0
