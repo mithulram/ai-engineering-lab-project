@@ -10,14 +10,14 @@ Device set to use mps:0
 /Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/transformers/pipelines/text_classification.py:111: UserWarning: `return_all_scores` is now deprecated,  if want a similar functionality use `top_k=None` instead of `return_all_scores=True` or `top_k=1` instead of `return_all_scores=False`.
   warnings.warn(
 INFO:safety_module:Text classifier initialized successfully
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 16131.94it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 17848.10it/s]
 Fast image processor class <class 'transformers.models.vit.image_processing_vit_fast.ViTImageProcessorFast'> is available for this model. Using slow image processor class. To use the fast image processor class set `use_fast=True`.
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 23831.27it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 7307.15it/s]
 Device set to use mps:0
 INFO:safety_module:Image classifier initialized successfully
 INFO:model_pipeline:Using device: cpu
 INFO:model_pipeline:SAM model initialized successfully
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 15141.89it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 11096.04it/s]
 Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
 Device set to use mps:0
 INFO:model_pipeline:Classification models initialized successfully
@@ -42,24 +42,21 @@ Device set to use mps:0
 /Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/transformers/pipelines/text_classification.py:111: UserWarning: `return_all_scores` is now deprecated,  if want a similar functionality use `top_k=None` instead of `return_all_scores=True` or `top_k=1` instead of `return_all_scores=False`.
   warnings.warn(
 INFO:safety_module:Text classifier initialized successfully
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 22310.13it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 13934.56it/s]
 Fast image processor class <class 'transformers.models.vit.image_processing_vit_fast.ViTImageProcessorFast'> is available for this model. Using slow image processor class. To use the fast image processor class set `use_fast=True`.
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 5622.39it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 9532.51it/s]
 Device set to use mps:0
 INFO:safety_module:Image classifier initialized successfully
 INFO:model_pipeline:Using device: cpu
 INFO:model_pipeline:SAM model initialized successfully
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 6177.18it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 7244.05it/s]
 Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
 Device set to use mps:0
 INFO:model_pipeline:Classification models initialized successfully
 INFO:__main__:Database tables created
 WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 132-220-253
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 11:39:03] "GET /api/health HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 11:39:03] "GET /api/health HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 11:39:03] "GET /api/health HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 11:39:03] "GET /api/health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 14:38:00] "GET /api/health HTTP/1.1" 200 -
 WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
 WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
 INFO:model_pipeline:Processing image for item type: car
@@ -69,11 +66,240 @@ INFO:model_pipeline:Generated 1 segments
 INFO:model_pipeline:Classifying segments...
 INFO:model_pipeline:Refining classification with zero-shot learning...
 INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
-INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=50.00
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 11:40:49] "POST /api/count HTTP/1.1" 200 -
+INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=0.50
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 14:39:57] "POST /api/count HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 14:42:46] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 14:51:28] "GET /metrics HTTP/1.1" 200 -
 WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
-INFO:safety_module:Safety violation logged: safety_evidence/violation_1758003049_military_vehicle_detection.json
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 11:40:49] "[31m[1mPOST /api/count HTTP/1.1[0m" 403 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 11:40:49] "GET /metrics HTTP/1.1" 200 -
-/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/multiprocessing/resource_tracker.py:216: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
-  warnings.warn('resource_tracker: There appear to be %d '
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+INFO:model_pipeline:Processing image for item type: car
+INFO:model_pipeline:Image size: 100x100
+INFO:model_pipeline:Generating segmentation masks...
+INFO:model_pipeline:Generated 1 segments
+INFO:model_pipeline:Classifying segments...
+INFO:model_pipeline:Refining classification with zero-shot learning...
+INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
+INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=0.50
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 14:51:41] "POST /api/count HTTP/1.1" 200 -
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+INFO:model_pipeline:Processing image for item type: car
+INFO:model_pipeline:Image size: 100x100
+INFO:model_pipeline:Generating segmentation masks...
+INFO:model_pipeline:Generated 1 segments
+INFO:model_pipeline:Classifying segments...
+INFO:model_pipeline:Refining classification with zero-shot learning...
+INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
+INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=0.50
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 14:52:05] "POST /api/count HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:15:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:15:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:15:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:15:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:15:49] "GET /metrics HTTP/1.1" 200 -
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+INFO:model_pipeline:Processing image for item type: car
+INFO:model_pipeline:Image size: 100x100
+INFO:model_pipeline:Generating segmentation masks...
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:15:59] "GET /metrics HTTP/1.1" 200 -
+INFO:model_pipeline:Generated 1 segments
+INFO:model_pipeline:Classifying segments...
+INFO:model_pipeline:Refining classification with zero-shot learning...
+INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
+INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=0.50
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:16:06] "POST /api/count HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:16:09] "GET /metrics HTTP/1.1" 200 -
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+INFO:model_pipeline:Processing image for item type: car
+INFO:model_pipeline:Image size: 100x100
+INFO:model_pipeline:Generating segmentation masks...
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:16:19] "GET /metrics HTTP/1.1" 200 -
+INFO:model_pipeline:Generated 1 segments
+INFO:model_pipeline:Classifying segments...
+INFO:model_pipeline:Refining classification with zero-shot learning...
+INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
+INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=0.50
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:16:28] "POST /api/count HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:16:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:16:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:16:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:16:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:17:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:17:11] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:17:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:17:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:17:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:17:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:17:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:18:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:18:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:18:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:18:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:18:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:18:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:19:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:19:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:19:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:19:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:19:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:19:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:20:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:20:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:20:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:20:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:20:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:20:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:21:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:21:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:21:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:21:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:21:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:21:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:22:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:22:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:22:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:22:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:22:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:22:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:23:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:23:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:23:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:23:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:23:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:23:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:24:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:24:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:24:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:24:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:24:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:24:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:25:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:25:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:25:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:25:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:25:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:25:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:26:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:26:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:26:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:26:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:26:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:26:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:27:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:27:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:27:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:27:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:27:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:27:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:28:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:28:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:28:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:28:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:28:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:28:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:29:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:29:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:29:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:29:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:29:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:29:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:30:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:30:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:30:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:30:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:30:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:30:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:31:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:31:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:31:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:31:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:31:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:31:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:32:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:32:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:32:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:32:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:32:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:32:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:33:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:33:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:33:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:33:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:33:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:33:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:34:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:34:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:34:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:34:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:34:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:34:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:35:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:35:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:35:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:35:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:35:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:35:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:36:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:36:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:36:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:36:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:36:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:36:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:37:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:37:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:37:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:37:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:37:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:37:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:38:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:38:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:38:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:38:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:38:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:38:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:39:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:39:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:39:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:39:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:39:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:39:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:40:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:40:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:40:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:40:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:40:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:40:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:41:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:41:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:41:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:41:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:41:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:41:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:42:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:42:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:42:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:42:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:42:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:42:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:43:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:43:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:43:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:43:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:43:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:43:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:44:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:44:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:44:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:44:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:44:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:44:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:45:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:45:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:45:29] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:45:39] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:45:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:45:59] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:46:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:46:19] "GET /metrics HTTP/1.1" 200 -
