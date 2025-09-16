@@ -42,3 +42,6 @@ requests>=2.31.0
 
 # Few-shot Learning
 scikit-learn>=1.3.0
+
+# Computer Vision
+opencv-python>=4.7.0
