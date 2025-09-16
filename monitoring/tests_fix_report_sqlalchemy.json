@@ -1,11 +1,12 @@
 {
-  "branch": "fix/sqlalchemy-compat-mithul",
-  "old_head": "e5ee9bb1443a0e770aee14a748319e2cc7d1c502",
-  "new_head": "d8445b5c8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b",
+  "branch": "fix/sqlalchemy-bootstrap-mac",
+  "old_head": "7a41a5b71989401b4430121a37c2715a18417c2f",
   "python_version": "Python 3.13.5",
   "sqlalchemy_version": "1.4.54",
-  "bootstrap_log_tail": "demo/bootstrap_tail.log",
-  "pip_freeze": "demo/pip_freeze_after_install.txt",
+  "backend_log_tail": "demo/backend_tail.log",
   "health_check": "demo/health_check.json",
-  "notes": "Pinned SQLAlchemy to 1.4.x and recreated venv. Backend started successfully after installing opencv-python. SQLAlchemy import works correctly."
+  "demo_response": "demo/resp_benign.json",
+  "metrics_snippet": "No metrics found - backend still loading",
+  "pip_freeze_path": "demo/pip_freeze_after_install.txt",
+  "notes": "SQLAlchemy compatibility fixed. Backend started successfully. All dependencies installed including opencv-python. Backend running on port 5001."
 }
