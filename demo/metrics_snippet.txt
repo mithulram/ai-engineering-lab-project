@@ -1,0 +1,15 @@
+# HELP ai_object_counting_accuracy Accuracy of object counting predictions
+# TYPE ai_object_counting_accuracy gauge
+ai_object_counting_accuracy{image_resolution="unknown",object_type="unknown",pipeline_version="1.0.0",segments_found="unknown"} 50.0
+# HELP ai_object_counting_precision Precision of object counting predictions
+# TYPE ai_object_counting_precision gauge
+ai_object_counting_precision{image_resolution="unknown",object_type="unknown",pipeline_version="1.0.0",segments_found="unknown"} 50.0
+# HELP ai_object_counting_recall Recall of object counting predictions
+# TYPE ai_object_counting_recall gauge
+ai_object_counting_recall{image_resolution="unknown",object_type="unknown",pipeline_version="1.0.0",segments_found="unknown"} 50.0
+# HELP ai_object_counting_model_confidence Confidence score per predicted label
+# TYPE ai_object_counting_model_confidence gauge
+ai_object_counting_model_confidence{model_name="pipeline",object_type="unknown",pipeline_version="1.0.0",predicted_label="unknown"} 50.0
+# HELP ai_object_counting_requests_total Total count of API requests for object counting
+# TYPE ai_object_counting_requests_total counter
+ai_object_counting_requests_total{pipeline_version="1.0.0",status="200"} 1.0

@@ -1,0 +1,27 @@
+{
+  "evidence": {
+    "violations": [
+      {
+        "details": {
+          "detection_method": "regex_keyword_matching",
+          "text": "tank "
+        },
+        "reason": "military_vehicle_detection"
+      }
+    ]
+  },
+  "reasons": [
+    "military_vehicle_detection"
+  ],
+  "status": "blocked",
+  "violations": [
+    {
+      "details": {
+        "detection_method": "regex_keyword_matching",
+        "text": "tank "
+      },
+      "reason": "military_vehicle_detection",
+      "type": "military_vehicle_detection"
+    }
+  ]
+}
