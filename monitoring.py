@@ -10,6 +10,28 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+def _normalize_confidence_to_01(conf):
+    """
+    Normalize confidence value to 0-1 range
+    
+    Args:
+        conf: Confidence value (either 0-1 or 0-100 range)
+    
+    Returns:
+        float: Confidence value in 0-1 range
+    """
+    if conf is None:
+        return 0.0
+    
+    conf_float = float(conf)
+    
+    # If value is > 1.0, assume it's in 0-100 range and normalize
+    if conf_float > 1.0:
+        return conf_float / 100.0
+    
+    # Otherwise assume it's already in 0-1 range
+    return max(0.0, min(1.0, conf_float))
+
 class MetricsCollector:
     """
     Collects and exposes metrics for the AI Object Counting application
@@ -195,12 +217,13 @@ class MetricsCollector:
             
             # Record model confidence
             for model_name, confidence in confidence_scores.items():
+                normalized_confidence = _normalize_confidence_to_01(confidence)
                 self.model_confidence_gauge.labels(
                     model_name=model_name,
                     object_type=object_type,
                     predicted_label=object_type,
                     pipeline_version=pipeline_version
-                ).set(confidence)
+                ).set(normalized_confidence)
             
             # Record inference times
             for model_name, inference_time in inference_times.items():
@@ -308,8 +331,8 @@ class MetricsCollector:
             pipeline_version (str): Pipeline version
         """
         try:
-            # Extract values
-            confidence = float(result_dict.get("confidence", result_dict.get("confidence_score", 0.0)))
+            # Extract values and normalize confidence to 0-1 range
+            confidence = _normalize_confidence_to_01(result_dict.get("confidence", result_dict.get("confidence_score", 0.0)))
             processing_time = float(result_dict.get("processing_time", 0.0))
             item_type = result_dict.get("item_type", "unknown")
             predicted_count = int(result_dict.get("count", result_dict.get("total", 0)))
