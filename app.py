@@ -47,8 +47,8 @@ class CountingResult(db.Model):
     item_type = db.Column(db.String(100), nullable=False)
     predicted_count = db.Column(db.Integer, nullable=False)
     corrected_count = db.Column(db.Integer, nullable=True)
-    confidence_score = db.Column(db.Float, nullable=True)
-    processing_time = db.Column(db.Float, nullable=True)
+    confidence_score = db.Column(db.Float, nullable=False, default=0.0)
+    processing_time = db.Column(db.Float, nullable=False, default=0.0)
     user_feedback = db.Column(db.Text, nullable=True)
     
     def to_dict(self):
