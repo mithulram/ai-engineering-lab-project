@@ -208,6 +208,9 @@ def count_objects():
                 response["id"] = db_record.id
             return response
 
+        # Calculate processing time
+        processing_time = time.time() - start
+        
         try:
             from datetime import datetime
             import uuid
