@@ -49,7 +49,7 @@ cleanup() {
         fi
         rm -f "$PID_FILE"
     fi
-    pkill -f "gunicorn.*app:app" || true # Ensure all gunicorn processes are killed
+    pkill -f "gunicorn.*backend.app:app" || true # Ensure all gunicorn processes are killed
     pkill -f "python3 app.py" || true # Kill any direct flask runs
     rm -f "$DEMO_DIR"/*.pid || true # Remove any stale PIDs
     sleep 1
@@ -108,7 +108,7 @@ gunicorn --bind "0.0.0.0:$API_PORT" \
          --access-logfile "$ACCESS_LOG" \
          --error-logfile "$ERROR_LOG" \
          --pid "$PID_FILE" \
-         "app:app" &
+         "backend.app:app" &
 
 GUNICORN_PID=$!
 echo "$GUNICORN_PID" > "$PID_FILE"
@@ -134,7 +134,7 @@ echo "   - Access: tail -f $ACCESS_LOG"
 echo "   - Errors: tail -f $ERROR_LOG"
 echo
 success "🛑 To stop the backend:"
-echo "   pkill -f 'gunicorn.*app:app'"
+echo "   pkill -f 'gunicorn.*backend.app:app'"
 echo "   or kill $GUNICORN_PID"
 echo
 success "🎉 Backend is running successfully!"

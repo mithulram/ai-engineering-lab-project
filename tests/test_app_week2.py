@@ -15,7 +15,7 @@ import requests
 import io
 
 # Import the Flask app
-from app import app, db, CountingResult
+from backend.app import app, db, CountingResult
 import pytest
 
 class TestAIObjectCountingWeek2(unittest.TestCase):

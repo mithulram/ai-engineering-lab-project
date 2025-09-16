@@ -8,7 +8,7 @@ import numpy as np
 import pytest
 
 # Import the Flask app
-from app import app, db, CountingResult
+from backend.app import app, db, CountingResult
 
 class TestObjectCountingAPI(unittest.TestCase):
     """Test cases for the Object Counting API."""
@@ -358,7 +358,7 @@ class TestModelPipeline(unittest.TestCase):
     
     def test_supported_item_types(self):
         """Test that supported item types are correctly defined."""
-        from app import OBJECT_TYPES
+        from backend.app import OBJECT_TYPES
         
         expected_types = [
             "car", "cat", "tree", "dog", "building", 
@@ -370,7 +370,7 @@ class TestModelPipeline(unittest.TestCase):
     
     def test_allowed_file_extensions(self):
         """Test that allowed file extensions are correctly defined."""
-        from app import ALLOWED_EXTENSIONS
+        from backend.app import ALLOWED_EXTENSIONS
         
         expected_extensions = {'png', 'jpg', 'jpeg', 'gif', 'bmp'}
         
@@ -379,7 +379,7 @@ class TestModelPipeline(unittest.TestCase):
     
     def test_allowed_file_function(self):
         """Test the allowed_file function."""
-        from app import allowed_file
+        from backend.app import allowed_file
         
         # Valid extensions
         self.assertTrue(allowed_file('test.png'))

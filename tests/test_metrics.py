@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from app import app
+from backend.app import app
 
 def test_metrics():
     with app.test_client() as client:
