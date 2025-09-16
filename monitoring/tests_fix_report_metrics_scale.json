@@ -1,0 +1,8 @@
+{
+  "branch": "fix/metrics-scale-anuvidhyas",
+  "commits": ["256944c", "e989a5d", "608e9ef", "26dc6f3", "b828405", "337f8d2"],
+  "tests_run": "1",
+  "tests_passed": "1",
+  "metrics_snippet": "demo/metrics_snippet.txt",
+  "notes": "Converted metric exports to 0..1 range; Grafana should format as percent. All metrics now show values like 0.5 instead of 50.0. Verification script returned OK."
+}
