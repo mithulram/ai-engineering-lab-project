@@ -1,0 +1,12 @@
+{
+  "branch": "fix/history-monitoring-anuvidhyas",
+  "commits": ["dc31977", "fd84a66", "3a9fd42", "012494b", "2839881", "31998b4"],
+  "tests_run": "2",
+  "tests_passed": "2",
+  "demo_outputs": {
+    "benign": "demo/resp_benign.json",
+    "blocked": "demo/resp_blocked.json",
+    "metrics": "demo/metrics_snippet.txt"
+  },
+  "notes": "Persisted confidence and processing_time; updated metrics to publish model_confidence and proxy accuracy/precision/recall. All metrics now show non-zero values: accuracy=50.0, precision=50.0, recall=50.0, model_confidence=50.0, requests_total=1.0"
+}

@@ -1,0 +1,20 @@
+{
+  "confidence": 0.5,
+  "confidence_score": 0.5,
+  "count": 0,
+  "details": {
+    "refined_confidences": [
+      0.020152052864432335
+    ],
+    "refined_labels": [
+      "parachute, chute"
+    ],
+    "target_confidences": [],
+    "total_segments": 1
+  },
+  "id": "472c70c8-10d8-4ce2-a3c6-5b1b6127205b",
+  "item_type": "car",
+  "meta": {},
+  "processing_time": 8.421556949615479,
+  "total": 0
+}

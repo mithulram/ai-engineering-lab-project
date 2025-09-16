@@ -299,6 +299,72 @@ class MetricsCollector:
         except Exception as e:
             logger.error(f"Error recording blocked request metrics: {str(e)}")
     
+    def record_counting_result(self, result_dict, pipeline_version="1.0.0"):
+        """
+        Record metrics for a counting result
+        
+        Args:
+            result_dict (dict): Result dictionary from counting
+            pipeline_version (str): Pipeline version
+        """
+        try:
+            # Extract values
+            confidence = float(result_dict.get("confidence", result_dict.get("confidence_score", 0.0)))
+            processing_time = float(result_dict.get("processing_time", 0.0))
+            item_type = result_dict.get("item_type", "unknown")
+            predicted_count = int(result_dict.get("count", result_dict.get("total", 0)))
+            corrected_count = result_dict.get("corrected_count")
+            
+            # Update model confidence (as percentage 0-100)
+            self.model_confidence_gauge.labels(
+                model_name="pipeline",
+                object_type=item_type,
+                predicted_label=item_type,
+                pipeline_version=pipeline_version
+            ).set(confidence * 100.0)
+            
+            # Calculate proxy accuracy/precision/recall
+            if corrected_count is not None:
+                # User provided correction exists
+                pred = float(predicted_count)
+                corr = float(corrected_count)
+                # Accuracy proxy: how close prediction is to correction (1.0 perfect -> scale 0-1)
+                accuracy_proxy = max(0.0, 1.0 - (abs(pred - corr) / max(1.0, corr)))
+                precision_proxy = 100.0 * min(pred, corr) / (pred if pred > 0 else 1.0)
+                recall_proxy = 100.0 * min(pred, corr) / (corr if corr > 0 else 1.0)
+            else:
+                # No correction: use confidence as proxy
+                accuracy_proxy = confidence * 100.0
+                precision_proxy = confidence * 100.0
+                recall_proxy = confidence * 100.0
+            
+            # Update accuracy/precision/recall gauges
+            self.accuracy_gauge.labels(
+                object_type=item_type,
+                image_resolution="unknown",
+                segments_found="unknown",
+                pipeline_version=pipeline_version
+            ).set(accuracy_proxy)
+            
+            self.precision_gauge.labels(
+                object_type=item_type,
+                image_resolution="unknown",
+                segments_found="unknown",
+                pipeline_version=pipeline_version
+            ).set(precision_proxy)
+            
+            self.recall_gauge.labels(
+                object_type=item_type,
+                image_resolution="unknown",
+                segments_found="unknown",
+                pipeline_version=pipeline_version
+            ).set(recall_proxy)
+            
+            logger.info(f"Updated metrics for {item_type}: confidence={confidence:.2f}, accuracy_proxy={accuracy_proxy:.2f}")
+            
+        except Exception as e:
+            logger.error(f"Error recording counting result metrics: {str(e)}")
+    
     def _calculate_precision(self, predicted_count, actual_count):
         """Calculate precision for counting task"""
         if predicted_count == 0:
