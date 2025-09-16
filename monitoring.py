@@ -24,21 +24,21 @@ class MetricsCollector:
         # Performance Metrics
         self.accuracy_gauge = Gauge(
             'ai_object_counting_accuracy',
-            'Accuracy of object counting predictions',
+            'Accuracy of object counting predictions (0.0 - 1.0). Format as percent in dashboards.',
             ['object_type', 'image_resolution', 'segments_found', 'pipeline_version'],
             registry=self.registry
         )
         
         self.precision_gauge = Gauge(
             'ai_object_counting_precision',
-            'Precision of object counting predictions',
+            'Precision of object counting predictions (0.0 - 1.0). Format as percent in dashboards.',
             ['object_type', 'image_resolution', 'segments_found', 'pipeline_version'],
             registry=self.registry
         )
         
         self.recall_gauge = Gauge(
             'ai_object_counting_recall',
-            'Recall of object counting predictions',
+            'Recall of object counting predictions (0.0 - 1.0). Format as percent in dashboards.',
             ['object_type', 'image_resolution', 'segments_found', 'pipeline_version'],
             registry=self.registry
         )
@@ -46,7 +46,7 @@ class MetricsCollector:
         # Model Confidence Metrics
         self.model_confidence_gauge = Gauge(
             'ai_object_counting_model_confidence',
-            'Confidence score per predicted label',
+            'Confidence score per predicted label (0.0 - 1.0). Format as percent in dashboards.',
             ['model_name', 'object_type', 'predicted_label', 'pipeline_version'],
             registry=self.registry
         )
