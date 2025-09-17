@@ -24,10 +24,10 @@ ai_object_counting_response_time_seconds_bucket{endpoint="/api/count",le="30.0",
 ai_object_counting_response_time_seconds_bucket{endpoint="/api/count",le="60.0",object_type="unknown",pipeline_version="1.0.0"} 2.0
 ai_object_counting_response_time_seconds_bucket{endpoint="/api/count",le="+Inf",object_type="unknown",pipeline_version="1.0.0"} 2.0
 ai_object_counting_response_time_seconds_count{endpoint="/api/count",object_type="unknown",pipeline_version="1.0.0"} 2.0
-ai_object_counting_response_time_seconds_sum{endpoint="/api/count",object_type="unknown",pipeline_version="1.0.0"} 17.625133752822876
+ai_object_counting_response_time_seconds_sum{endpoint="/api/count",object_type="unknown",pipeline_version="1.0.0"} 17.61773991584778
 # HELP ai_object_counting_response_time_seconds_created Total response time for API requests
 # TYPE ai_object_counting_response_time_seconds_created gauge
-ai_object_counting_response_time_seconds_created{endpoint="/api/count",object_type="unknown",pipeline_version="1.0.0"} 1.75809832249047e+09
+ai_object_counting_response_time_seconds_created{endpoint="/api/count",object_type="unknown",pipeline_version="1.0.0"} 1.758103604370664e+09
 # HELP ai_object_counting_image_resolution Resolution of processed images
 # TYPE ai_object_counting_image_resolution gauge
 # HELP ai_object_counting_segments_found Number of segments found in images
@@ -41,10 +41,17 @@ ai_object_counting_response_time_seconds_created{endpoint="/api/count",object_ty
 ai_object_counting_request_count_total{endpoint="/api/count",method="POST",pipeline_version="1.0.0",status_code="200"} 2.0
 # HELP ai_object_counting_request_count_created Total number of API requests
 # TYPE ai_object_counting_request_count_created gauge
-ai_object_counting_request_count_created{endpoint="/api/count",method="POST",pipeline_version="1.0.0",status_code="200"} 1.758098322490504e+09
+ai_object_counting_request_count_created{endpoint="/api/count",method="POST",pipeline_version="1.0.0",status_code="200"} 1.7581036043706949e+09
 # HELP ai_object_counting_requests_total Total count of API requests for object counting
 # TYPE ai_object_counting_requests_total counter
 ai_object_counting_requests_total{pipeline_version="1.0.0",status="200"} 2.0
 # HELP ai_object_counting_requests_created Total count of API requests for object counting
 # TYPE ai_object_counting_requests_created gauge
-ai_object_counting_requests_created{pipeline_version="1.0.0",status="200"} 1.7580983224905112e+09
+ai_object_counting_requests_created{pipeline_version="1.0.0",status="200"} 1.758103604370702e+09
+# HELP ai_object_counting_predictions_total Total number of predictions made
+# TYPE ai_object_counting_predictions_total counter
+# HELP ai_object_counting_blocked_requests_total Total number of blocked requests
+# TYPE ai_object_counting_blocked_requests_total counter
+# HELP ai_object_counting_model_info_info Information about the models used
+# TYPE ai_object_counting_model_info_info gauge
+ai_object_counting_model_info_info{classification_model="ResNet-50 (ImageNet)",label_refinement="DistilBERT (Zero-shot)",pipeline_version="1.0.0",sam_model="Segment Anything Model (ViT-B)"} 1.0
