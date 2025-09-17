@@ -1,9 +1,10 @@
 # Progress Report Week 1 - Friday
 
+Week 1 completion and documentation phase. Focused on finalizing the core backend functionality, adding monitoring capabilities, and preparing comprehensive documentation. Successfully delivered a working API with basic monitoring.
+
 | **Task** | **Responsible** | **Resources** | **Status** |
 | -------- | --------------- | ------------- | ---------- |
-| Transfer notebook 3-step pipeline to Python backend and implement `/api/count` and `/api/correct` endpoints | Backend team / Mithul | app.py, model_pipeline.py, tests/test_app.py | Done — endpoints implemented, SQLite DB persisted |
-| Replace mock APIs with real AI models (SAM, ResNet-50, DistilBERT) | ML team | model_pipeline.py, .huggingface_cache | Done — models load on CPU, fallback removed |
-| Save results to DB with schema (timestamp, path, item_type, count, correction) | Backend team | models.py / ORM | Done — SQLite schema created and used |
-| Add basic monitoring endpoints (/metrics, /api/status) | DevOps | monitoring.py, prometheus client | Done — metrics endpoint present |
-| Unit tests and reproducibility docs | QA / Docs | test_app.py, README.MD, RUN_INSTRUCTIONS.md | Done — tests added (initial suite), docs present |
+| Add Prometheus metrics endpoint (/metrics) | TBD | monitoring.py, prometheus_client | Done — metrics endpoint implemented |
+| Create frontend wireframes and UI mockups | TBD | wireframes/, ui_mockups/ | In Progress — basic wireframes created |
+| Update documentation and run instructions | Anuvidhyas | README.md, RUN_INSTRUCTIONS.md | Done — comprehensive docs created |
+| Week 1 demo and testing with sample images | Mithul | demo/, tests/data/sample_car.jpg | Done — demo working with real images |
