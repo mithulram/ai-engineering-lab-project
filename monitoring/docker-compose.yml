@@ -17,6 +17,8 @@ services:
       - '--storage.tsdb.retention.time=200h'
       - '--web.enable-lifecycle'
     restart: unless-stopped
+    networks:
+      - monitoring
 
   grafana:
     image: grafana/grafana:9.5.0
@@ -34,6 +36,12 @@ services:
     restart: unless-stopped
     depends_on:
       - prometheus
+    networks:
+      - monitoring
 
 volumes:
   grafana-storage:
+
+networks:
+  monitoring:
+    driver: bridge

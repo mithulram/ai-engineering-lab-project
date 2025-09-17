@@ -74,7 +74,7 @@
               }
             ]
           },
-          "unit": "short"
+          "unit": "percentunit"
         },
         "overrides": []
       },
@@ -224,7 +224,7 @@
               }
             ]
           },
-          "unit": "short"
+          "unit": "percentunit"
         },
         "overrides": []
       },
@@ -341,7 +341,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "rate(ai_object_counting_blocked_requests_total[5m]) / rate(ai_object_counting_request_count_total[5m]) * 100",
+          "expr": "rate(ai_object_counting_blocked_requests_total[5m]) / rate(ai_object_counting_request_count_total[5m])",
           "interval": "",
           "legendFormat": "Block Rate %",
           "refId": "A"

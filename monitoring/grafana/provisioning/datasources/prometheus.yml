@@ -4,6 +4,8 @@ datasources:
   - name: Prometheus
     type: prometheus
     access: proxy
+    # Docker Compose environment: Grafana and Prometheus run in same Docker network
+    # Use service name 'prometheus' for internal Docker network communication
     url: http://prometheus:9090
     isDefault: true
     editable: true
