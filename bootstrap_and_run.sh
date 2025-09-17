@@ -259,7 +259,8 @@ start_flutter() {
     flutter pub get >/dev/null 2>&1 || true
     
     # Try to start Flutter
-    if nohup flutter run -d chrome --web-port "$flutter_port" > "../$DEMO_DIR/flutter.log" 2>&1 &; then
+    nohup flutter run -d chrome --web-port "$flutter_port" > "../$DEMO_DIR/flutter.log" 2>&1 &
+    if [ $? -eq 0 ]; then
         local flutter_pid=$!
         echo "$flutter_pid" > "../$DEMO_DIR/flutter.pid"
         cd ..
