@@ -4,17 +4,17 @@
   "count": 0,
   "details": {
     "refined_confidences": [
-      0.020152052864432335
+      0.009673736058175564
     ],
     "refined_labels": [
-      "parachute, chute"
+      "kite"
     ],
     "target_confidences": [],
     "total_segments": 1
   },
-  "id": "4262b9b7-ddb4-488d-889f-d180f692a45a",
+  "id": "3974d6b8-d3bb-4fa3-bd8a-bb51d80d7f3b",
   "item_type": "car",
   "meta": {},
-  "processing_time": 9.432178974151611,
+  "processing_time": 8.388048887252808,
   "total": 0
 }

@@ -1,0 +1,4 @@
+ImportError while loading conftest '/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/tests/conftest.py'.
+tests/conftest.py:4: in <module>
+    from app import app, db
+E   ModuleNotFoundError: No module named 'app'

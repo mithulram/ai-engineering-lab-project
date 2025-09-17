@@ -10,14 +10,14 @@ Device set to use mps:0
 /Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/transformers/pipelines/text_classification.py:111: UserWarning: `return_all_scores` is now deprecated,  if want a similar functionality use `top_k=None` instead of `return_all_scores=True` or `top_k=1` instead of `return_all_scores=False`.
   warnings.warn(
 INFO:safety_module:Text classifier initialized successfully
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 17848.10it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 14926.35it/s]
 Fast image processor class <class 'transformers.models.vit.image_processing_vit_fast.ViTImageProcessorFast'> is available for this model. Using slow image processor class. To use the fast image processor class set `use_fast=True`.
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 7307.15it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 6533.18it/s]
 Device set to use mps:0
 INFO:safety_module:Image classifier initialized successfully
 INFO:model_pipeline:Using device: cpu
 INFO:model_pipeline:SAM model initialized successfully
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 11096.04it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 1953.56it/s]
 Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
 Device set to use mps:0
 INFO:model_pipeline:Classification models initialized successfully
@@ -27,7 +27,7 @@ INFO:__main__:Database tables created
 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on all addresses (0.0.0.0)
  * Running on http://127.0.0.1:5001
- * Running on http://192.168.0.108:5001
+ * Running on http://192.168.0.106:5001
 INFO:werkzeug:[33mPress CTRL+C to quit[0m
 INFO:werkzeug: * Restarting with stat
 /Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
@@ -42,264 +42,904 @@ Device set to use mps:0
 /Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/transformers/pipelines/text_classification.py:111: UserWarning: `return_all_scores` is now deprecated,  if want a similar functionality use `top_k=None` instead of `return_all_scores=True` or `top_k=1` instead of `return_all_scores=False`.
   warnings.warn(
 INFO:safety_module:Text classifier initialized successfully
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 13934.56it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 22192.08it/s]
 Fast image processor class <class 'transformers.models.vit.image_processing_vit_fast.ViTImageProcessorFast'> is available for this model. Using slow image processor class. To use the fast image processor class set `use_fast=True`.
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 9532.51it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 6452.78it/s]
 Device set to use mps:0
 INFO:safety_module:Image classifier initialized successfully
 INFO:model_pipeline:Using device: cpu
 INFO:model_pipeline:SAM model initialized successfully
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 7244.05it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 7695.97it/s]
 Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
 Device set to use mps:0
 INFO:model_pipeline:Classification models initialized successfully
 INFO:__main__:Database tables created
 WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 132-220-253
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 14:38:00] "GET /api/health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:08:32] "GET /api/health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:08:32] "GET /api/health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:08:32] "GET /api/health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:08:33] "GET /api/health HTTP/1.1" 200 -
 WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
 WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
 INFO:model_pipeline:Processing image for item type: car
-INFO:model_pipeline:Image size: 100x100
+INFO:model_pipeline:Image size: 64x64
+INFO:model_pipeline:Generating segmentation masks...
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:08:35] "GET /api/health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:08:35] "GET /metrics HTTP/1.1" 200 -
+INFO:model_pipeline:Generated 1 segments
+INFO:model_pipeline:Classifying segments...
+INFO:model_pipeline:Refining classification with zero-shot learning...
+INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
+INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=0.50
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:08:42] "POST /api/count HTTP/1.1" 200 -
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+INFO:safety_module:Safety violation logged: safety_evidence/violation_1758098322_military_vehicle_detection.json
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:08:42] "[31m[1mPOST /api/count HTTP/1.1[0m" 403 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:08:42] "GET /api/health HTTP/1.1" 200 -
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+INFO:model_pipeline:Processing image for item type: car
+INFO:model_pipeline:Image size: 64x64
 INFO:model_pipeline:Generating segmentation masks...
 INFO:model_pipeline:Generated 1 segments
 INFO:model_pipeline:Classifying segments...
 INFO:model_pipeline:Refining classification with zero-shot learning...
 INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
 INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=0.50
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 14:39:57] "POST /api/count HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 14:42:46] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 14:51:28] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:08:58] "POST /api/count HTTP/1.1" 200 -
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+INFO:safety_module:Safety violation logged: safety_evidence/violation_1758098338_military_vehicle_detection.json
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:08:58] "[31m[1mPOST /api/count HTTP/1.1[0m" 403 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:09:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:09:35] "GET /api/health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:09:35] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:10:35] "GET /api/health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:10:35] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:11:35] "GET /api/health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:11:35] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:11:37] "GET /api/learned-objects HTTP/1.1" 200 -
+INFO:few_shot_learning:Learning new object type: bicycle
+INFO:few_shot_learning:Training images: 5
+INFO:few_shot_learning:Saved model for bicycle to few_shot_models/bicycle_model.pkl
+INFO:few_shot_learning:Successfully learned object type: bicycle
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:11:38] "POST /api/learn HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:11:38] "GET /api/learned-objects HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:11:38] "POST /api/count-learned HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:11:38] "POST /api/recognize HTTP/1.1" 200 -
+INFO:few_shot_learning:Learning new object type: chair
+INFO:few_shot_learning:Training images: 3
+INFO:few_shot_learning:Saved model for chair to few_shot_models/chair_model.pkl
+INFO:few_shot_learning:Successfully learned object type: chair
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:11:39] "POST /api/learn HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:11:39] "GET /api/learned-objects HTTP/1.1" 200 -
+INFO:model_pipeline:Processing image: uploads/generated_6a9da416-33be-4182-9d2d-092eeeaabfe5.png for item type: car
+INFO:model_pipeline:Image size: 512x512
+INFO:model_pipeline:Generating segmentation masks...
+INFO:model_pipeline:Generated 4 segments
+INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:11:52] "POST /api/generate-image HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:12:29] "GET /api/health HTTP/1.1" 200 -
 WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
 WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
 INFO:model_pipeline:Processing image for item type: car
-INFO:model_pipeline:Image size: 100x100
+INFO:model_pipeline:Image size: 200x200
+INFO:model_pipeline:Generating segmentation masks...
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:12:35] "GET /api/health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:12:35] "GET /metrics HTTP/1.1" 200 -
+INFO:model_pipeline:Generated 1 segments
+INFO:model_pipeline:Classifying segments...
+INFO:model_pipeline:Refining classification with zero-shot learning...
+INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
+ERROR:app:DB write failed
+Traceback (most recent call last):
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: counting_result
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/app.py", line 228, in count_objects
+    db.session.commit()
+  File "<string>", line 2, in commit
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1454, in commit
+    self._transaction.commit(_to_root=self.future)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 832, in commit
+    self._prepare_impl()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 811, in _prepare_impl
+    self.session.flush()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3449, in flush
+    self._flush(objects)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3589, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3549, in _flush
+    flush_context.execute()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 456, in execute
+    rec.execute(self)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 630, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 245, in save_obj
+    _emit_insert_statements(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 1097, in _emit_insert_statements
+    c = connection._execute_20(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1710, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: counting_result
+[SQL: INSERT INTO counting_result (id, timestamp, image_path, item_type, predicted_count, corrected_count, confidence_score, processing_time, user_feedback) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('aa5871e8-581a-49e3-85dc-3306de99016b', '2025-09-17 08:42:37.978900', 'uploaded_images/unknown.jpg', 'car', 0, None, 0.5, 8.120319366455078, None)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=0.50
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:12:38] "POST /api/count HTTP/1.1" 200 -
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+INFO:model_pipeline:Processing image for item type: bicycle
+INFO:model_pipeline:Image size: 200x200
 INFO:model_pipeline:Generating segmentation masks...
 INFO:model_pipeline:Generated 1 segments
 INFO:model_pipeline:Classifying segments...
 INFO:model_pipeline:Refining classification with zero-shot learning...
 INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
+ERROR:app:DB write failed
+Traceback (most recent call last):
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: counting_result
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/app.py", line 228, in count_objects
+    db.session.commit()
+  File "<string>", line 2, in commit
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1454, in commit
+    self._transaction.commit(_to_root=self.future)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 832, in commit
+    self._prepare_impl()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 811, in _prepare_impl
+    self.session.flush()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3449, in flush
+    self._flush(objects)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3589, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3549, in _flush
+    flush_context.execute()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 456, in execute
+    rec.execute(self)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 630, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 245, in save_obj
+    _emit_insert_statements(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 1097, in _emit_insert_statements
+    c = connection._execute_20(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1710, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: counting_result
+[SQL: INSERT INTO counting_result (id, timestamp, image_path, item_type, predicted_count, corrected_count, confidence_score, processing_time, user_feedback) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('6331b0f2-5728-4333-b076-6561aa3e55f9', '2025-09-17 08:42:45.999929', 'uploaded_images/unknown.jpg', 'bicycle', 0, None, 0.5, 7.988322734832764, None)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
 INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=0.50
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 14:51:41] "POST /api/count HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:12:46] "POST /api/count HTTP/1.1" 200 -
 WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
 WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
-INFO:model_pipeline:Processing image for item type: car
-INFO:model_pipeline:Image size: 100x100
+INFO:model_pipeline:Processing image for item type: truck
+INFO:model_pipeline:Image size: 200x200
 INFO:model_pipeline:Generating segmentation masks...
 INFO:model_pipeline:Generated 1 segments
 INFO:model_pipeline:Classifying segments...
 INFO:model_pipeline:Refining classification with zero-shot learning...
 INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
+ERROR:app:DB write failed
+Traceback (most recent call last):
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: counting_result
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/app.py", line 228, in count_objects
+    db.session.commit()
+  File "<string>", line 2, in commit
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1454, in commit
+    self._transaction.commit(_to_root=self.future)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 832, in commit
+    self._prepare_impl()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 811, in _prepare_impl
+    self.session.flush()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3449, in flush
+    self._flush(objects)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3589, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3549, in _flush
+    flush_context.execute()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 456, in execute
+    rec.execute(self)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 630, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 245, in save_obj
+    _emit_insert_statements(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 1097, in _emit_insert_statements
+    c = connection._execute_20(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1710, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: counting_result
+[SQL: INSERT INTO counting_result (id, timestamp, image_path, item_type, predicted_count, corrected_count, confidence_score, processing_time, user_feedback) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('10424ba0-2503-4d4c-b6fe-b8b53f859b05', '2025-09-17 08:42:53.726187', 'uploaded_images/unknown.jpg', 'truck', 0, None, 0.5, 7.717271089553833, None)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
 INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=0.50
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 14:52:05] "POST /api/count HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:15:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:15:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:15:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:15:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:15:49] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:12:53] "POST /api/count HTTP/1.1" 200 -
 WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
 WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
-INFO:model_pipeline:Processing image for item type: car
-INFO:model_pipeline:Image size: 100x100
+INFO:model_pipeline:Processing image for item type: motorcycle
+INFO:model_pipeline:Image size: 200x200
 INFO:model_pipeline:Generating segmentation masks...
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:15:59] "GET /metrics HTTP/1.1" 200 -
 INFO:model_pipeline:Generated 1 segments
 INFO:model_pipeline:Classifying segments...
 INFO:model_pipeline:Refining classification with zero-shot learning...
 INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
+ERROR:app:DB write failed
+Traceback (most recent call last):
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: counting_result
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/app.py", line 228, in count_objects
+    db.session.commit()
+  File "<string>", line 2, in commit
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1454, in commit
+    self._transaction.commit(_to_root=self.future)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 832, in commit
+    self._prepare_impl()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 811, in _prepare_impl
+    self.session.flush()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3449, in flush
+    self._flush(objects)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3589, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3549, in _flush
+    flush_context.execute()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 456, in execute
+    rec.execute(self)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 630, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 245, in save_obj
+    _emit_insert_statements(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 1097, in _emit_insert_statements
+    c = connection._execute_20(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1710, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: counting_result
+[SQL: INSERT INTO counting_result (id, timestamp, image_path, item_type, predicted_count, corrected_count, confidence_score, processing_time, user_feedback) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('67f0baaa-2ae2-493e-8c2b-5abcd0790ee9', '2025-09-17 08:43:01.422164', 'uploaded_images/unknown.jpg', 'motorcycle', 0, None, 0.5, 7.686843156814575, None)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
 INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=0.50
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:16:06] "POST /api/count HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:16:09] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:01] "POST /api/count HTTP/1.1" 200 -
 WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
 WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
-INFO:model_pipeline:Processing image for item type: car
-INFO:model_pipeline:Image size: 100x100
+INFO:model_pipeline:Processing image for item type: bus
+INFO:model_pipeline:Image size: 200x200
 INFO:model_pipeline:Generating segmentation masks...
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:16:19] "GET /metrics HTTP/1.1" 200 -
 INFO:model_pipeline:Generated 1 segments
 INFO:model_pipeline:Classifying segments...
 INFO:model_pipeline:Refining classification with zero-shot learning...
 INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
+ERROR:app:DB write failed
+Traceback (most recent call last):
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: counting_result
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/app.py", line 228, in count_objects
+    db.session.commit()
+  File "<string>", line 2, in commit
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1454, in commit
+    self._transaction.commit(_to_root=self.future)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 832, in commit
+    self._prepare_impl()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 811, in _prepare_impl
+    self.session.flush()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3449, in flush
+    self._flush(objects)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3589, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3549, in _flush
+    flush_context.execute()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 456, in execute
+    rec.execute(self)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 630, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 245, in save_obj
+    _emit_insert_statements(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 1097, in _emit_insert_statements
+    c = connection._execute_20(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1710, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: counting_result
+[SQL: INSERT INTO counting_result (id, timestamp, image_path, item_type, predicted_count, corrected_count, confidence_score, processing_time, user_feedback) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('49d9ae08-3dff-4048-b202-a5adfb84fc57', '2025-09-17 08:43:09.203310', 'uploaded_images/unknown.jpg', 'bus', 0, None, 0.5, 7.771989107131958, None)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
 INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=0.50
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:16:28] "POST /api/count HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:16:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:16:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:16:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:16:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:17:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:17:11] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:17:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:17:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:17:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:17:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:17:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:18:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:18:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:18:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:18:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:18:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:18:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:19:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:19:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:19:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:19:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:19:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:19:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:20:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:20:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:20:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:20:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:20:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:20:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:21:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:21:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:21:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:21:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:21:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:21:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:22:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:22:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:22:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:22:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:22:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:22:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:23:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:23:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:23:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:23:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:23:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:23:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:24:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:24:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:24:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:24:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:24:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:24:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:25:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:25:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:25:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:25:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:25:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:25:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:26:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:26:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:26:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:26:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:26:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:26:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:27:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:27:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:27:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:27:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:27:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:27:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:28:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:28:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:28:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:28:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:28:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:28:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:29:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:29:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:29:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:29:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:29:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:29:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:30:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:30:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:30:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:30:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:30:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:30:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:31:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:31:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:31:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:31:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:31:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:31:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:32:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:32:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:32:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:32:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:32:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:32:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:33:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:33:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:33:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:33:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:33:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:33:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:34:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:34:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:34:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:34:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:34:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:34:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:35:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:35:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:35:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:35:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:35:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:35:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:36:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:36:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:36:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:36:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:36:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:36:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:37:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:37:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:37:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:37:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:37:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:37:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:38:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:38:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:38:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:38:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:38:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:38:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:39:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:39:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:39:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:39:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:39:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:39:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:40:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:40:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:40:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:40:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:40:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:40:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:41:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:41:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:41:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:41:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:41:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:41:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:42:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:42:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:42:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:42:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:42:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:42:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:43:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:43:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:43:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:43:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:43:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:43:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:44:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:44:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:44:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:44:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:44:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:44:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:45:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:45:19] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:45:29] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:45:39] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:45:49] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:45:59] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:46:09] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [16/Sep/2025 15:46:19] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:09] "POST /api/count HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:09] "GET /api/health HTTP/1.1" 200 -
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+INFO:safety_module:Safety violation logged: safety_evidence/violation_1758098589_military_vehicle_detection.json
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:09] "[31m[1mPOST /api/count HTTP/1.1[0m" 403 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:09] "GET /api/health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:09] "GET /metrics HTTP/1.1" 200 -
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+INFO:safety_module:Safety violation logged: safety_evidence/violation_1758098589_military_vehicle_detection.json
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:09] "[31m[1mPOST /api/count HTTP/1.1[0m" 403 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:10] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:10] "GET /api/health HTTP/1.1" 200 -
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+INFO:safety_module:Safety violation logged: safety_evidence/violation_1758098590_military_vehicle_detection.json
+INFO:safety_module:Safety violation logged: safety_evidence/violation_1758098590_suspicious_pattern.json
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:10] "[31m[1mPOST /api/count HTTP/1.1[0m" 403 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:10] "GET /api/health HTTP/1.1" 200 -
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+INFO:safety_module:Safety violation logged: safety_evidence/violation_1758098590_military_vehicle_detection.json
+INFO:safety_module:Safety violation logged: safety_evidence/violation_1758098590_suspicious_pattern.json
+INFO:safety_module:Safety violation logged: safety_evidence/violation_1758098590_suspicious_pattern.json
+INFO:safety_module:Safety violation logged: safety_evidence/violation_1758098590_suspicious_pattern.json
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:10] "[31m[1mPOST /api/count HTTP/1.1[0m" 403 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:10] "GET /api/health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:10] "GET /api/safety/stats HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:10] "GET /api/health HTTP/1.1" 200 -
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+INFO:safety_module:Safety violation logged: safety_evidence/violation_1758098590_suspicious_pattern.json
+INFO:safety_module:Safety violation logged: safety_evidence/violation_1758098590_suspicious_pattern.json
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:10] "[31m[1mPOST /api/count HTTP/1.1[0m" 403 -
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+INFO:safety_module:Safety violation logged: safety_evidence/violation_1758098590_military_vehicle_detection.json
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:10] "[31m[1mPOST /api/count HTTP/1.1[0m" 403 -
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+INFO:safety_module:Safety violation logged: safety_evidence/violation_1758098590_military_vehicle_detection.json
+INFO:safety_module:Safety violation logged: safety_evidence/violation_1758098590_suspicious_pattern.json
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:10] "[31m[1mPOST /api/count HTTP/1.1[0m" 403 -
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+INFO:safety_module:Safety violation logged: safety_evidence/violation_1758098590_military_vehicle_detection.json
+INFO:safety_module:Safety violation logged: safety_evidence/violation_1758098590_suspicious_pattern.json
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:10] "[31m[1mPOST /api/count HTTP/1.1[0m" 403 -
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+INFO:safety_module:Safety violation logged: safety_evidence/violation_1758098590_military_vehicle_detection.json
+INFO:safety_module:Safety violation logged: safety_evidence/violation_1758098590_suspicious_pattern.json
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:10] "[31m[1mPOST /api/count HTTP/1.1[0m" 403 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:10] "GET /api/health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:10] "GET /metrics HTTP/1.1" 200 -
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+INFO:model_pipeline:Processing image for item type: car
+INFO:model_pipeline:Image size: 256x256
+INFO:model_pipeline:Generating segmentation masks...
+INFO:model_pipeline:Generated 6 segments
+INFO:model_pipeline:Classifying segments...
+INFO:model_pipeline:Refining classification with zero-shot learning...
+WARNING:model_pipeline:Zero-shot classification failed for segment 0: 'ObjectCounter' object has no attribute 'zero_shot_classifier'
+INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
+ERROR:app:DB write failed
+Traceback (most recent call last):
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: counting_result
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/app.py", line 228, in count_objects
+    db.session.commit()
+  File "<string>", line 2, in commit
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1454, in commit
+    self._transaction.commit(_to_root=self.future)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 832, in commit
+    self._prepare_impl()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 811, in _prepare_impl
+    self.session.flush()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3449, in flush
+    self._flush(objects)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3589, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3549, in _flush
+    flush_context.execute()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 456, in execute
+    rec.execute(self)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 630, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 245, in save_obj
+    _emit_insert_statements(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 1097, in _emit_insert_statements
+    c = connection._execute_20(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1710, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: counting_result
+[SQL: INSERT INTO counting_result (id, timestamp, image_path, item_type, predicted_count, corrected_count, confidence_score, processing_time, user_feedback) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('316b9a0c-a5db-4ee3-b80e-4db5a02de003', '2025-09-17 08:43:18.585440', 'uploaded_images/unknown.jpg', 'car', 0, None, 0.5, 8.079805135726929, None)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=0.50
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:18] "POST /api/count HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:18] "GET /api/learned-objects HTTP/1.1" 200 -
+INFO:few_shot_learning:Learning new object type: bicycle
+INFO:few_shot_learning:Training images: 3
+INFO:few_shot_learning:Saved model for bicycle to few_shot_models/bicycle_model.pkl
+INFO:few_shot_learning:Successfully learned object type: bicycle
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:18] "POST /api/learn HTTP/1.1" 200 -
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+INFO:model_pipeline:Processing image for item type: car
+INFO:model_pipeline:Image size: 256x256
+INFO:model_pipeline:Generating segmentation masks...
+INFO:model_pipeline:Generated 2 segments
+INFO:model_pipeline:Classifying segments...
+INFO:model_pipeline:Refining classification with zero-shot learning...
+WARNING:model_pipeline:Zero-shot classification failed for segment 0: 'ObjectCounter' object has no attribute 'zero_shot_classifier'
+INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
+ERROR:app:DB write failed
+Traceback (most recent call last):
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: counting_result
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/app.py", line 228, in count_objects
+    db.session.commit()
+  File "<string>", line 2, in commit
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1454, in commit
+    self._transaction.commit(_to_root=self.future)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 832, in commit
+    self._prepare_impl()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 811, in _prepare_impl
+    self.session.flush()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3449, in flush
+    self._flush(objects)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3589, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3549, in _flush
+    flush_context.execute()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 456, in execute
+    rec.execute(self)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 630, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 245, in save_obj
+    _emit_insert_statements(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 1097, in _emit_insert_statements
+    c = connection._execute_20(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1710, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: counting_result
+[SQL: INSERT INTO counting_result (id, timestamp, image_path, item_type, predicted_count, corrected_count, confidence_score, processing_time, user_feedback) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('ae0e2162-41da-4646-aa6b-0dcd82efedf6', '2025-09-17 08:43:26.756805', 'uploaded_images/unknown.jpg', 'car', 0, None, 0.5, 8.109370708465576, None)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=0.50
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:26] "POST /api/count HTTP/1.1" 200 -
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+INFO:model_pipeline:Processing image for item type: car
+INFO:model_pipeline:Image size: 256x256
+INFO:model_pipeline:Generating segmentation masks...
+INFO:model_pipeline:Generated 6 segments
+INFO:model_pipeline:Classifying segments...
+INFO:model_pipeline:Refining classification with zero-shot learning...
+INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
+ERROR:app:DB write failed
+Traceback (most recent call last):
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: counting_result
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/app.py", line 228, in count_objects
+    db.session.commit()
+  File "<string>", line 2, in commit
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1454, in commit
+    self._transaction.commit(_to_root=self.future)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 832, in commit
+    self._prepare_impl()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 811, in _prepare_impl
+    self.session.flush()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3449, in flush
+    self._flush(objects)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3589, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3549, in _flush
+    flush_context.execute()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 456, in execute
+    rec.execute(self)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 630, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 245, in save_obj
+    _emit_insert_statements(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 1097, in _emit_insert_statements
+    c = connection._execute_20(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1710, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: counting_result
+[SQL: INSERT INTO counting_result (id, timestamp, image_path, item_type, predicted_count, corrected_count, confidence_score, processing_time, user_feedback) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('17ca9739-9443-4163-9f6f-3ffea081f899', '2025-09-17 08:43:34.899546', 'uploaded_images/unknown.jpg', 'car', 0, None, 0.5, 8.132976293563843, None)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=0.50
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:34] "POST /api/count HTTP/1.1" 200 -
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+INFO:model_pipeline:Processing image for item type: car
+INFO:model_pipeline:Image size: 256x256
+INFO:model_pipeline:Generating segmentation masks...
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:35] "GET /api/health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:35] "GET /metrics HTTP/1.1" 200 -
+INFO:model_pipeline:Generated 8 segments
+INFO:model_pipeline:Classifying segments...
+INFO:model_pipeline:Refining classification with zero-shot learning...
+WARNING:model_pipeline:Zero-shot classification failed for segment 0: 'ObjectCounter' object has no attribute 'zero_shot_classifier'
+INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
+ERROR:app:DB write failed
+Traceback (most recent call last):
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: counting_result
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/app.py", line 228, in count_objects
+    db.session.commit()
+  File "<string>", line 2, in commit
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1454, in commit
+    self._transaction.commit(_to_root=self.future)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 832, in commit
+    self._prepare_impl()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 811, in _prepare_impl
+    self.session.flush()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3449, in flush
+    self._flush(objects)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3589, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3549, in _flush
+    flush_context.execute()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 456, in execute
+    rec.execute(self)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 630, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 245, in save_obj
+    _emit_insert_statements(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 1097, in _emit_insert_statements
+    c = connection._execute_20(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1710, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: counting_result
+[SQL: INSERT INTO counting_result (id, timestamp, image_path, item_type, predicted_count, corrected_count, confidence_score, processing_time, user_feedback) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('5df7a648-1786-49f8-a8d3-f0da462611d6', '2025-09-17 08:43:43.170000', 'uploaded_images/unknown.jpg', 'car', 0, None, 0.5, 8.260247707366943, None)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=0.50
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:43] "POST /api/count HTTP/1.1" 200 -
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+INFO:model_pipeline:Processing image for item type: car
+INFO:model_pipeline:Image size: 256x256
+INFO:model_pipeline:Generating segmentation masks...
+INFO:model_pipeline:Generated 12 segments
+INFO:model_pipeline:Classifying segments...
+INFO:model_pipeline:Refining classification with zero-shot learning...
+WARNING:model_pipeline:Zero-shot classification failed for segment 0: 'ObjectCounter' object has no attribute 'zero_shot_classifier'
+INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
+ERROR:app:DB write failed
+Traceback (most recent call last):
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: counting_result
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/app.py", line 228, in count_objects
+    db.session.commit()
+  File "<string>", line 2, in commit
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1454, in commit
+    self._transaction.commit(_to_root=self.future)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 832, in commit
+    self._prepare_impl()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 811, in _prepare_impl
+    self.session.flush()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3449, in flush
+    self._flush(objects)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3589, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3549, in _flush
+    flush_context.execute()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 456, in execute
+    rec.execute(self)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 630, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 245, in save_obj
+    _emit_insert_statements(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 1097, in _emit_insert_statements
+    c = connection._execute_20(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1710, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: counting_result
+[SQL: INSERT INTO counting_result (id, timestamp, image_path, item_type, predicted_count, corrected_count, confidence_score, processing_time, user_feedback) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('efc85ddd-0f4e-4a03-a443-ec8a6cf11ac3', '2025-09-17 08:43:51.687037', 'uploaded_images/unknown.jpg', 'car', 0, None, 0.5, 8.50688099861145, None)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=0.50
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:13:51] "POST /api/count HTTP/1.1" 200 -
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
+INFO:model_pipeline:Processing image for item type: car
+INFO:model_pipeline:Image size: 256x256
+INFO:model_pipeline:Generating segmentation masks...
+INFO:model_pipeline:Generated 11 segments
+INFO:model_pipeline:Classifying segments...
+INFO:model_pipeline:Refining classification with zero-shot learning...
+WARNING:model_pipeline:Zero-shot classification failed for segment 0: 'ObjectCounter' object has no attribute 'zero_shot_classifier'
+INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
+ERROR:app:DB write failed
+Traceback (most recent call last):
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: counting_result
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/app.py", line 228, in count_objects
+    db.session.commit()
+  File "<string>", line 2, in commit
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1454, in commit
+    self._transaction.commit(_to_root=self.future)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 832, in commit
+    self._prepare_impl()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 811, in _prepare_impl
+    self.session.flush()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3449, in flush
+    self._flush(objects)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3589, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3549, in _flush
+    flush_context.execute()
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 456, in execute
+    rec.execute(self)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 630, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 245, in save_obj
+    _emit_insert_statements(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 1097, in _emit_insert_statements
+    c = connection._execute_20(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1710, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: counting_result
+[SQL: INSERT INTO counting_result (id, timestamp, image_path, item_type, predicted_count, corrected_count, confidence_score, processing_time, user_feedback) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('c9494017-714e-48f8-8514-45e3c8b7d57c', '2025-09-17 08:44:00.004683', 'uploaded_images/unknown.jpg', 'car', 0, None, 0.5, 8.307843208312988, None)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=0.50
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:14:00] "POST /api/count HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:14:00] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:14:02] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 14:14:02] "GET /api/health HTTP/1.1" 200 -

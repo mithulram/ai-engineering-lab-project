@@ -7,5 +7,6 @@ datasources:
     # Docker Compose environment: Grafana and Prometheus run in same Docker network
     # Use service name 'prometheus' for internal Docker network communication
     url: http://prometheus:9090
+    # Fallback for non-Docker runs: use http://localhost:9090 if Grafana runs on host
     isDefault: true
     editable: true

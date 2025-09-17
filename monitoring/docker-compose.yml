@@ -18,7 +18,7 @@ services:
       - '--web.enable-lifecycle'
     restart: unless-stopped
     networks:
-      - monitoring
+      - monitoring_net
 
   grafana:
     image: grafana/grafana:9.5.0
@@ -37,11 +37,11 @@ services:
     depends_on:
       - prometheus
     networks:
-      - monitoring
+      - monitoring_net
 
 volumes:
   grafana-storage:
 
 networks:
-  monitoring:
+  monitoring_net:
     driver: bridge

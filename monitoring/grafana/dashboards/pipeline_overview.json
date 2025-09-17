@@ -102,7 +102,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "rate(ai_object_counting_request_count_total[5m])",
+          "expr": "rate(ai_object_counting_requests_total[5m])",
           "interval": "",
           "legendFormat": "{{status}}",
           "refId": "A"
