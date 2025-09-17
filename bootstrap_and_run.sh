@@ -152,8 +152,8 @@ setup_python_env() {
         log "Installing Python requirements..."
         
         # Update SQLAlchemy constraint if present
-        if grep -q "SQLAlchemy" requirements.txt; then
-            sed -i.bak 's/SQLAlchemy.*/SQLAlchemy>=1.4.46,<2.0/' requirements.txt
+        if grep -q "^SQLAlchemy" requirements.txt; then
+            sed -i.bak 's/^SQLAlchemy.*/SQLAlchemy>=1.4.46,<2.0/' requirements.txt
             log "Updated SQLAlchemy constraint to <2.0,>=1.4.46"
         fi
         
