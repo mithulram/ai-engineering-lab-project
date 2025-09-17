@@ -8,6 +8,10 @@ import json
 from datetime import datetime
 import logging
 import time
+
+# Set up HuggingFace cache environment variables
+os.environ['HF_HOME'] = os.path.join(os.getcwd(), '.huggingface_cache')
+os.environ['TRANSFORMERS_CACHE'] = os.path.join(os.getcwd(), '.huggingface_cache')
 from model_pipeline import ObjectCounter
 from monitoring import metrics_collector
 from few_shot_learning import few_shot_learner
