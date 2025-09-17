@@ -1,4 +1,4 @@
-.......F.............FF.................................F....
+.......F.............FF
 =================================== FAILURES ===================================
 __________ TestObjectCountingAPI.test_count_objects_invalid_item_type __________
 
@@ -38,7 +38,7 @@ self = <test_app.TestModelPipeline testMethod=test_supported_item_types>
         ]
     
 >       self.assertEqual(OBJECT_TYPES, expected_types)
-E       AssertionError: {'ground', 'apc', 'counting', 'inventory'[238 chars]ent'} != ['car', 'cat', 'tree', 'dog', 'building',[34 chars]are']
+E       AssertionError: {'bus', 'armored_vehicle', 'counting', 'e[238 chars]mor'} != ['car', 'cat', 'tree', 'dog', 'building',[34 chars]are']
 
 test_app.py:366: AssertionError
 __________ TestAIObjectCountingWeek2.test_api_documentation_endpoints __________
@@ -95,84 +95,29 @@ Response status: 404
 WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
 ------------------------------ Captured log call -------------------------------
 WARNING  safety_module:safety_module.py:155 ML text classification failed: list indices must be integers or slices, not str
-__________________ TestSafetyAPI.test_evidence_file_creation ___________________
-
-self = <test_safety.TestSafetyAPI testMethod=test_evidence_file_creation>
-
-    def test_evidence_file_creation(self):
-        """Test that evidence files are created for blocked requests"""
-        # Create a safety module and trigger a violation
-        module = SafetyModule()
-    
-        # Create a test violation
-        violation = SafetyViolation(
-            violation_type="test_violation",
-            reason="Test military vehicle detection",
-            confidence=0.9,
-            evidence={"text": "count tanks", "keyword": "tank"}
-        )
-    
-        # Log the violation
-        module.log_violation(violation, self.test_image_path)
-    
-        # Check that evidence file was created
-        evidence_files = [f for f in os.listdir(module.evidence_dir)
-                         if f.startswith("violation_")]
-        self.assertGreater(len(evidence_files), 0)
-    
-        # Check the content of the evidence file
-        evidence_file_path = os.path.join(module.evidence_dir, evidence_files[0])
-        with open(evidence_file_path, 'r') as f:
-            evidence_data = json.load(f)
-    
->       self.assertEqual(evidence_data["violation_type"], "test_violation")
-E       AssertionError: 'suspicious_pattern' != 'test_violation'
-E       - suspicious_pattern
-E       + test_violation
-
-test_safety.py:321: AssertionError
------------------------------ Captured stderr call -----------------------------
-Some weights of GPT2ForSequenceClassification were not initialized from the model checkpoint at microsoft/DialoGPT-medium and are newly initialized: ['score.weight']
-You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
-Device set to use mps:0
-INFO:safety_module:Text classifier initialized successfully
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 6853.44it/s]
-Fast image processor class <class 'transformers.models.vit.image_processing_vit_fast.ViTImageProcessorFast'> is available for this model. Using slow image processor class. To use the fast image processor class set `use_fast=True`.
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 27060.03it/s]
-Device set to use mps:0
-INFO:safety_module:Image classifier initialized successfully
-INFO:safety_module:Safety violation logged: safety_evidence/violation_1758103845_test_violation.json
------------------------------- Captured log call -------------------------------
-INFO     safety_module:safety_module.py:75 Text classifier initialized successfully
-INFO     safety_module:safety_module.py:86 Image classifier initialized successfully
-INFO     safety_module:safety_module.py:295 Safety violation logged: safety_evidence/violation_1758103845_test_violation.json
 =============================== warnings summary ===============================
-.venv/lib/python3.9/site-packages/urllib3/__init__.py:35
-  /Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+../../../../Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35
+  /Users/anuvidhyas/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
     warnings.warn(
 
-.venv/lib/python3.9/site-packages/transformers/utils/hub.py:111
-  /Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+../../../../Library/Python/3.9/lib/python/site-packages/transformers/utils/hub.py:111
+  /Users/anuvidhyas/Library/Python/3.9/lib/python/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
     warnings.warn(
 
-.venv/lib/python3.9/site-packages/transformers/pipelines/text_classification.py:111: 1 warning
-test_safety.py: 13 warnings
-  /Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/transformers/pipelines/text_classification.py:111: UserWarning: `return_all_scores` is now deprecated,  if want a similar functionality use `top_k=None` instead of `return_all_scores=True` or `top_k=1` instead of `return_all_scores=False`.
+../../../../Library/Python/3.9/lib/python/site-packages/transformers/pipelines/text_classification.py:111
+  /Users/anuvidhyas/Library/Python/3.9/lib/python/site-packages/transformers/pipelines/text_classification.py:111: UserWarning: `return_all_scores` is now deprecated,  if want a similar functionality use `top_k=None` instead of `return_all_scores=True` or `top_k=1` instead of `return_all_scores=False`.
     warnings.warn(
 
 test_app.py::TestObjectCountingAPI::test_correct_count_result_not_found
-  /Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/app.py:291: LegacyAPIWarning: Deprecated API features detected! These feature(s) are not compatible with SQLAlchemy 2.0. To prevent incompatible upgrades prior to updating applications, ensure requirements files are pinned to "sqlalchemy<2.0". Set environment variable SQLALCHEMY_WARN_20=1 to show all deprecation warnings.  Set environment variable SQLALCHEMY_SILENCE_UBER_WARNING=1 to silence this message. (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+test_app.py::TestObjectCountingAPI::test_correct_count_success
+test_app_week2.py::TestAIObjectCountingWeek2::test_api_documentation_endpoints
+  /Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/app.py:291: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
     db_result = CountingResult.query.get(result_id)
 
 test_app.py::TestObjectCountingAPI::test_count_objects_success
-test_app_week2.py::TestAIObjectCountingWeek2::test_concurrent_requests
-test_app_week2.py::TestAIObjectCountingWeek2::test_concurrent_requests
-test_app_week2.py::TestAIObjectCountingWeek2::test_concurrent_requests
-test_app_week2.py::TestAIObjectCountingWeek2::test_concurrent_requests
-test_app_week2.py::TestAIObjectCountingWeek2::test_concurrent_requests
-test_app_week2.py::TestAIObjectCountingWeek2::test_object_counting_api
-test_app_week2.py::TestAIObjectCountingWeek2::test_performance_metrics
-  /Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/segment_anything/automatic_mask_generator.py:369: DeprecationWarning: __array__ implementation doesn't accept a copy keyword, so passing copy=False failed. __array__ must implement 'dtype' and 'copy' keyword arguments.
+test_app.py::TestObjectCountingAPI::test_count_objects_success
+test_app.py::TestObjectCountingAPI::test_count_objects_success
+  /Users/anuvidhyas/Library/Python/3.9/lib/python/site-packages/segment_anything/automatic_mask_generator.py:369: DeprecationWarning: __array__ implementation doesn't accept a copy keyword, so passing copy=False failed. __array__ must implement 'dtype' and 'copy' keyword arguments.
     mask_data["boxes"][i_mask] = boxes[i_mask]  # update res directly
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
@@ -180,8 +125,12 @@ test_app_week2.py::TestAIObjectCountingWeek2::test_performance_metrics
 FAILED test_app.py::TestObjectCountingAPI::test_count_objects_invalid_item_type
 FAILED test_app.py::TestModelPipeline::test_supported_item_types - AssertionE...
 FAILED test_app_week2.py::TestAIObjectCountingWeek2::test_api_documentation_endpoints
-FAILED test_safety.py::TestSafetyAPI::test_evidence_file_creation - Assertion...
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!! KeyboardInterrupt !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py:704: KeyboardInterrupt
+/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/threading.py:1069: KeyboardInterrupt
 (to show a full traceback on KeyboardInterrupt use --full-trace)
-4 failed, 57 passed, 25 warnings in 145.34s (0:02:25)
+3 failed, 20 passed, 9 warnings in 17.56s
+Exception ignored in: <module 'threading' from '/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/threading.py'>
+Traceback (most recent call last):
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/threading.py", line 1448, in _shutdown
+    lock.acquire()
+KeyboardInterrupt: 

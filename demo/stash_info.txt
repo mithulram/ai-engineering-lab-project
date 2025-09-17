@@ -1,0 +1,5 @@
+ M demo/backend.log
+?? demo/git_push.txt
+?? demo/stash_info.txt
+Stashed changes:
+stash@{0}: On verified/monitoring-retry-727ceac-20250917: Auto-stash before verification run Wed Sep 17 15:51:56 IST 2025

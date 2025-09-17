@@ -1,331 +1,28 @@
-/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+/Users/anuvidhyas/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
   warnings.warn(
-/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+/Users/anuvidhyas/Library/Python/3.9/lib/python/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
   warnings.warn(
 INFO:few_shot_learning:Feature extractor initialized successfully
 INFO:few_shot_learning:Few-shot learner initialized on device: cpu
 Some weights of GPT2ForSequenceClassification were not initialized from the model checkpoint at microsoft/DialoGPT-medium and are newly initialized: ['score.weight']
 You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
 Device set to use mps:0
-/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/transformers/pipelines/text_classification.py:111: UserWarning: `return_all_scores` is now deprecated,  if want a similar functionality use `top_k=None` instead of `return_all_scores=True` or `top_k=1` instead of `return_all_scores=False`.
+/Users/anuvidhyas/Library/Python/3.9/lib/python/site-packages/transformers/pipelines/text_classification.py:111: UserWarning: `return_all_scores` is now deprecated,  if want a similar functionality use `top_k=None` instead of `return_all_scores=True` or `top_k=1` instead of `return_all_scores=False`.
   warnings.warn(
 INFO:safety_module:Text classifier initialized successfully
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 7626.01it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 15592.21it/s]
 Fast image processor class <class 'transformers.models.vit.image_processing_vit_fast.ViTImageProcessorFast'> is available for this model. Using slow image processor class. To use the fast image processor class set `use_fast=True`.
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 6808.94it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 8924.05it/s]
 Device set to use mps:0
 INFO:safety_module:Image classifier initialized successfully
 INFO:model_pipeline:Using device: cpu
 INFO:model_pipeline:SAM model initialized successfully
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 1983.12it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 9709.04it/s]
 Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
 Device set to use mps:0
 INFO:model_pipeline:Classification models initialized successfully
 INFO:__main__:Database tables created
  * Serving Flask app 'app'
  * Debug mode: on
-INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on all addresses (0.0.0.0)
- * Running on http://127.0.0.1:5001
- * Running on http://192.168.0.106:5001
-INFO:werkzeug:[33mPress CTRL+C to quit[0m
-INFO:werkzeug: * Restarting with stat
-/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
-  warnings.warn(
-INFO:few_shot_learning:Feature extractor initialized successfully
-INFO:few_shot_learning:Few-shot learner initialized on device: cpu
-Some weights of GPT2ForSequenceClassification were not initialized from the model checkpoint at microsoft/DialoGPT-medium and are newly initialized: ['score.weight']
-You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
-Device set to use mps:0
-/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/transformers/pipelines/text_classification.py:111: UserWarning: `return_all_scores` is now deprecated,  if want a similar functionality use `top_k=None` instead of `return_all_scores=True` or `top_k=1` instead of `return_all_scores=False`.
-  warnings.warn(
-INFO:safety_module:Text classifier initialized successfully
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 8128.50it/s]
-Fast image processor class <class 'transformers.models.vit.image_processing_vit_fast.ViTImageProcessorFast'> is available for this model. Using slow image processor class. To use the fast image processor class set `use_fast=True`.
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 5184.55it/s]
-Device set to use mps:0
-INFO:safety_module:Image classifier initialized successfully
-INFO:model_pipeline:Using device: cpu
-INFO:model_pipeline:SAM model initialized successfully
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 8192.00it/s]
-Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
-Device set to use mps:0
-INFO:model_pipeline:Classification models initialized successfully
-INFO:__main__:Database tables created
-WARNING:werkzeug: * Debugger is active!
-INFO:werkzeug: * Debugger PIN: 132-220-253
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:36:35] "GET /api/health HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:36:35] "GET /api/health HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:36:35] "GET /api/health HTTP/1.1" 200 -
-WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
-WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
-INFO:model_pipeline:Processing image for item type: car
-INFO:model_pipeline:Image size: 64x64
-INFO:model_pipeline:Generating segmentation masks...
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:36:35] "GET /api/health HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:36:35] "GET /metrics HTTP/1.1" 200 -
-INFO:model_pipeline:Generated 1 segments
-INFO:model_pipeline:Classifying segments...
-INFO:model_pipeline:Refining classification with zero-shot learning...
-INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
-INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=0.50
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:36:44] "POST /api/count HTTP/1.1" 200 -
-WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
-INFO:safety_module:Safety violation logged: safety_evidence/violation_1758103604_military_vehicle_detection.json
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:36:44] "[31m[1mPOST /api/count HTTP/1.1[0m" 403 -
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:36:44] "GET /api/health HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:36:52] "GET /api/health HTTP/1.1" 200 -
-WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
-WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
-INFO:model_pipeline:Processing image for item type: car
-INFO:model_pipeline:Image size: 64x64
-INFO:model_pipeline:Generating segmentation masks...
-INFO:model_pipeline:Generated 1 segments
-INFO:model_pipeline:Classifying segments...
-INFO:model_pipeline:Refining classification with zero-shot learning...
-INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
-INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=0.50
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:37:09] "POST /api/count HTTP/1.1" 200 -
-WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
-INFO:safety_module:Safety violation logged: safety_evidence/violation_1758103629_military_vehicle_detection.json
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:37:09] "[31m[1mPOST /api/count HTTP/1.1[0m" 403 -
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:37:20] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:37:35] "GET /api/health HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:37:35] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:38:35] "GET /api/health HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:38:35] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:39:35] "GET /api/health HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:39:36] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:39:58] "GET /api/learned-objects HTTP/1.1" 200 -
-INFO:few_shot_learning:Learning new object type: bicycle
-INFO:few_shot_learning:Training images: 5
-INFO:few_shot_learning:Saved model for bicycle to few_shot_models/bicycle_model.pkl
-INFO:few_shot_learning:Successfully learned object type: bicycle
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:39:58] "POST /api/learn HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:39:58] "GET /api/learned-objects HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:39:59] "POST /api/count-learned HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:39:59] "POST /api/recognize HTTP/1.1" 200 -
-INFO:few_shot_learning:Learning new object type: chair
-INFO:few_shot_learning:Training images: 3
-INFO:few_shot_learning:Saved model for chair to few_shot_models/chair_model.pkl
-INFO:few_shot_learning:Successfully learned object type: chair
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:39:59] "POST /api/learn HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:39:59] "GET /api/learned-objects HTTP/1.1" 200 -
-INFO:model_pipeline:Processing image: uploads/generated_c16198be-f0cc-49d1-912f-d30c9f8a645d.png for item type: car
-INFO:model_pipeline:Image size: 512x512
-INFO:model_pipeline:Generating segmentation masks...
-INFO:model_pipeline:Generated 4 segments
-INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:40:13] "POST /api/generate-image HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:40:35] "GET /api/health HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:40:35] "GET /metrics HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:40:55] "GET /api/health HTTP/1.1" 200 -
-WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
-WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
-INFO:model_pipeline:Processing image for item type: car
-INFO:model_pipeline:Image size: 200x200
-INFO:model_pipeline:Generating segmentation masks...
-INFO:model_pipeline:Generated 1 segments
-INFO:model_pipeline:Classifying segments...
-INFO:model_pipeline:Refining classification with zero-shot learning...
-INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
-ERROR:app:DB write failed
-Traceback (most recent call last):
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
-    self.dialect.do_execute(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
-    cursor.execute(statement, parameters)
-sqlite3.OperationalError: no such table: counting_result
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/app.py", line 232, in count_objects
-    db.session.commit()
-  File "<string>", line 2, in commit
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1454, in commit
-    self._transaction.commit(_to_root=self.future)
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 832, in commit
-    self._prepare_impl()
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 811, in _prepare_impl
-    self.session.flush()
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3449, in flush
-    self._flush(objects)
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3589, in _flush
-    transaction.rollback(_capture_exception=True)
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
-    compat.raise_(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
-    raise exception
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3549, in _flush
-    flush_context.execute()
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 456, in execute
-    rec.execute(self)
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 630, in execute
-    util.preloaded.orm_persistence.save_obj(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 245, in save_obj
-    _emit_insert_statements(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 1097, in _emit_insert_statements
-    c = connection._execute_20(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1710, in _execute_20
-    return meth(self, args_10style, kwargs_10style, execution_options)
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
-    return connection._execute_clauseelement(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
-    ret = self._execute_context(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
-    self._handle_dbapi_exception(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
-    util.raise_(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
-    raise exception
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
-    self.dialect.do_execute(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: counting_result
-[SQL: INSERT INTO counting_result (id, timestamp, image_path, item_type, predicted_count, corrected_count, confidence_score, processing_time, user_feedback) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)]
-[parameters: ('eecbd9e1-995c-4b3b-b76b-4c8dd44dcffe', '2025-09-17 10:11:05.144232', 'uploaded_images/unknown.jpg', 'car', 0, None, 0.5, 9.95557713508606, None)]
-(Background on this error at: https://sqlalche.me/e/14/e3q8)
-INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=0.50
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:41:05] "POST /api/count HTTP/1.1" 200 -
-WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
-WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
-INFO:model_pipeline:Processing image for item type: bicycle
-INFO:model_pipeline:Image size: 200x200
-INFO:model_pipeline:Generating segmentation masks...
-INFO:model_pipeline:Generated 1 segments
-INFO:model_pipeline:Classifying segments...
-INFO:model_pipeline:Refining classification with zero-shot learning...
-INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
-ERROR:app:DB write failed
-Traceback (most recent call last):
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
-    self.dialect.do_execute(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
-    cursor.execute(statement, parameters)
-sqlite3.OperationalError: no such table: counting_result
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/app.py", line 232, in count_objects
-    db.session.commit()
-  File "<string>", line 2, in commit
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1454, in commit
-    self._transaction.commit(_to_root=self.future)
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 832, in commit
-    self._prepare_impl()
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 811, in _prepare_impl
-    self.session.flush()
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3449, in flush
-    self._flush(objects)
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3589, in _flush
-    transaction.rollback(_capture_exception=True)
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
-    compat.raise_(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
-    raise exception
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3549, in _flush
-    flush_context.execute()
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 456, in execute
-    rec.execute(self)
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 630, in execute
-    util.preloaded.orm_persistence.save_obj(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 245, in save_obj
-    _emit_insert_statements(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 1097, in _emit_insert_statements
-    c = connection._execute_20(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1710, in _execute_20
-    return meth(self, args_10style, kwargs_10style, execution_options)
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
-    return connection._execute_clauseelement(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
-    ret = self._execute_context(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
-    self._handle_dbapi_exception(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
-    util.raise_(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
-    raise exception
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
-    self.dialect.do_execute(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: counting_result
-[SQL: INSERT INTO counting_result (id, timestamp, image_path, item_type, predicted_count, corrected_count, confidence_score, processing_time, user_feedback) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)]
-[parameters: ('23581a03-4b31-47f7-8bec-9598bd4b2175', '2025-09-17 10:11:13.603443', 'uploaded_images/unknown.jpg', 'bicycle', 0, None, 0.5, 8.423662185668945, None)]
-(Background on this error at: https://sqlalche.me/e/14/e3q8)
-INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=0.50
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:41:13] "POST /api/count HTTP/1.1" 200 -
-WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
-WARNING:safety_module:ML text classification failed: list indices must be integers or slices, not str
-INFO:model_pipeline:Processing image for item type: truck
-INFO:model_pipeline:Image size: 200x200
-INFO:model_pipeline:Generating segmentation masks...
-INFO:model_pipeline:Generated 1 segments
-INFO:model_pipeline:Classifying segments...
-INFO:model_pipeline:Refining classification with zero-shot learning...
-INFO:model_pipeline:Object counting completed. Count: 0, Confidence: 0.5
-ERROR:app:DB write failed
-Traceback (most recent call last):
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
-    self.dialect.do_execute(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
-    cursor.execute(statement, parameters)
-sqlite3.OperationalError: no such table: counting_result
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/app.py", line 232, in count_objects
-    db.session.commit()
-  File "<string>", line 2, in commit
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1454, in commit
-    self._transaction.commit(_to_root=self.future)
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 832, in commit
-    self._prepare_impl()
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 811, in _prepare_impl
-    self.session.flush()
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3449, in flush
-    self._flush(objects)
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3589, in _flush
-    transaction.rollback(_capture_exception=True)
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
-    compat.raise_(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
-    raise exception
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 3549, in _flush
-    flush_context.execute()
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 456, in execute
-    rec.execute(self)
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/unitofwork.py", line 630, in execute
-    util.preloaded.orm_persistence.save_obj(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 245, in save_obj
-    _emit_insert_statements(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/orm/persistence.py", line 1097, in _emit_insert_statements
-    c = connection._execute_20(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1710, in _execute_20
-    return meth(self, args_10style, kwargs_10style, execution_options)
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
-    return connection._execute_clauseelement(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
-    ret = self._execute_context(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
-    self._handle_dbapi_exception(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
-    util.raise_(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
-    raise exception
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
-    self.dialect.do_execute(
-  File "/Users/anuvidhyas/Desktop/Mithul/AI project/ai-engineering-lab-project/.venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: counting_result
-[SQL: INSERT INTO counting_result (id, timestamp, image_path, item_type, predicted_count, corrected_count, confidence_score, processing_time, user_feedback) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)]
-[parameters: ('54a78ae9-d049-43fb-8814-a9adc7e41d28', '2025-09-17 10:11:22.323509', 'uploaded_images/unknown.jpg', 'truck', 0, None, 0.5, 8.709711074829102, None)]
-(Background on this error at: https://sqlalche.me/e/14/e3q8)
-INFO:monitoring:Updated metrics for unknown: confidence=0.50, accuracy_proxy=0.50
-INFO:werkzeug:127.0.0.1 - - [17/Sep/2025 15:41:22] "POST /api/count HTTP/1.1" 200 -
+Address already in use
+Port 5001 is in use by another program. Either identify and stop that program, or start the server with a different port.

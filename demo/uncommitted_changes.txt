@@ -1,0 +1,10 @@
+ M demo/backend.log
+ M demo/backend.pid
+ M demo/metrics_snippet.txt
+ M demo/pytest_final.txt
+?? demo/docker_daemon_status.txt
+?? demo/flutter.pid
+?? demo/flutter_version.txt
+?? demo/git_push.txt
+?? demo/stash_info.txt
+?? demo/uncommitted_changes.txt
